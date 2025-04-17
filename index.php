@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trang chủ</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -16,9 +16,9 @@
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 1000; /* Giữ header nằm trên các phần khác */
-            background-color: white; /* Nên có để không bị trong suốt */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Đổ bóng nhẹ */
+            z-index: 1000; 
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .header_logo{
             margin-left: 30px;
@@ -110,7 +110,7 @@
             background-color: rgb(85, 45, 125);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             transform: scale(1.05);
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.7); /* bóng mạnh hơn khi hover */
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
         }
         .corner-icon {
             position: absolute;
@@ -118,7 +118,7 @@
             right: -850px;
             width: 200px;
             height: auto;
-            transform: translate(50%, 50%); /* Dịch ảnh ra ngoài 50% chiều rộng và chiều cao */
+            transform: translate(50%, 50%); 
             z-index: 10;
         }
         .introduce{
@@ -228,7 +228,6 @@
                     </form>
         </div>
         <?php if (isset($_SESSION['user'])): ?>
-        <!-- Dropdown user -->
         <div class="user-dropdown">
             <img src="image/user-icon.png" class="user-icon" onclick="toggleDropdown()" alt="User">
             <div id="dropdown-menu" class="dropdown-menu">
@@ -239,8 +238,7 @@
             </div>
         </div>
         <?php else: ?>
-            <!-- Nút đăng nhập đăng ký -->
-            <a href="login.php" class="btn-login">Đăng nhập</a>
+            <a href="dangnhap.php" class="btn-login">Đăng nhập</a>
             <a href="dangky.php" class="btn-register">Đăng ký</a>
         <?php endif; ?>
     </div>

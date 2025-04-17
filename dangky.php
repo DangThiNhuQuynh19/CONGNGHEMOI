@@ -66,7 +66,7 @@
     button {
       width: 100%;
       padding: 12px;
-      background-color: #6f42c1;
+      background-color: rgb(85, 45, 125);
       color: white;
       font-size: 16px;
       border: none;
