@@ -21,10 +21,10 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Đổ bóng nhẹ */
         }
         .header_logo{
-            margin-left: 80px;
+            margin-left: 30px;
         }
         .menu{
-            margin-right: 30px;
+            margin-right: 20px;
         }
         .menu ul{
             list-style-type: none;
@@ -32,7 +32,7 @@
             justify-content: space-between;
         }
         .menu li{
-            margin-right: 20px;
+            margin-right: 10px;
             font-size: large;
             color: rgb(60, 21, 97);
         }
@@ -56,7 +56,39 @@
             font-size:14px;
         }
         .search{
-            margin-right: 80px;
+            margin-right: 15px;
+        }
+        .btn-login, .btn-register {
+            display: inline-block;
+            padding: 8px 8px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn-login {
+            background-color: rgb(60, 21, 97);
+            color: white;
+            border: 2px solid #6a0dad;
+        }
+
+        .btn-login:hover {
+            background-color: white;
+            color: #6a0dad;
+            border: 2px solid #6a0dad;
+        }
+        .btn-register {
+            background-color: rgb(60, 21, 97);
+            color: white;
+            border: 2px solid #800080;
+        }
+        .btn-register:hover {
+            background-color: white;
+            color: #800080;
+            border: 2px solid #800080;
         }
         .booking-button{
             display: inline-block;
@@ -195,6 +227,22 @@
                         <button class="btnsearch" type="submit">Tìm kiếm</button>
                     </form>
         </div>
+        <?php if (isset($_SESSION['user'])): ?>
+        <!-- Dropdown user -->
+        <div class="user-dropdown">
+            <img src="image/user-icon.png" class="user-icon" onclick="toggleDropdown()" alt="User">
+            <div id="dropdown-menu" class="dropdown-menu">
+                <a href="">Xem hồ sơ bệnh án điện tử</a>
+                <a href="">Lịch hẹn của bạn</a>
+                <a href="">Tin nhắn</a>
+                <a href="">Đăng xuất</a>
+            </div>
+        </div>
+        <?php else: ?>
+            <!-- Nút đăng nhập đăng ký -->
+            <a href="login.php" class="btn-login">Đăng nhập</a>
+            <a href="dangky.php" class="btn-register">Đăng ký</a>
+        <?php endif; ?>
     </div>
     <div class="main">
         <div class="banner" style="position: relative; text-align: center; color: white;overflow: visible;">
