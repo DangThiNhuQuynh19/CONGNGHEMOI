@@ -1,3 +1,45 @@
+<?php
+// File xử lý đăng ký
+include_once(__DIR__ . "/../../controller/cTaiKhoan.php");
+
+$message = ""; // Biến chứa thông báo
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Lấy dữ liệu từ form
+    $email = $_POST['email'];
+    $hoten = $_POST['fullname'];
+    $ngaysinh = $_POST['dob'];
+    $matkhau = $_POST['password'];
+    $confirmMatkhau = $_POST['confirm-password'];
+
+    // Kiểm tra các trường có rỗng không
+    if (empty($email) || empty($hoten) || empty($ngaysinh) || empty($matkhau) || empty($confirmMatkhau)) {
+        $message = "Tất cả các trường đều phải được điền đầy đủ.";
+    } elseif ($matkhau !== $confirmMatkhau) {
+        // Kiểm tra mật khẩu nhập lại có khớp không
+        $message = "Mật khẩu nhập lại không khớp.";
+    } else {
+        // Gọi controller để xử lý đăng ký
+        $controller = new cTaiKhoan();
+        $result = $controller->dangkytk($email, $hoten, $ngaysinh, $matkhau);
+
+        if ($result === "email_ton_tai") {
+            $message = "Email đã tồn tại. Vui lòng chọn email khác.";
+        } elseif ($result === true) {
+            echo "<script>
+                alert('Đăng ký thành công! Đang chuyển hướng...');
+                setTimeout(function() {
+                    window.location.href = '?dangnhap';
+                }, 200);
+            </script>";
+            exit();
+        }else {
+            $message = "Đã có lỗi xảy ra khi tạo tài khoản.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -16,13 +58,13 @@
     }
 
     .register-box {
-      background-color: #ffffff;
-      padding: 40px 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 450px;
-      text-align: center;
+        background-color: #ffffff;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
     }
 
     .register-box img.logo {
@@ -91,7 +133,16 @@
   <div class="register-box">
     <img src="image/logo-banner.png" alt="Logo" class="logo" />
     <h2>Đăng ký tài khoản</h2>
-    <form>
+
+    <!-- Hiển thị thông báo với alert -->
+    <?php if ($message != ""): ?>
+      <script type="text/javascript">
+        alert("<?php echo $message; ?>");
+      </script>
+    <?php endif; ?>
+
+    <form action="" method="POST">
+    
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" placeholder="Nhập email" required />
 

@@ -1,3 +1,46 @@
+<?php
+session_start();
+include_once(__DIR__ . "/../../controller/cTaiKhoan.php");
+
+$message = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'] ?? '';
+    $matkhau = $_POST['password'] ?? '';
+
+    if (empty($email) || empty($matkhau)) {
+        $message = "Vui lòng nhập đầy đủ thông tin.";
+    } else {
+        // Khởi tạo Controller
+        $controller = new cTaiKhoan();
+        
+        // Gọi phương thức đăng nhập từ controller
+        $result = $controller->dangnhap($email, $matkhau);
+
+        // Xử lý kết quả trả về từ phương thức dangnhap
+        if ($result === true) {
+            $_SESSION['login_success'] = true;
+            
+            // Lấy vai trò từ session đã gán lúc xác thực thành công
+            $vaitro = $_SESSION['vaitro'];  // Chỉnh sửa ở đây
+            
+            if ($vaitro == 0) {
+                header("Location: view/BacSi/index.php");
+            } else if ($vaitro == 1) {
+                header("Location: view/Benhnhan/index.php");
+            }
+            exit;
+        }
+        
+        else {
+            // Nếu đăng nhập thất bại, hiển thị thông báo lỗi
+            $message = $result;
+        }
+    }
+}
+?>
+
+<!-- HTML form -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -77,6 +120,12 @@
       background-color: #5a34a5;
     }
 
+    .message {
+      margin-bottom: 15px;
+      color: red;
+      font-size: 15px;
+    }
+
     @media (max-width: 480px) {
       .login-box {
         padding: 30px 20px;
@@ -89,7 +138,12 @@
   <div class="login-box">
     <img src="image/logo-banner.png" alt="Logo" class="logo" />
     <h2>Đăng nhập</h2>
-    <form>
+
+    <?php if ($message != ""): ?>
+      <div class="message"><?php echo $message; ?></div>
+    <?php endif; ?>
+
+    <form method="POST" action="">
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" placeholder="Nhập email" required />
 
