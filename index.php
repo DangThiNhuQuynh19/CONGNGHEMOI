@@ -30,11 +30,11 @@
 
     <?php
       if(isset($_GET["dangnhap"])){
-        include_once("view/taikhoan/dangnhap.php");
+        include_once("view/TaiKhoan/dangnhap.php");
       }else if(isset($_GET["dangky"])){
-        include_once("view/taikhoan/dangky.php");
+        include_once("view/TaiKhoan/dangky.php");
       }else{
-        include_once("view/taikhoan/dangnhap.php");
+        include_once("view/TaiKhoan/dangnhap.php");
       }
     ?>
    

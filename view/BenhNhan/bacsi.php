@@ -13,26 +13,52 @@ $ds = $c->getAllBacSi();
     <meta charset="UTF-8">
     <title>Danh sách bác sĩ</title>
     <style>
-        .textsearch{
-            border-radius: 15px; 
-            width:220px;
-            height:25px; 
-            border-color:rgb(60, 21, 97);
-        }
-        .textsearch::placeholder {
-            color:rgb(60, 21, 97);
-            opacity: 1; 
+       .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px auto;
         }
 
-        .btnsearch{
-            width: 80px;
-            height: 30px;
-            border-radius: 10px; 
-            color: rgb(60, 21, 97);
-            font-size:14px;
+        .search-form {
+            background-color: #f2f2f2;
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .search{
-            margin-right: 15px;
+
+        .textsearch {
+            border: none;
+            outline: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            width: 300px;
+            font-size: 14px;
+            background-color: #fff;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .textsearch:focus {
+            box-shadow: 0 0 0 2px rgba(60, 21, 97, 0.3);
+        }
+
+        .btnsearch {
+            background-color: rgb(60, 21, 97);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btnsearch:hover {
+            background-color: #4a1c7c;
         }
         body {
             font-family: Arial, sans-serif;
@@ -126,14 +152,14 @@ $ds = $c->getAllBacSi();
     </style>
 </head>
 <body>
-
-<div class="search">
-    <form action="search.php" method="GET">
-        <input class="textsearch" type="text" name="keyword" placeholder="Nhập tên bác sĩ hoặc chuyên khoa..." required>
+<h1>Danh sách bác sĩ</h1>
+<div class="search-container">
+    <form action="search.php" method="GET" class="search-form">
+        <input class="textsearch" type="text" name="keyword" placeholder="Nhập tên bác sĩ..." required>
         <button class="btnsearch" type="submit">Tìm kiếm</button>
     </form>
 </div>
-<h1>Danh sách bác sĩ</h1>
+
 
 <?php 
     if (is_int($ds) && $ds == -1) {
@@ -160,7 +186,7 @@ $ds = $c->getAllBacSi();
             </p>
             <div class="doctor-buttons" >
                 <a href="datlich.php?id=<?php echo $row['mabacsi']; ?>" class="btn-primary">ĐẶT LỊCH KHÁM ONLINE</a>
-                <a href="chitietbacsi.php?id=<?php echo $row['mabacsi']; ?>" class="btn-secondary">XEM CHI TIẾT</a>
+                <a href="index.php?action=chitietbacsi&id=<?php echo $row['mabacsi']; ?> " class="btn-secondary">XEM CHI TIẾT</a>
             </div>
         </div>
     </div>

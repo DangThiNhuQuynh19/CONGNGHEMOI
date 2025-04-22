@@ -1,3 +1,6 @@
+<?php
+session_start(); // Khởi tạo session ở đầu trang
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +11,8 @@
         body {
             font-family: 'Arial', sans-serif;
         }
-        .header{
+
+        .header {
             width: 100%;
             height: 100px;
             display: flex;
@@ -18,71 +22,59 @@
             top: 0;
             z-index: 1000; 
             background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .header_logo{
+
+        .header_logo {
             margin-left: 100px;
         }
-        .menu{
-            margin-right: 10px;
+
+        .menu {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
         }
-        .menu ul{
+
+        .menu ul {
             list-style-type: none;
             display: flex;
             justify-content: space-between;
         }
-        .menu li{
+
+        .menu li {
             margin-right: 20px;
             font-size: 20px;
             color: rgb(60, 21, 97);
         }
-        .menu li a{
+
+        .menu li a {
             text-decoration: none;
             color: rgb(60, 21, 97);
         }
-        .btn-login, .btn-register {
-            padding-left: 1px;
-            display: inline-block;
-            padding: 8px 8px;
-            font-size: 14px;
+
+        
+        /* Biểu tượng đầu người */
+        .user-icon {
+            border-radius: 52%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
             font-weight: bold;
-            border-radius: 6px;
-            text-decoration: none;
-            text-align: center;
-            transition: 0.3s;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px; /* Khoảng cách với menu */
         }
 
-        .btn-login {
-            background-color: rgb(60, 21, 97);
-            color: white;
-            border: 2px solid #6a0dad;
+        .user-icon:hover {
+            background-color: #6a34a5; /* Màu tím nhạt hơn khi hover */
         }
 
-        .btn-login:hover {
-            background-color: white;
-            color: #6a0dad;
-            border: 2px solid #6a0dad;
-        }
-        .btn-register {
-            background-color: rgb(60, 21, 97);
-            color: white;
-            border: 2px solid #800080;
-        }
-        .btn-register:hover {
-            background-color: white;
-            color: #800080;
-            border: 2px solid #800080;
-        }
-
-        /* Dropdown menu styling */
+        /* Dropdown menu */
         .user-dropdown {
             position: relative;
-        }
-
-        .user-icon {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
+            display: inline-block;
         }
 
         .dropdown-menu {
@@ -91,30 +83,37 @@
             top: 50px;
             right: 0;
             background-color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             min-width: 200px;
             border-radius: 8px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .user-dropdown.show .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
         }
 
         .dropdown-menu a {
-            padding: 10px;
+            padding: 12px 16px;
             display: block;
-            color: #333;
+            color: rgb(60, 21, 97);
+            font-size: 20px;
             text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .dropdown-menu a:hover {
             background-color: #f1f1f1;
+            color: #6a34a5; /* Màu tím khi hover */
         }
-
-        /* Hiển thị dropdown khi hover */
-        .user-dropdown:hover .dropdown-menu {
-            display: block;
-        }
-        
     </style>
 </head>
 <body>
+
 <!-- HEADER -->
 <div class="header">
     <div class="header_logo">
@@ -134,21 +133,22 @@
     </div>
 
     <?php if (isset($_SESSION['vaitro']) && $_SESSION['vaitro'] == 1): ?>
-        <div class="user-dropdown">
-            <img src="../../image/user-icon.png" class="user-icon" alt="User">
-            <div class="dropdown-menu">
-                <a href="?action=hoso">Xem hồ sơ bệnh án điện tử</a>
-                <a href="?action=lichhen">Lịch hẹn của bạn</a>
-                <a href="?action=tinnhan">Tin nhắn</a>
-                <a href="dangxuat.php">Đăng xuất</a>
-            </div>
+    <div class="user-dropdown">
+        <div class="user-icon">
+            <span><img src="../../image/user1.png" alt="" style="width:40px;"></span> 
         </div>
-    <?php else: ?>
-        <div class="acc">
-            <a href="dangnhap.php" class="btn-login">Đăng nhập</a>
-            <a href="dangky.php" class="btn-register">Đăng ký</a>
+        <button class="dropbtn">
+            Xin chào, <?php echo htmlspecialchars($_SESSION['hoten']); ?>
+        </button>
+        <div class="dropdown-menu">
+            <a href="?action=hoso">Xem hồ sơ bệnh án điện tử</a>
+            <a href="?action=lichhen">Lịch hẹn của bạn</a>
+            <a href="?action=tinnhan">Tin nhắn</a>
+            <a href="/HOSPITAL/view/TaiKhoan/dangxuat.php">Đăng xuất</a>
         </div>
-    <?php endif; ?>
+    </div>
+<?php endif; ?>
+
 </div>
 
 <!-- PHẦN HIỂN THỊ NỘI DUNG THEO action -->
@@ -183,6 +183,9 @@
             case 'tinnhan':
                 include_once("tinnhan.php");
                 break;
+            case 'chitietbacsi':
+                include_once("chitietbacsi.php");
+                break;
             case 'index':
             default:
                 include_once("trangchu.php");
@@ -193,6 +196,24 @@
     }
 ?>
 
-   
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const userIcon = document.querySelector(".user-icon");
+        const userDropdown = document.querySelector(".user-dropdown");
+
+        // Toggle dropdown khi click vào biểu tượng người dùng
+        userIcon.addEventListener("click", function () {
+            userDropdown.classList.toggle("show");
+        });
+
+        // Đóng dropdown khi click ngoài
+        document.addEventListener("click", function (event) {
+            if (!userDropdown.contains(event.target)) {
+                userDropdown.classList.remove("show");
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

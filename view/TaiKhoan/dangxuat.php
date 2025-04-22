@@ -1,6 +1,10 @@
 <?php
-session_start();
+session_start();  // Khởi tạo session
+
+// Xóa toàn bộ session để đăng xuất
 session_destroy();
-header("Location: index.php");
-exit;
+
+// Chuyển hướng về trang chủ sau khi đăng xuất
+header("Location: ../../index.php");  // Điều chỉnh đường dẫn theo cấu trúc thư mục của bạn
+exit();
 ?>
