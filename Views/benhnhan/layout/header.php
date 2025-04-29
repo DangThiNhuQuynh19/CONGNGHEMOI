@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -302,8 +304,10 @@
                         <img src="Assets/img/user-icon.png" alt="User">
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Lê Trọng Phát</span>
-                        <span class="user-role">Bệnh nhân</span>
+                        <!-- Displaying dynamic user name -->
+                        <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
+                        <!-- Displaying dynamic user role -->
+                        <span class="user-role"><?php echo $_SESSION['user_role'] == 1 ? 'Bệnh nhân' : 'Bác sĩ'; ?></span>
                     </div>
                     <div class="dropdown-menu" id="dropdownMenu">
                         <div class="dropdown-header">
@@ -323,6 +327,7 @@
                     <a href="?action=dangky" class="btn-register">Đăng ký</a>
                 </div>
             <?php endif; ?>
+
         </div>
         
         <!-- Rest of your content goes here -->

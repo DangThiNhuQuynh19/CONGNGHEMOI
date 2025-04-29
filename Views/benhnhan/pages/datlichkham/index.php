@@ -1,61 +1,40 @@
 <?php
-// Include các file controller
+// Include các file controller cần thiết
 include_once('Controllers/cbacsi.php');
 include_once('Controllers/clichkham.php');
 
-// Lấy tham số từ URL
-$idbs = isset($_GET['idbs']) ? $_GET['idbs'] : null;
-$ngay = isset($_GET['ngay']) ? $_GET['ngay'] : null;
-$ca = isset($_GET['ca']) ? $_GET['ca'] : null;
+// Xử lý lấy thông tin bác sĩ, lịch làm việc
+$idbs = $_GET['idbs'] ?? null;
+$ngay = $_GET['ngay'] ?? null;
+$ca = $_GET['ca'] ?? null;
 
 if ($idbs && $ngay && $ca) {
-    // Lấy thông tin bác sĩ từ mã bác sĩ
     $pBacSi = new cBacSi();
     $tblBacSi = $pBacSi->getBacSiById($idbs);
-
-    // Check if the result is valid (mysqli_result should not be used directly as an int)
-    if ($tblBacSi === false) {
-        echo "Lỗi kết nối cơ sở dữ liệu.";
-    } elseif ($tblBacSi->num_rows == 0) {
-        echo "Không tìm thấy thông tin bác sĩ.";
-    } else {
-        // Fetch data using fetch_assoc() from the result set
+    if ($tblBacSi && $tblBacSi->num_rows > 0) {
         $bacSi = $tblBacSi->fetch_assoc();
-        if ($bacSi) {
-            $hoten = $bacSi['hoten'];
-            $capbac = $bacSi['capbac'];
-            $chuyenKhoa = $bacSi['tenchuyenkhoa'];
-            $gia = $bacSi['giakham'];
-            $anh = $bacSi['imgbs'];
-        } else {
-            echo "Không có thông tin bác sĩ.";
-        }
+        $hoten = $bacSi['hoten'];
+        $capbac = $bacSi['capbac'];
+        $chuyenKhoa = $bacSi['tenchuyenkhoa'];
+        $gia = $bacSi['giakham'];
+        $anh = $bacSi['imgbs'];
+    } else {
+        $error = "Không tìm thấy thông tin bác sĩ.";
     }
 
-    // Lấy thông tin lịch làm việc từ mã ca
     $pLichKham = new cLichKham();
     $tblLich = $pLichKham->getlich($ca);
-
-    // Check if the result is valid (mysqli_result should not be used directly as an int)
-    if ($tblLich === false) {
-        echo "Lỗi kết nối cơ sở dữ liệu.";
-    } elseif ($tblLich->num_rows == 0) {
-        echo "Không tìm thấy thông tin ca làm việc.";
-    } else {
-        // Fetch data using fetch_assoc() from the result set
+    if ($tblLich && $tblLich->num_rows > 0) {
         $lich = $tblLich->fetch_assoc();
-        if ($lich) {
-            $giobatdau = $lich['giobatdau'];
-            $gioketthuc = $lich['gioketthuc'];
-        } else {
-            echo "Không có thông tin lịch làm việc.";
-        }
+        $giobatdau = $lich['giobatdau'];
+        $gioketthuc = $lich['gioketthuc'];
+    } else {
+        $error = "Không tìm thấy thông tin ca làm việc.";
     }
 } else {
-    echo "Thiếu tham số trong URL.";
+    $error = "Thiếu tham số trên URL.";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -217,28 +196,20 @@ if ($idbs && $ngay && $ca) {
   <p class="text-danger text-center">Không có thông tin đặt lịch khám.</p>
 <?php endif; ?>
 
-<!-- The rest of the form code remains unchanged -->
-
-</body>
-</html>
-
-  <div class="container mt-5 mb-5">
-    <h2 class="mb-4 text-center">Đặt Lịch Khám Online</h2>
-    <form method="POST" action="luu_lich_kham.php">
-      <!-- Patient History Section -->
-      <div class="mb-3">
-        <label class="form-label">Bạn đã từng khám bệnh trước đây?</label>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="patientHistory" id="daTungKham" value="Đã từng khám" onclick="togglePatientHistory()" checked>
-          <label class="form-check-label" for="daTungKham">Đã từng khám</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="patientHistory" id="chuaTungKham" value="Chưa từng khám" onclick="togglePatientHistory()">
-          <label class="form-check-label" for="chuaTungKham">Chưa từng khám</label>
-        </div>
+<div class="container mt-5 mb-5">
+  <h2 class="mb-4 text-center">Đặt Lịch Khám Online</h2>
+  <form method="POST" action="luu_lich_kham.php">
+    <div class="mb-3">
+      <label class="form-label">Bạn đã từng khám bệnh trước đây?</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="patientHistory" id="daTungKham" value="Đã từng khám" onclick="togglePatientHistory()" checked>
+        <label class="form-check-label" for="daTungKham">Đã từng khám</label>
       </div>
-
-      <!-- Form Fields Below -->
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="patientHistory" id="chuaTungKham" value="Chưa từng khám" onclick="togglePatientHistory()">
+        <label class="form-check-label" for="chuaTungKham">Chưa từng khám</label>
+      </div>
+    </div>
       <div class="row g-3" id="formFields">
         <!-- Các ô nhập khác chỉ hiển thị khi "Chưa từng khám" -->
         <div class="col-md-6">
@@ -315,9 +286,43 @@ if ($idbs && $ngay && $ca) {
           <label for="tiensubenhbandau" class="form-label">Tiền Sử Bệnh Bản Thân</label>
           <textarea class="form-control" id="tiensubenhbandau" name="tiensubenhbandau" rows="2"></textarea>
         </div>
-
+        <div class="col-md-6">
+          <label for="nhommau" class="form-label">Nhóm Máu</label>
+          <select class="form-select" id="nhommau" name="nhommau">
+            <option value="">-- Chọn --</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+          </select>
+        </div>
       </div>
+<!-- Thông tin thân nhân nếu dưới 18 tuổi -->
+      <div id="thanNhanSection" class="p-3 mt-4" style="display:none;">
+          <h5 style="color: var(--custom-purple);">Thông Tin Thân Nhân (Bệnh nhân dưới 18 tuổi)</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="hotenthannhan" class="form-label">Họ Tên Thân Nhân</label>
+              <input type="text" class="form-control" id="hotenthannhan" name="hotenthannhan">
+            </div>
 
+            <div class="col-md-3">
+              <label for="quanhe" class="form-label">Quan Hệ</label>
+              <input type="text" class="form-control" id="quanhe" name="quanhe">
+            </div>
+
+            <div class="col-md-3">
+              <label for="sdtthannhan" class="form-label">SĐT Thân Nhân</label>
+              <input type="text" class="form-control" id="sdtthannhan" name="sdtthannhan">
+            </div>
+
+            <div class="col-md-6">
+              <label for="cccdthannhan" class="form-label">CCCD Thân Nhân</label>
+              <input type="text" class="form-control" id="cccdthannhan" name="cccdthannhan">
+            </div>
+          </div>
+        </div>
+    
       <!-- Mã Bệnh Nhân - Chỉ hiển thị khi "Đã từng khám" -->
       <div class="col-md-6" id="mabenhnhanField" style="display:none;">
         <label for="mabenhnhan" class="form-label">Mã Bệnh Nhân</label>
@@ -329,6 +334,62 @@ if ($idbs && $ngay && $ca) {
       </div>
     </form>
   </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  const ngaysinhInput = document.getElementById('ngaysinh');
+  const thanNhanSection = document.getElementById('thanNhanSection');
+  const daTungKham = document.getElementById('daTungKham'); // Lấy radio "Đã từng khám"
 
+  // Xử lý thay đổi ngày sinh để kiểm tra độ tuổi
+  ngaysinhInput.addEventListener('change', function () {
+    const today = new Date();
+    const birthDate = new Date(this.value);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    if (age < 18) {
+      thanNhanSection.style.display = 'block';
+    } else {
+      thanNhanSection.style.display = 'none';
+    }
+  });
+
+  // Kiểm tra khi chọn "Đã từng khám" hay "Chưa từng khám"
+  daTungKham.addEventListener('change', function () {
+    togglePatientHistory(); // Gọi lại hàm togglePatientHistory để xử lý lại khi thay đổi lựa chọn
+    // Khi chọn "Đã từng khám", ẩn thông tin thân nhân
+    thanNhanSection.style.display = 'none';
+  });
+
+  const chuaTungKham = document.getElementById('chuaTungKham'); // Lấy radio "Chưa từng khám"
+  chuaTungKham.addEventListener('change', function () {
+    togglePatientHistory(); // Gọi lại hàm togglePatientHistory khi chọn "Chưa từng khám"
+  });
+
+  // Kiểm tra khi tải trang lần đầu
+  window.onload = togglePatientHistory;
+
+  // Hàm ẩn/hiện form thông tin cá nhân và mã bệnh nhân
+  function togglePatientHistory() {
+    const daTungKhamChecked = daTungKham.checked; // Kiểm tra nếu chọn "Đã từng khám"
+    const formFields = document.getElementById('formFields');
+    const maBenhNhanField = document.getElementById('mabenhnhanField');
+
+    if (daTungKhamChecked) {
+      formFields.style.display = 'none';        // Ẩn form thông tin cá nhân
+      maBenhNhanField.style.display = 'block';   // Hiện ô nhập mã bệnh nhân
+    } else {
+      formFields.style.display = 'flex';         // Hiện form thông tin cá nhân
+      maBenhNhanField.style.display = 'none';    // Ẩn ô nhập mã bệnh nhân
+    }
+  }
+});
+</script>
 </body>
 </html>
+

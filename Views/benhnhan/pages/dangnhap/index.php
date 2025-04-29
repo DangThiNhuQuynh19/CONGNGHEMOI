@@ -342,9 +342,9 @@
         
         <form method="POST" id="loginForm">
           <div class="input-group">
-            <label for="email">Email:</label>
+            <label for="tentk">Tên tài khoản:</label>
             <i class="fas fa-envelope"></i>
-            <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required />
+            <input type="email" id="tentk" name="tentk" placeholder="Nhập email của bạn" required />
           </div>
           
           <div class="input-group">
