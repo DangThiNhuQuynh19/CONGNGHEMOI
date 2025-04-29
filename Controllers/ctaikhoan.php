@@ -16,7 +16,6 @@ class ctaiKhoan {
             $row = $user->fetch_assoc();
             $_SESSION['dangnhap'] = $row["vaitro"];
             $_SESSION["user"] = $row;
-    
             header("Location:index.php?action=trangchu");
             exit();
         } else {
