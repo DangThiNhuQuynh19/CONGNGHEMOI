@@ -1,8 +1,8 @@
 <?php
     include_once('Controllers/cbenhnhan.php');
     $cbenhnhan= new cbenhnhan();
-    $user = $_SESSION["user"];
     if(isset($_SESSION["dangnhap"]) && isset($_SESSION["user"])){
+        $user = $_SESSION["user"];
         $benhnhan = $cbenhnhan->getbenhnhanbytk($user["tentk"]);
         if($_SESSION["dangnhap"]==1){
             $vaitro="Bệnh nhân";
@@ -312,7 +312,7 @@
             <?php if (isset($_SESSION['dangnhap']) && $_SESSION['dangnhap'] == 1): ?>
                 <div class="user-dropdown" id="userDropdown">
                     <div class="user-icon" id="userIcon">
-                        <img src="Assets/img/user-icon.png" alt="User">
+                        <img src=<?php echo'"Assets/img/'.$benhnhan["img"].'"';?> alt="User">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo $benhnhan["hotenbenhnhan"]?></span>

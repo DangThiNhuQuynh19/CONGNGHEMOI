@@ -291,7 +291,7 @@
                 <div class="banner-heading">
                     CHĂM SÓC <br>SỨC KHỎE <br>GIA ĐÌNH<br>CỦA BẠN
                 </div>
-                <a href="" class="booking-button">Đặt lịch khám online</a>
+                <a href="?action=datlichkham" class="booking-button">Đặt lịch khám online</a>
             </div>
             <img class="corner-icon" src="Assets/img/logo-banner.png" alt="icon">
         </div>

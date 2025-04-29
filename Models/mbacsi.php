@@ -73,6 +73,18 @@ require_once('ketnoi.php');
             }
         }
         
-
+        public function xembacsitheotentk($tentk){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "select * from bacsi where tentk = '$tentk' limit 1";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
     }
 ?>
