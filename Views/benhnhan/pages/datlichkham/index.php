@@ -34,6 +34,31 @@ if ($idbs && $ngay && $ca) {
 } else {
     $error = "Thiếu tham số trên URL.";
 }
+
+include_once('Controllers/cBenhNhan.php');
+$benhnhans = [];
+if (isset($_SESSION['user']) && isset($_SESSION['user']['tentk'])) {
+    $tentk = $_SESSION['user']['tentk'];
+    $pBenhNhan = new cBenhNhan();
+    $benhnhans = $pBenhNhan->getAllBenhNhanByTK($tentk);
+}
+
+$batBuoc = [
+    'hotenbenhnhan', 'ngaysinh', 'gioitinh', 'nghenghiep', 'cccdbenhnhan',
+    'dantoc', 'email', 'sdtbenhnhan', 'tinh/thanhpho', 'quan/huyen',
+    'xa/phuong', 'sonha', 'nhommau'
+];
+
+// Kiểm tra các trường thông tin bắt buộc
+function checkMissingFields($record, $requiredFields) {
+    foreach ($requiredFields as $field) {
+        if (!isset($record[$field]) || trim($record[$field]) === '') {
+            return true; // Có thiếu thông tin
+        }
+    }
+    return false; // Đủ thông tin
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -42,7 +67,6 @@ if ($idbs && $ngay && $ca) {
   <title>Đặt Lịch Khám Online</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     :root {
       --custom-purple: rgb(85, 45, 125);
@@ -171,8 +195,47 @@ if ($idbs && $ngay && $ca) {
       background-color: #f9f9f9;
       border-radius: 10px;
     }
+
+    .btn-success {
+      border-radius: 50px;
+      font-weight: 500;
+      padding: 10px 20px;
+      background-color: var(--custom-purple);
+    }
+
+    .text-danger {
+      color: #dc3545;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 10px;
+      background-color: #f8d7da;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 10px;
+      display: inline-block;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .btn-primary[disabled] {
+      background-color: #ccc;
+      border-color: #ccc;
+      cursor: not-allowed;
+    }
   </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <body>
 <?php if ($idbs && $ngay && $ca): ?>
   <div class="container text-center">
@@ -197,199 +260,65 @@ if ($idbs && $ngay && $ca) {
 <?php endif; ?>
 
 <div class="container mt-5 mb-5">
-  <h2 class="mb-4 text-center">Đặt Lịch Khám Online</h2>
-  <form method="POST" action="luu_lich_kham.php">
-    <div class="mb-3">
-      <label class="form-label">Bạn đã từng khám bệnh trước đây?</label>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="patientHistory" id="daTungKham" value="Đã từng khám" onclick="togglePatientHistory()" checked>
-        <label class="form-check-label" for="daTungKham">Đã từng khám</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="patientHistory" id="chuaTungKham" value="Chưa từng khám" onclick="togglePatientHistory()">
-        <label class="form-check-label" for="chuaTungKham">Chưa từng khám</label>
-      </div>
-    </div>
-      <div class="row g-3" id="formFields">
-        <!-- Các ô nhập khác chỉ hiển thị khi "Chưa từng khám" -->
-        <div class="col-md-6">
-          <label for="hotenbenhnhan" class="form-label">Họ Tên Bệnh Nhân</label>
-          <input type="text" class="form-control" id="hotenbenhnhan" name="hotenbenhnhan" required>
-        </div>
-
-        <div class="col-md-4">
-          <label for="ngaysinh" class="form-label">Ngày Sinh</label>
-          <input type="date" class="form-control" id="ngaysinh" name="ngaysinh" required>
-        </div>
-
-        <div class="col-md-4">
-          <label for="gioitinh" class="form-label">Giới Tính</label>
-          <select class="form-select" id="gioitinh" name="gioitinh" required>
-            <option value="">-- Chọn --</option>
-            <option value="Nam">Nam</option>
-            <option value="Nữ">Nữ</option>
-            <option value="Khác">Khác</option>
-          </select>
-        </div>
-
-        <div class="col-md-4">
-          <label for="nghenghiep" class="form-label">Nghề Nghiệp</label>
-          <input type="text" class="form-control" id="nghenghiep" name="nghenghiep">
-        </div>
-
-        <div class="col-md-6">
-          <label for="cccdbenhnhan" class="form-label">CCCD</label>
-          <input type="text" class="form-control" id="cccdbenhnhan" name="cccdbenhnhan">
-        </div>
-
-        <div class="col-md-6">
-          <label for="dantoc" class="form-label">Dân Tộc</label>
-          <input type="text" class="form-control" id="dantoc" name="dantoc">
-        </div>
-
-        <div class="col-md-6">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email">
-        </div>
-
-        <div class="col-md-6">
-          <label for="sdtbenhnhan" class="form-label">SĐT Bệnh Nhân</label>
-          <input type="text" class="form-control" id="sdtbenhnhan" name="sdtbenhnhan">
-        </div>
-
-        <div class="col-md-4">
-          <label for="tinh" class="form-label">Tỉnh/Thành Phố</label>
-          <input type="text" class="form-control" id="tinh" name="tinh">
-        </div>
-
-        <div class="col-md-4">
-          <label for="quan" class="form-label">Quận/Huyện</label>
-          <input type="text" class="form-control" id="quan" name="quan">
-        </div>
-
-        <div class="col-md-4">
-          <label for="xa" class="form-label">Xã/Phường</label>
-          <input type="text" class="form-control" id="xa" name="xa">
-        </div>
-
-        <div class="col-md-12">
-          <label for="sonha" class="form-label">Số Nhà</label>
-          <input type="text" class="form-control" id="sonha" name="sonha">
-        </div>
-
-        <div class="col-md-6">
-          <label for="tiensubenhtatgiadinh" class="form-label">Tiền Sử Bệnh Gia Đình</label>
-          <textarea class="form-control" id="tiensubenhtatgiadinh" name="tiensubenhtatgiadinh" rows="2"></textarea>
-        </div>
-
-        <div class="col-md-6">
-          <label for="tiensubenhbandau" class="form-label">Tiền Sử Bệnh Bản Thân</label>
-          <textarea class="form-control" id="tiensubenhbandau" name="tiensubenhbandau" rows="2"></textarea>
-        </div>
-        <div class="col-md-6">
-          <label for="nhommau" class="form-label">Nhóm Máu</label>
-          <select class="form-select" id="nhommau" name="nhommau">
-            <option value="">-- Chọn --</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="AB">AB</option>
-            <option value="O">O</option>
-          </select>
-        </div>
-      </div>
-<!-- Thông tin thân nhân nếu dưới 18 tuổi -->
-      <div id="thanNhanSection" class="p-3 mt-4" style="display:none;">
-          <h5 style="color: var(--custom-purple);">Thông Tin Thân Nhân (Bệnh nhân dưới 18 tuổi)</h5>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="hotenthannhan" class="form-label">Họ Tên Thân Nhân</label>
-              <input type="text" class="form-control" id="hotenthannhan" name="hotenthannhan">
+  <h2 class="mb-4 text-center">Chọn hồ sơ bệnh nhân</h2>
+  <?php if (!empty($benhnhans)): ?>
+  <div class="row">
+  <div class="accordion" id="benhNhanAccordion">
+  <?php foreach ($benhnhans as $index => $bn): ?>
+    <?php $thieuThongTin = checkMissingFields($bn, $batBuoc); ?>
+    <div class="accordion-item mb-3">
+      <h2 class="accordion-header" id="heading<?php echo $index; ?>">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse<?php echo $index; ?>">
+          <?php echo htmlspecialchars($bn['hotenbenhnhan']); ?>
+        </button>
+      </h2>
+      <div id="collapse<?php echo $index; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $index; ?>" data-bs-parent="#benhNhanAccordion">
+        <div class="accordion-body">
+          <div class="d-flex justify-content-between">
+            <div class="w-75">
+              <p><strong>Ngày sinh:</strong> <?php echo htmlspecialchars($bn['ngaysinh']); ?></p>
+              <p><strong>Giới tính:</strong> <?php echo htmlspecialchars($bn['gioitinh']); ?></p>
+              <p><strong>Nghề nghiệp:</strong> <?php echo htmlspecialchars($bn['nghenghiep']); ?></p>
+              <p><strong>CCCD:</strong> <?php echo htmlspecialchars($bn['cccdbenhnhan']); ?></p>
+              <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($bn['sonha']) . ', ' . htmlspecialchars($bn['xa/phuong']) . ', ' . htmlspecialchars($bn['quan/huyen']) . ', ' . htmlspecialchars($bn['tinh/thanhpho']); ?></p>
+              <p><strong>Tiền sử bệnh tật của gia đình:</strong> <?php echo htmlspecialchars($bn['tiensubenhtatcuagiadinh']); ?></p>
+              <p><strong>Tiền sử bệnh tật của bản thân:</strong> <?php echo htmlspecialchars($bn['tiensubenhtatcuabenhnhan']); ?></p>
             </div>
-
-            <div class="col-md-3">
-              <label for="quanhe" class="form-label">Quan Hệ</label>
-              <input type="text" class="form-control" id="quanhe" name="quanhe">
-            </div>
-
-            <div class="col-md-3">
-              <label for="sdtthannhan" class="form-label">SĐT Thân Nhân</label>
-              <input type="text" class="form-control" id="sdtthannhan" name="sdtthannhan">
-            </div>
-
-            <div class="col-md-6">
-              <label for="cccdthannhan" class="form-label">CCCD Thân Nhân</label>
-              <input type="text" class="form-control" id="cccdthannhan" name="cccdthannhan">
+            <div class="w-25">
+              <p><strong>Điện thoại:</strong> <?php echo htmlspecialchars($bn['sdtbenhnhan']); ?></p>
+              <p><strong>Email:</strong> <?php echo htmlspecialchars($bn['email']); ?></p>
+              <p><strong>Quan hệ:</strong> <?php echo htmlspecialchars($bn['quanhe']); ?></p>
+              <p><strong>Dân tộc:</strong> <?php echo htmlspecialchars($bn['dantoc']); ?></p>
+              <p><strong>Nhóm máu:</strong> <?php echo htmlspecialchars($bn['nhommau']); ?></p>
             </div>
           </div>
+          <?php if (!$thieuThongTin): ?>
+            <form method="POST" action="">
+              <button type="submit" class="btn btn-primary">Chọn bệnh nhân này</button>
+            </form>
+          <?php else: ?>
+            <div class="text-danger mt-2">
+              Hồ sơ bệnh nhân chưa đầy đủ thông tin bắt buộc.
+            </div>
+          <?php endif; ?>
+          <form method="POST" action="">
+          <a href="?action=suahoso&mabenhnhan=<?php echo $bn['mabenhnhan']; ?>" class="btn btn-warning">Sửa hồ sơ</a>
+
+            <a href="xoahoso.php?mabenhnhan=<?php echo $bn['mabenhnhan']; ?>" class="btn btn-danger"
+              onclick="return confirm('Bạn có chắc chắn muốn xóa hồ sơ bệnh nhân này?');">
+              Xóa hồ sơ
+            </a>
+
+          </form>
         </div>
-    
-      <!-- Mã Bệnh Nhân - Chỉ hiển thị khi "Đã từng khám" -->
-      <div class="col-md-6" id="mabenhnhanField" style="display:none;">
-        <label for="mabenhnhan" class="form-label">Mã Bệnh Nhân</label>
-        <input type="text" class="form-control" id="mabenhnhan" name="mabenhnhan" required>
       </div>
-
-      <div class="text-center mt-4">
-        <button type="submit" class="btn btn-primary">Xác Nhận Đặt Lịch</button>
-      </div>
-    </form>
+    </div>
+  <?php endforeach; ?>
   </div>
+  </div>
+  <?php else: ?>
+    <p class="text-danger">Không có bệnh nhân nào được tìm thấy.</p>
+  <?php endif; ?>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-  const ngaysinhInput = document.getElementById('ngaysinh');
-  const thanNhanSection = document.getElementById('thanNhanSection');
-  const daTungKham = document.getElementById('daTungKham'); // Lấy radio "Đã từng khám"
-
-  // Xử lý thay đổi ngày sinh để kiểm tra độ tuổi
-  ngaysinhInput.addEventListener('change', function () {
-    const today = new Date();
-    const birthDate = new Date(this.value);
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-
-    if (age < 18) {
-      thanNhanSection.style.display = 'block';
-    } else {
-      thanNhanSection.style.display = 'none';
-    }
-  });
-
-  // Kiểm tra khi chọn "Đã từng khám" hay "Chưa từng khám"
-  daTungKham.addEventListener('change', function () {
-    togglePatientHistory(); // Gọi lại hàm togglePatientHistory để xử lý lại khi thay đổi lựa chọn
-    // Khi chọn "Đã từng khám", ẩn thông tin thân nhân
-    thanNhanSection.style.display = 'none';
-  });
-
-  const chuaTungKham = document.getElementById('chuaTungKham'); // Lấy radio "Chưa từng khám"
-  chuaTungKham.addEventListener('change', function () {
-    togglePatientHistory(); // Gọi lại hàm togglePatientHistory khi chọn "Chưa từng khám"
-  });
-
-  // Kiểm tra khi tải trang lần đầu
-  window.onload = togglePatientHistory;
-
-  // Hàm ẩn/hiện form thông tin cá nhân và mã bệnh nhân
-  function togglePatientHistory() {
-    const daTungKhamChecked = daTungKham.checked; // Kiểm tra nếu chọn "Đã từng khám"
-    const formFields = document.getElementById('formFields');
-    const maBenhNhanField = document.getElementById('mabenhnhanField');
-
-    if (daTungKhamChecked) {
-      formFields.style.display = 'none';        // Ẩn form thông tin cá nhân
-      maBenhNhanField.style.display = 'block';   // Hiện ô nhập mã bệnh nhân
-    } else {
-      formFields.style.display = 'flex';         // Hiện form thông tin cá nhân
-      maBenhNhanField.style.display = 'none';    // Ẩn ô nhập mã bệnh nhân
-    }
-  }
-});
-</script>
 </body>
 </html>
-

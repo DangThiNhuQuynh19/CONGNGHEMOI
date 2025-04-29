@@ -29,8 +29,9 @@ class mtaikhoan{
         $stmtInsertTK->bind_param("ss", $email, $hashedPassword);
         if ($stmtInsertTK->execute()) {
             // Thêm vào bảng benhnhan
-            $stmtInsertBN = $this->conn->prepare("INSERT INTO benhnhan (hotenbenhnhan, ngaysinh, email, tentk) VALUES (?, ?, ?, ?)");
-            $stmtInsertBN->bind_param("ssss", $hoten, $ngaysinh, $email, $email);
+            $quanhe = "bản thân";
+            $stmtInsertBN = $this->conn->prepare("INSERT INTO benhnhan (hotenbenhnhan, ngaysinh, email, quanhe, tentk) VALUES (?, ?, ?, ?, ?)");
+            $stmtInsertBN->bind_param("sssss", $hoten, $ngaysinh, $email, $quanhe, $email);
             return $stmtInsertBN->execute() ? true : "Lỗi khi thêm bệnh nhân.";
         } else {
             return "Lỗi khi tạo tài khoản.";

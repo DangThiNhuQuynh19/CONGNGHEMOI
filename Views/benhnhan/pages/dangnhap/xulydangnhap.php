@@ -7,12 +7,6 @@ if (isset($_POST["btndangnhap"])) {
     $tentk = $_POST["tentk"];
     $password = MD5($_POST["password"]);
     $nguoidung->dangnhap($tentk, $password);
-    // if ($result) {
-        
-    //     header("Location: index.php");
-    //     exit;
-    // } else {
-    //     echo '<script>document.getElementById("errorMessage").classList.add("show");</script>';
-    // }
+
 }
 ?>

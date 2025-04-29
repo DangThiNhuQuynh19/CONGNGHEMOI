@@ -6,7 +6,7 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "select * from benhnhan where tentk = '$tentk' limit 1";
+                $str = "select * from benhnhan where tentk = '$tentk' and quanhe  LIKE 'bản thân' limit 1";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
@@ -14,5 +14,55 @@
                 return false; 
             }
         }
+        public function getBenhNhanByTenTK($tentk) {
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "select * from benhnhan where tentk = '$tentk'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+        public function getBenhNhanByID($id) {
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "select * from benhnhan where mabenhnhan = '$id'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+        public function capnhatbenhnhan($mabenhnhan, $hotenbenhnhan, $ngaysinh, $gioitinh, $nghenghiep, $cccdbenhnhan,
+                                $dantoc, $email, $sdtbenhnhan, $tinh, $quan, $xa, $sonha, $quanhe,
+                                $tiensubenhtatcuagiadinh, $tiensubenhtatcuabenhnhan, $nhommau) {
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if ($con) {
+                // Sử dụng dấu backtick để bao quanh tên cột
+                $str = "UPDATE benhnhan 
+                        SET hotenbenhnhan='$hotenbenhnhan', ngaysinh='$ngaysinh', gioitinh='$gioitinh', nghenghiep='$nghenghiep', 
+                            cccdbenhnhan='$cccdbenhnhan', dantoc='$dantoc', email='$email', sdtbenhnhan='$sdtbenhnhan',
+                            `tinh/thanhpho`='$tinh', `quan/huyen`='$quan', `xa/phuong`='$xa', sonha='$sonha', quanhe='$quanhe',
+                            tiensubenhtatcuagiadinh='$tiensubenhtatcuagiadinh', tiensubenhtatcuabenhnhan='$tiensubenhtatcuabenhnhan', 
+                            nhommau='$nhommau' 
+                        WHERE mabenhnhan='$mabenhnhan'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            } else {
+                return false;
+            }
+        }
+
     }
+    
 ?>
