@@ -313,7 +313,7 @@ error_reporting(0);
             <?php if (isset($_SESSION['dangnhap']) && $_SESSION['dangnhap'] == 1): ?>
                 <div class="user-dropdown" id="userDropdown">
                     <div class="user-icon" id="userIcon">
-                        <img src=<?php echo'"Assets/img/'.$benhnhan["img"].'"';?> alt="User">
+                        <img src="Assets/img/user-icon.png" alt="User">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo $benhnhan["hotenbenhnhan"]?></span>
