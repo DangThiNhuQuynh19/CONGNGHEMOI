@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
     include_once('Controllers/cbenhnhan.php');
     $cbenhnhan= new cbenhnhan();
     if(isset($_SESSION["dangnhap"]) && isset($_SESSION["user"])){
