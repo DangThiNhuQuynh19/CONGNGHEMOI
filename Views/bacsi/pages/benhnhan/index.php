@@ -1,7 +1,7 @@
 <?php
     include_once('Controllers/cbenhnhan.php');
     $cbenhnhan = new cBenhNhan();
-    $benhnhan_list= $cbenhnhan->getdanhsachbenhnhan();
+    $benhnhan_list= $cbenhnhan->get_list_benhnhan();
 ?>
 <body>
     <div class="container">

@@ -14,21 +14,12 @@
                 return false; 
             }
         }
-<<<<<<< HEAD
-
-        public function select_list_benhnhan(){
-=======
         public function getBenhNhanByTenTK($tentk) {
->>>>>>> 0f71e08b867709d4b77268aafd787c6122c0405c
             $p = new clsKetNoi();
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-<<<<<<< HEAD
-                $str = "select * from benhnhan";
-=======
                 $str = "select * from benhnhan where tentk = '$tentk'";
->>>>>>> 0f71e08b867709d4b77268aafd787c6122c0405c
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
@@ -36,12 +27,7 @@
                 return false; 
             }
         }
-<<<<<<< HEAD
-
-        public function select_benhnhan_id($id){
-=======
         public function getBenhNhanByID($id) {
->>>>>>> 0f71e08b867709d4b77268aafd787c6122c0405c
             $p = new clsKetNoi();
             $con = $p->moketnoi();
             $con->set_charset('utf8');
@@ -54,9 +40,6 @@
                 return false; 
             }
         }
-<<<<<<< HEAD
-        
-=======
         public function capnhatbenhnhan($mabenhnhan, $hotenbenhnhan, $ngaysinh, $gioitinh, $nghenghiep, $cccdbenhnhan,
                                 $dantoc, $email, $sdtbenhnhan, $tinh, $quan, $xa, $sonha, $quanhe,
                                 $tiensubenhtatcuagiadinh, $tiensubenhtatcuabenhnhan, $nhommau) {
@@ -80,7 +63,34 @@
             }
         }
 
->>>>>>> 0f71e08b867709d4b77268aafd787c6122c0405c
+        public function select_list_benhnhan(){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "select * from benhnhan";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+
+        public function select_benhnhan_id($id){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "select * from benhnhan where mabenhnhan = '$id'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+
     }
     
 ?>

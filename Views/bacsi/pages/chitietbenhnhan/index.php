@@ -2,7 +2,7 @@
 $mabenhnhan = $_GET['id'] ?? '';
 include_once('Controllers/cbenhnhan.php');
 $cbenhnhan = new cBenhNhan();
-$bn= $cbenhnhan->getbenhnhanbyid($mabenhnhan);
+$bn= $cbenhnhan->get_benhnhan_id($mabenhnhan);
 // Get active tab from URL or default to medical-records
 $active_tab = $_GET['tab'] ?? 'medical-records';
 ?>    
