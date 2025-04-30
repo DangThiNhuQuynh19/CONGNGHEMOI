@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($kq) {
         echo "<script>
             alert('Cập nhật hồ sơ thành công!');
-            window.location.href = 'index.php';
+            window.location.href = '?action=caidat';
         </script>";
     } else {
         echo "<script>
@@ -81,7 +81,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -112,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .btn {
-            background-color: #007bff;
+            background-color: #3c1561;
             color: #fff;
             padding: 12px 20px; /* Tăng kích thước padding cho nút */
             border-radius: 5px;
@@ -140,6 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
+        <h2 style="text-align:center; color: #3c1561;">Sửa Hồ Sơ</h2>
         <!-- Form sửa hồ sơ bệnh nhân -->
         <form action="" method="POST">
             <div class="row g-3" id="formFields">

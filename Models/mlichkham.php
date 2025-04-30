@@ -11,12 +11,14 @@ class mLichKham {
                 // Lọc ca làm việc có giờ bắt đầu >= giờ hiện tại
                 $str = "SELECT * FROM lichlamviec AS lv 
                         JOIN calamviec AS cv ON lv.macalamviec = cv.macalamviec
-                        WHERE ngaylam = '$ngay' AND mabacsi = '$id' AND giobatdau >= '$gioHienTai'";
+                        WHERE ngaylam = '$ngay' AND mabacsi = '$id' AND giobatdau >= '$gioHienTai' 
+                        AND (ghichu IS NULL OR ghichu != 'đã đặt')";
             } else {
                 // Ngày lớn hơn hôm nay, hiển thị tất cả ca
                 $str = "SELECT * FROM lichlamviec AS lv 
                         JOIN calamviec AS cv ON lv.macalamviec = cv.macalamviec
-                        WHERE ngaylam = '$ngay' AND mabacsi = '$id'";
+                        WHERE ngaylam = '$ngay' AND mabacsi = '$id'
+                        AND (ghichu IS NULL OR ghichu != 'đã đặt')";
             }
             $tbl = $con->query($str);
             $p->dongketnoi($con);
@@ -26,8 +28,6 @@ class mLichKham {
         }
     }
     
-    
-    
     public function xemlich($id){
         $p = new clsKetNoi();
         $con = $p->moketnoi();
@@ -35,6 +35,19 @@ class mLichKham {
         if($con){
             $str = "select * from lichlamviec as lv join calamviec as cv 
             on cv.macalamviec = lv.macalamviec where cv.macalamviec='$id'";
+            $tbl = $con->query($str);
+            $p->dongketnoi($con);
+            return $tbl;
+        }else{
+            return false; 
+        }
+    }
+    public function luulichkham(){
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+        $con->set_charset('utf8');
+        if($con){
+            $str = "";
             $tbl = $con->query($str);
             $p->dongketnoi($con);
             return $tbl;

@@ -59,6 +59,46 @@ function checkMissingFields($record, $requiredFields) {
     return false; // Đủ thông tin
 }
 
+
+include_once('Controllers/cphieukhambenh.php'); 
+include_once('Controllers/clichlamviec.php');
+
+if (isset($_POST['datlich'])) {
+    $mabenhnhan = $_POST['mabenhnhan'];
+    $macalamviec = $_POST['macalamviec'];
+    $mabacsi = $_POST['mabacsi'];
+    $ngaykham = $_POST['ngaykham'];
+    $tongtien = $_POST['giakham'];
+    $trangthai = 'Chưa khám';
+
+    // Tạo mã phiếu khám bệnh ngẫu nhiên
+    $maphieukb = 'PKB' . time() . rand(100, 999);
+
+    $pPhieuKham = new cPhieuKhambenh();
+    if ($pPhieuKham->kiemTraTrungLich($mabenhnhan, $ngaykham, $macalamviec)) {
+        echo '<div class="text-danger text-center">Bạn đã có lịch hẹn khám trong ca này vào ngày này rồi.</div>';
+    }else{
+      $result = $pPhieuKham->insertphieukham($maphieukb, $ngaykham, $macalamviec, $mabacsi, $mabenhnhan, $tongtien, $trangthai);
+
+      if ($result) {
+        // Lấy malichlamviec từ mabacsi, ngaykham, macalamviec
+        $pLich = new cLichLamViec();
+        $tbl = $pLich->getmalichlamviec($mabacsi, $ngaykham, $macalamviec);
+        
+        if ($tbl && $tbl != -1 && $tbl != 0) {
+            $row = $tbl->fetch_assoc();
+            $malichlamviec = $row['malichlamviec'];
+            // Cập nhật ghi chú là "đã đặt"
+            $pLich->updatelichlamviecday($malichlamviec);
+        }
+    
+        echo '<script>alert("Đặt lịch khám thành công! Mã phiếu: ' . $maphieukb . ' <br> Hãy ghi nhớ mã này để nhập xác nhận vào tin nhắn với bác sĩ"); location.href="?action=lichhen";</script>';
+    } else {
+        echo '<div class="text-danger text-center">Đặt lịch khám thất bại. Vui lòng thử lại.</div>';
+    }
+    }
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -293,12 +333,19 @@ function checkMissingFields($record, $requiredFields) {
             </div>
           </div>
           <?php if (!$thieuThongTin): ?>
-            <form method="POST" action="">
-              <button type="submit" class="btn btn-primary">Chọn bệnh nhân này</button>
+            <form method="POST">
+              <input type="hidden" name="mabenhnhan" value="<?php echo $bn['mabenhnhan']; ?>">
+              <input type="hidden" name="macalamviec" value="<?php echo $ca; ?>">
+              <input type="hidden" name="mabacsi" value="<?php echo $idbs; ?>">
+              <input type="hidden" name="ngaykham" value="<?php echo $ngay; ?>">
+              <input type="hidden" name="giakham" value="<?php echo $gia; ?>">
+              <div class="text-center mt-3">
+                <button type="submit" name="datlich" class="btn btn-primary">Đặt lịch khám</button>
+              </div>
             </form>
           <?php else: ?>
-            <div class="text-danger mt-2">
-              Hồ sơ bệnh nhân chưa đầy đủ thông tin bắt buộc.
+            <div class="text-danger text-center mt-3">
+              Hồ sơ chưa đủ thông tin để đặt lịch. Vui lòng cập nhật.
             </div>
           <?php endif; ?>
           <form method="POST" action="">
@@ -318,7 +365,9 @@ function checkMissingFields($record, $requiredFields) {
   </div>
   <?php else: ?>
     <p class="text-danger">Không có bệnh nhân nào được tìm thấy.</p>
+    <a href="?action=taohoso" class="btn btn-success"> + Tạo hồ sơ bệnh nhân mới</a>
   <?php endif; ?>
+    <a href="?action=taohoso" class="btn btn-primary"> + Tạo hồ sơ bệnh nhân mới</a>
 </div>
 </body>
 </html>
