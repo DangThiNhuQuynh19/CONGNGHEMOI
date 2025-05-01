@@ -90,6 +90,32 @@
                 return false; 
             }
         }
+        public function insertbenhnhan($hotenbenhnhan, $ngaysinh, $gioitinh, $nghenghiep, $cccdbenhnhan,
+                               $dantoc, $email, $sdtbenhnhan, $tinh, $quan, $xa, $sonha, $quanhe,
+                               $tiensubenhtatcuagiadinh, $tiensubenhtatcuabenhnhan, $nhommau, $tentk) {
+            $p = new clsketnoi();
+            $con = $p->moketnoi();
+            $truyvan = "INSERT INTO benhnhan(hotenbenhnhan, ngaysinh, gioitinh, nghenghiep, cccdbenhnhan,
+                                            dantoc, email, sdtbenhnhan, `tinh/thanhpho`, `quan/huyen`, `xa/phuong`,
+                                            sonha, quanhe, tiensubenhtatcuagiadinh, tiensubenhtatcuabenhnhan, nhommau, tentk) 
+                        VALUES ('$hotenbenhnhan', '$ngaysinh', '$gioitinh', '$nghenghiep', '$cccdbenhnhan',
+                                '$dantoc', '$email', '$sdtbenhnhan', '$tinh', '$quan', '$xa', '$sonha', '$quanhe',
+                                '$tiensubenhtatcuagiadinh', '$tiensubenhtatcuabenhnhan', '$nhommau', '$tentk')";
+            // Thực thi câu truy vấn
+            $kq = mysqli_query($con, $truyvan);
+            $p->dongketnoi($con);
+            
+            return $kq;
+        }
+        public function deletebenhnhan($id) {
+            $p = new clsketnoi();
+            $con = $p->moketnoi();
+            $truyvan = "DELETE FROM benhnhan WHERE mabenhnhan = $id";
+            $tbl = mysqli_query($con, $truyvan);
+            $p->dongketnoi($con);
+            return $tbl;
+        }
+
 
     }
     

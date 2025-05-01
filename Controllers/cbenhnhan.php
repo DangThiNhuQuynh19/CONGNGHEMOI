@@ -88,5 +88,27 @@ class cBenhNhan{
             }
         }
     }
+    public function insertbenhnhan($hotenbenhnhan, $ngaysinh, $gioitinh, $nghenghiep, $cccdbenhnhan,
+                                    $dantoc, $email, $sdtbenhnhan, $tinh, $quan, $xa, $sonha, $quanhe,
+                                    $tiensubenhtatcuagiadinh, $tiensubenhtatcuabenhnhan, $nhommau,$tentk){
+        $p = new mBenhNhan();
+        $kq = $p -> insertbenhnhan( $hotenbenhnhan, $ngaysinh, $gioitinh, $nghenghiep, $cccdbenhnhan,
+                                    $dantoc, $email, $sdtbenhnhan, $tinh, $quan, $xa, $sonha, $quanhe,
+                                    $tiensubenhtatcuagiadinh, $tiensubenhtatcuabenhnhan, $nhommau,$tentk);
+        if($kq){
+            return $kq;
+        } else {
+            return false;
+        }
+    }
+    public function deletebenhnhan($id){
+        $p = new mBenhNhan();
+        $kq = $p -> deletebenhnhan($id);
+        if($kq){
+            return $kq;
+        }else{
+            return false;
+        }
+    }
 }
 ?>

@@ -11,6 +11,15 @@ class cLichLamViec {
             return false;
         }
     }
+    public function updatelichlamviectrong($malichlamviec){
+        $p = new mLichLamViec();
+        $kq = $p -> updatelichlamviectrong($malichlamviec);
+        if($kq){
+            return $kq;
+        } else {
+            return false;
+        }
+    }
     public function getmalichlamviec($mabacsi,$ngaylam,$macalamviec){
         $p = new mLichLamViec();
         $tbl = $p->laymalichlamviec($mabacsi,$ngaylam,$macalamviec);
