@@ -33,19 +33,30 @@ class cPhieuKhamBenh {
         }
         return false; // Không có lịch trùng
     }
-    public function getAllPhieuKhamBenhOfTK($tentk){
+    public function getAllPhieuKhamBenhOfTK($tentk,$trangthai) {
         $p = new mPhieuKhamBenh();
-        $tbl = $p->phieukhambenhcuataikhoan($tentk);
-        if(!$tbl){
+        $tbl = $p->phieukhambenhcuataikhoan($tentk,$trangthai);
+        if (!$tbl) {
             return -1;
-        }else{
-            if($tbl->num_rows > 0){
+        } else {
+            if ($tbl->num_rows > 0) {
                 return $tbl;
-            }else{
+            } else {
                 return 0;
             }
         }
     }
+    public function updatephieukhambenh($maphieukb) {
+        $p = new mPhieuKhamBenh();
+        $kq = $p->updatePhieuKhamBenh($maphieukb);
+        if ($kq) { 
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
     public function cancelPhieuKhamBenh($maphieukb) {
         $p = new mPhieuKhamBenh();
         $result = $p->huyPhieuKhamBenh($maphieukb); 

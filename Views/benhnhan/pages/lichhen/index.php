@@ -1,31 +1,40 @@
 <?php
-date_default_timezone_set('Asia/Ho_Chi_Minh'); // Đảm bảo múi giờ đúng
+session_start();
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+include_once('Controllers/cphieukhambenh.php');
 
-include_once('Controllers/cPhieuKhamBenh.php');
 if (!isset($_SESSION['user']) || !isset($_SESSION['user']['tentk'])) {
     echo "<p>Bạn chưa đăng nhập hoặc thiếu thông tin tài khoản.</p>";
     exit;
 }
+
 $tentk = $_SESSION['user']['tentk'];
 $pPhieu = new cPhieuKhamBenh();
-$phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk);
-
-// Lấy ngày giờ hiện tại
+$filter = $_GET['filter'] ?? 'upcoming'; // Lọc theo trạng thái
 $currentDate = date('Y-m-d');
-$currentTime = date('H:i:s');
-$filter = $_GET['filter'] ?? 'upcoming';
+
+// Lấy danh sách phiếu khám theo bộ lọc
+if ($filter === 'cancelled') {
+    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, 'đã hủy');
+} elseif ($filter === 'completed') {
+    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, 'đã khám');
+} else {
+    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, 'chưa khám');
+}
+
+// Xử lý hủy lịch hẹn
 if (isset($_GET['cancel_id'])) {
     $maphieukb = $_GET['cancel_id'];
     $phieu = $pPhieu->getPhieuKhamBenhOfIDPK($maphieukb);
-    if ($phieu){
+    if ($phieu) {
         $ngaykham = $phieu['ngaykham'];
-        $currentDate = date('Y-m-d');
         if ($ngaykham == $currentDate) {
             echo "<script>alert('Không thể hủy lịch hẹn vì sắp tới giờ khám.');</script>";
         } else {
             $malichlamviec = $phieu['malichlamviec'];
             $result = $pPhieu->cancelPhieuKhamBenh($maphieukb);
             if ($result) {
+                include_once('Controllers/clichlamviec.php');
                 $pLichLamViec = new cLichLamViec();
                 $pLichLamViec->updatelichlamviectrong($malichlamviec);
                 echo "<script>alert('Lịch hẹn đã được hủy thành công.'); window.location.href='?action=lichhen';</script>";
@@ -37,7 +46,6 @@ if (isset($_GET['cancel_id'])) {
         echo "<script>alert('Không tìm thấy phiếu khám với mã này.');</script>";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -107,8 +115,12 @@ if (isset($_GET['cancel_id'])) {
         Sắp tới
     </label>
     <label style="margin-left: 20px;">
-        <input type="radio" name="filter" value="past" <?= ($filter === 'past') ? 'checked' : '' ?>>
-        Đã qua
+        <input type="radio" name="filter" value="completed" <?= ($filter === 'completed') ? 'checked' : '' ?>>
+        Đã khám
+    </label>
+    <label style="margin-left: 20px;">
+        <input type="radio" name="filter" value="cancelled" <?= ($filter === 'cancelled') ? 'checked' : '' ?>>
+        Đã hủy
     </label>
     <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 20px;">Lọc</button>
 </form>
@@ -133,38 +145,26 @@ if (isset($_GET['cancel_id'])) {
         <tbody>
         <?php while ($row = $phieus->fetch_assoc()): ?>
             <?php
-            $ngayKham = $row['ngaykham'];
-            $gioKetThuc = $row['gioketthuc'];
-
-            // Tính toán đã qua chưa
-            $daQua = false;
-            if ($ngayKham < $currentDate) {
-                $daQua = true;
-            } elseif ($ngayKham === $currentDate && $gioKetThuc <= $currentTime) {
-                $daQua = true;
-            }
-
-            // Lọc theo radio
-            if (($filter === 'past' && !$daQua) || ($filter === 'upcoming' && $daQua)) {
-                continue;
-            }
+            $trangthai = $row['trangthai'] ?? '';
             ?>
             <tr>
                 <td><?= htmlspecialchars($row['maphieukb']) ?></td>
                 <td><?= htmlspecialchars($row['hotenbenhnhan']) ?></td>
                 <td><?= htmlspecialchars($ngayKham) ?></td>
-                <td><?= htmlspecialchars($row['giobatdau']) . ' - ' . htmlspecialchars($gioKetThuc) ?></td>
+                <td><?= htmlspecialchars($row['giobatdau']) . ' - ' . htmlspecialchars($row['gioketthuc']) ?></td>
                 <td><?= htmlspecialchars($row['tenchuyenkhoa']) ?></td>
                 <td><?= htmlspecialchars($row['hoten']) ?></td>
                 <td>
-                    <?php if (!$daQua): ?>
-                        <a href="?action=lichhen&cancel_id=<?= $row['maphieukb'] ?>" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Bạn có chắc chắn muốn hủy lịch hẹn này?');">
-                            Hủy lịch hẹn
-                            </a>
-                    <?php else: ?>
-                        <span class="muted-text">Đã khám</span>
-                    <?php endif; ?>
+                    <?php
+                    if ($trangthai === 'đã hủy') {
+                        echo '<span class="muted-text">Đã hủy</span>';
+                    } elseif ($trangthai === 'đã khám') {
+                        echo '<span class="muted-text">Đã khám</span>';
+                    } else {
+                        echo '<a href="?action=lichhen&cancel_id=' . $row['maphieukb'] . '" class="btn btn-danger btn-sm"
+                                onclick="return confirm(\'Bạn có chắc chắn muốn hủy lịch hẹn này?\');">Hủy lịch hẹn</a>';
+                    }
+                    ?>
                 </td>
             </tr>
         <?php endwhile; ?>

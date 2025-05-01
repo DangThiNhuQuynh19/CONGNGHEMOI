@@ -45,19 +45,26 @@
                 return false; 
             }
         }   
-        public function phieukhambenhcuataikhoan($tentk) {
+        public function phieukhambenhcuataikhoan($tentk, $status = null) {
             $p = new clsKetNoi();
             $con = $p->moketnoi();
             $con->set_charset('utf8');
+        
             if ($con) {
-                $str = "SELECT *
-                    FROM phieukhambenh pk
-                    JOIN bacsi bs ON pk.mabacsi = bs.mabacsi
-                    JOIN calamviec cv ON pk.macalamviec = cv.macalamviec
-                    JOIN benhnhan bn ON pk.mabenhnhan = bn.mabenhnhan
-                    JOIN chuyenkhoa ck ON bs.machuyenkhoa = ck.machuyenkhoa
-                    WHERE bn.tentk = '$tentk'";
-                $tbl = $con->query($str);
+                $sql = "SELECT pk.maphieukb, pk.ngaykham, pk.giobatdau, pk.trangthai, pk.gioketthuc, bs.hoten AS hotenbacsi,
+                        bn.hotenbenhnhan, ck.tenchuyenkhoa
+                        FROM phieukhambenh pk
+                        JOIN bacsi bs ON pk.mabacsi = bs.mabacsi
+                        JOIN benhnhan bn ON pk.mabenhnhan = bn.mabenhnhan
+                        JOIN chuyenkhoa ck ON bs.machuyenkhoa = ck.machuyenkhoa
+                        WHERE bn.tentk = '$tentk'";
+
+                if ($status) {
+                    $sql .= " AND pk.trangthai = '$status'";
+                }
+        
+                $tbl = $con->query($sql);
+        
                 $p->dongketnoi($con);
                 return $tbl;
             } else {
@@ -69,7 +76,20 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "DELETE FROM phieukhambenh WHERE maphieukb = '$maphieukb'";
+                $str = "update phieukhambenh set trangthai='đã hủy' WHERE maphieukb = '$maphieukb'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }   
+        public function updatePhieuKhamBenh($maphieukb) {
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "update phieukhambenh set trangthai='đã khám' WHERE maphieukb = '$maphieukb'";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
@@ -82,7 +102,7 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "select * FROM phieukhambenh WHERE maphieukb = '$maphieukb'";
+                $str = "select * FROM phieukhambenh WHERE maphieukb = '$maphieukb' ";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
