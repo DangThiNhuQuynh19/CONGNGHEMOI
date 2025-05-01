@@ -16,9 +16,8 @@ $currentTime = date('H:i:s');
 $filter = $_GET['filter'] ?? 'upcoming';
 if (isset($_GET['cancel_id'])) {
     $maphieukb = $_GET['cancel_id'];
-    $pPhieu = new cPhieuKhamBenh();
     $phieu = $pPhieu->getPhieuKhamBenhOfIDPK($maphieukb);
-    if ($phieu) {
+    if ($phieu){
         $ngaykham = $phieu['ngaykham'];
         $currentDate = date('Y-m-d');
         if ($ngaykham == $currentDate) {
