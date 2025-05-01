@@ -57,9 +57,9 @@ class cBenhNhan{
     }
 
 
-    public function get_list_benhnhan(){
+    public function get_benhnhan_mabacsi($mabacsi){
         $p = new mBenhNhan();
-        $tbl = $p->select_list_benhnhan();
+        $tbl = $p->select_benhnhan_mabacsi($mabacsi);
         $list = array();
         if (!$tbl) {
             return -1; 
@@ -88,6 +88,24 @@ class cBenhNhan{
             }
         }
     }
+
+    public function get_benhnhan_tukhoa($tukhoa, $mabacsi){
+        $p = new mBenhNhan();
+        $tbl = $p->timkiem_benhnhan_tukhoa($tukhoa, $mabacsi);
+        if (!$tbl) {
+            return -1; 
+        } else {
+            if ($tbl->num_rows > 0) {
+                $ds = array();
+                while ($row = $tbl->fetch_assoc()) {
+                    $ds[] = $row;
+                }
+                return $ds;
+            } else {
+                return 0; 
+            }
+        }
+    }
     public function insertbenhnhan($hotenbenhnhan, $ngaysinh, $gioitinh, $nghenghiep, $cccdbenhnhan,
                                     $dantoc, $email, $sdtbenhnhan, $tinh, $quan, $xa, $sonha, $quanhe,
                                     $tiensubenhtatcuagiadinh, $tiensubenhtatcuabenhnhan, $nhommau,$tentk){
@@ -110,5 +128,6 @@ class cBenhNhan{
             return false;
         }
     }
+
 }
 ?>

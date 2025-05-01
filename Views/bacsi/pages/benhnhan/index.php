@@ -1,7 +1,13 @@
 <?php
     include_once('Controllers/cbenhnhan.php');
+    include_once('Controllers/cbacsi.php');
     $cbenhnhan = new cBenhNhan();
-    $benhnhan_list= $cbenhnhan->get_list_benhnhan();
+    $cbacsi = new cBacSi();
+    $bacsi= $cbacsi->getBacSiByTenTK($_SESSION['user']['tentk']);
+    $benhnhan_list= $cbenhnhan->get_benhnhan_mabacsi( $bacsi['mabacsi']);
+    if(isset($_POST["btntimkiem"])){
+        $benhnhan_list= $cbenhnhan->get_benhnhan_tukhoa($_POST["tukhoa"],$bacsi['mabacsi'] );
+    }
 ?>
 <body>
     <div class="container">
@@ -13,19 +19,23 @@
         <div class="card">
             <div class="card-header">
                 <h2>Tìm kiếm bệnh nhân</h2>
+              
             </div>
             <div class="card-body">
-                <form class="search-form">
+                <form class="search-form" method="POST">
                     <div class="search-input">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Tìm theo tên, mã bệnh nhân...">
+                        <input type="text" name="tukhoa" placeholder="Tìm theo tên, mã bệnh nhân...">
                     </div>
                     <br>
-                    <button type="submit" class="btn-primary">Tìm kiếm</button>
+                    <button type="submit" class="btn-primary" name="btntimkiem">Tìm kiếm</button>
                 </form>
             </div>
         </div>
-        
+        <form method="GET" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
+            <input value="benhnhan" type="checkbox" name="action" id="homnay" onchange="this.form.submit()" <?php if (isset($_GET['action'])) echo 'checked'; ?>>
+            <label for="homnay" style="margin-left: 5px;"><b>Chỉ hiển thị bệnh nhân hôm nay</b></label>
+        </form>
         <div class="card">
             <div class="card-body no-padding">
                 <table class="data-table">
@@ -36,26 +46,31 @@
                             <th>Ngày sinh</th>
                             <th>Giới tính</th>
                             <th>Số điện thoại</th>
+                            <th>cccd</th>
                             <th>Email</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        
-                        foreach ($benhnhan_list as $i) {
-                            echo '<tr>';
-                            echo '<td>' . $i['mabenhnhan'] . '</td>';
-                            echo '<td>' . $i['hotenbenhnhan'] . '</td>';
-                            echo '<td>' . $i['ngaysinh'] . '</td>';
-                            echo '<td>' . $i['gioitinh'] . '</td>';
-                            echo '<td>' . $i['sdtbenhnhan'] . '</td>';
-                            echo '<td>' . $i['email'] . '</td>';
-                            echo '<td class="actions">';
-                            echo '<a href="?action=chitietbenhnhan&id=' . $i['mabenhnhan'] . '" class="btn-small">Chi tiết</a>';
-                            echo '</td>';
-                            echo '</tr>';
-                        }
+                            if($benhnhan_list){
+                                foreach ($benhnhan_list as $i) {
+                                    echo '<tr>';
+                                    echo '<td>' . $i['mabenhnhan'] . '</td>';
+                                    echo '<td>' . $i['hotenbenhnhan'] . '</td>';
+                                    echo '<td>' . $i['ngaysinh'] . '</td>';
+                                    echo '<td>' . $i['gioitinh'] . '</td>';
+                                    echo '<td>' . $i['sdtbenhnhan'] . '</td>';
+                                    echo '<td>' . $i['cccdbenhnhan'] . '</td>';
+                                    echo '<td>' . $i['email'] . '</td>';
+                                    echo '<td class="actions">';
+                                    echo '<a href="?action=chitietbenhnhan&id=' . $i['mabenhnhan'] . '" class="btn-small">Chi tiết</a>';
+                                    echo '</td>';
+                                    echo '</tr>';
+                                }
+                            }else{
+                                echo '<tr><td colspan="7" style="text-align:center; color:gray;">Chưa có bệnh nhân</td></tr>';
+                            }
                         ?>
                     </tbody>
                 </table>

@@ -26,7 +26,7 @@
             <div class="stats-container">
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-user-injured"></i>
+                        <a href="?action=benhnhan"><i class="fas fa-user-injured"></i></a>
                     </div>
                     <div class="stat-info">
                         <h3>Bệnh nhân hôm nay</h3>
@@ -37,7 +37,7 @@
                 
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-clipboard-list"></i>
+                        <a href="?action=xetnghiem"><i class="fas fa-clipboard-list"></i></a>
                     </div>
                     <div class="stat-info">
                         <h3>Xét nghiệm chờ xử lý</h3>
@@ -48,7 +48,7 @@
                 
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-calendar-check"></i>
+                        <a href="?action=lichhen"><i class="fas fa-calendar-check"></i></a>
                     </div>
                     <div class="stat-info">
                         <h3>Lịch hẹn</h3>
@@ -59,12 +59,12 @@
                 
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-comment-medical"></i>
+                        <a href="?action=tinnhan"> <i class="fas fa-comment-medical"></i></a>
                     </div>
                     <div class="stat-info">
                         <h3>Tin nhắn mới</h3>
                         <p class="stat-number">5</p>
-                        <p class="stat-change positive"><i class="fas fa-arrow-up"></i> +2 trong 24 giờ qua</p>
+                        <p class="stat-change positive">+2 trong 24 giờ qua</p>
                     </div>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                             echo '<h4>' . $test['patient'] . '</h4>';
                             echo '<p>' . $test['type'] . ' - ' . $test['date'] . '</p>';
                             echo '</div>';
-                            echo '<a href="#" class="btn-primary btn-small">Xem kết quả</a>';
+                            echo '<a href="?action=ketquaxetnghiem" class="btn-primary btn-small">Xem kết quả</a>';
                             echo '</div>';
                         }
                         ?>

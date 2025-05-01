@@ -63,12 +63,12 @@
             }
         }
 
-        public function select_list_benhnhan(){
+        public function select_benhnhan_mabacsi($mabacsi){
             $p = new clsKetNoi();
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "select * from benhnhan";
+                $str = "select * from benhnhan as b join phieukhambenh as p on b.mabenhnhan=p.mabenhnhan where mabacsi='$mabacsi' GROUP BY b.mabenhnhan ORDER BY b.mabenhnhan DESC";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
@@ -117,6 +117,33 @@
         }
 
 
+        public function timkiem_benhnhan_tukhoa($tukhoa, $mabacsi){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+        
+            if ($con) {
+                $sql = "SELECT * 
+                        FROM benhnhan AS b 
+                        JOIN phieukhambenh AS p ON b.mabenhnhan = p.mabenhnhan 
+                        WHERE p.mabacsi = '$mabacsi'";
+        
+                if (!empty($tukhoa)) {
+                    $sql .= " AND (b.mabenhnhan = '$tukhoa' 
+                                OR b.hotenbenhnhan LIKE '%$tukhoa%' 
+                                OR b.cccdbenhnhan LIKE '%$tukhoa%')";
+                }
+        
+                $sql .= " GROUP BY b.mabenhnhan 
+                          ORDER BY b.mabenhnhan DESC";
+        
+                $result = $con->query($sql);
+                $p->dongketnoi($con);
+                return $result;
+            } else {
+                return false;
+            }
+        }
     }
     
 ?>
