@@ -45,21 +45,22 @@
                 return false; 
             }
         }   
-        public function phieukhambenhcuataikhoan($tentk, $status = null) {
+        public function phieukhambenhcuataikhoan($tentk, $status) {
             $p = new clsKetNoi();
             $con = $p->moketnoi();
             $con->set_charset('utf8');
         
             if ($con) {
-                $sql = "SELECT pk.maphieukb, pk.ngaykham, pk.giobatdau, pk.trangthai, pk.gioketthuc, bs.hoten AS hotenbacsi,
-                        bn.hotenbenhnhan, ck.tenchuyenkhoa
-                        FROM phieukhambenh pk
-                        JOIN bacsi bs ON pk.mabacsi = bs.mabacsi
-                        JOIN benhnhan bn ON pk.mabenhnhan = bn.mabenhnhan
-                        JOIN chuyenkhoa ck ON bs.machuyenkhoa = ck.machuyenkhoa
-                        WHERE bn.tentk = '$tentk'";
+                $sql = "SELECT pk.maphieukb, pk.ngaykham, ca.giobatdau, pk.trangthai, ca.gioketthuc, bs.hoten AS hotenbacsi,
+                bn.hotenbenhnhan, ck.tenchuyenkhoa
+                FROM phieukhambenh pk
+                JOIN bacsi bs ON pk.mabacsi = bs.mabacsi
+                JOIN benhnhan bn ON pk.mabenhnhan = bn.mabenhnhan
+                JOIN chuyenkhoa ck ON bs.machuyenkhoa = ck.machuyenkhoa
+                JOIN calamviec ca ON ca.macalamviec=pk.macalamviec
+                WHERE bn.tentk  = '$tentk'";
 
-                if ($status) {
+                if (!empty($status)) {
                     $sql .= " AND pk.trangthai = '$status'";
                 }
         

@@ -10,16 +10,18 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['user']['tentk'])) {
 
 $tentk = $_SESSION['user']['tentk'];
 $pPhieu = new cPhieuKhamBenh();
-$filter = $_GET['filter'] ?? 'upcoming'; // Lọc theo trạng thái
+$filter = $_GET['filter'] ?? null; // Lọc theo trạng thái
 $currentDate = date('Y-m-d');
 
 // Lấy danh sách phiếu khám theo bộ lọc
-if ($filter === 'cancelled') {
-    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, 'đã hủy');
-} elseif ($filter === 'completed') {
-    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, 'đã khám');
-} else {
-    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, 'chưa khám');
+if ($filter === 'đã hủy') {
+    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, $filter);
+} elseif ($filter === 'đã khám') {
+    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, $filter);
+} elseif($filter === 'chưa khám') {
+    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, $filter);
+}else{
+    $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, $filter);
 }
 
 // Xử lý hủy lịch hẹn
@@ -111,15 +113,15 @@ if (isset($_GET['cancel_id'])) {
 <form method="get">
     <input type="hidden" name="action" value="lichhen">
     <label>
-        <input type="radio" name="filter" value="upcoming" <?= ($filter === 'upcoming') ? 'checked' : '' ?>>
-        Sắp tới
+        <input type="radio" name="filter" value="chưa khám" <?= ($filter === 'upcoming') ? 'checked' : '' ?>>
+        Chưa khám
     </label>
     <label style="margin-left: 20px;">
-        <input type="radio" name="filter" value="completed" <?= ($filter === 'completed') ? 'checked' : '' ?>>
+        <input type="radio" name="filter" value="đã khám" <?= ($filter === 'completed') ? 'checked' : '' ?>>
         Đã khám
     </label>
     <label style="margin-left: 20px;">
-        <input type="radio" name="filter" value="cancelled" <?= ($filter === 'cancelled') ? 'checked' : '' ?>>
+        <input type="radio" name="filter" value="đã hủy" <?= ($filter === 'cancelled') ? 'checked' : '' ?>>
         Đã hủy
     </label>
     <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 20px;">Lọc</button>
@@ -150,10 +152,10 @@ if (isset($_GET['cancel_id'])) {
             <tr>
                 <td><?= htmlspecialchars($row['maphieukb']) ?></td>
                 <td><?= htmlspecialchars($row['hotenbenhnhan']) ?></td>
-                <td><?= htmlspecialchars($ngayKham) ?></td>
+                <td><?= htmlspecialchars($row['ngaykham']) ?></td>
                 <td><?= htmlspecialchars($row['giobatdau']) . ' - ' . htmlspecialchars($row['gioketthuc']) ?></td>
                 <td><?= htmlspecialchars($row['tenchuyenkhoa']) ?></td>
-                <td><?= htmlspecialchars($row['hoten']) ?></td>
+                <td><?= htmlspecialchars($row['hotenbacsi']) ?></td>
                 <td>
                     <?php
                     if ($trangthai === 'đã hủy') {
