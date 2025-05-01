@@ -821,6 +821,15 @@ ul {
   background-color: var(--success);
 }
 
+.status-canceled {
+  background-color: var(--danger-light);
+  color: var(--danger);
+}
+
+.status-canceled::before {
+  background-color: var(--danger);
+}
+
 .status-processing {
   background-color: var(--warning-light);
   color: var(--warning);
@@ -843,6 +852,7 @@ ul {
   background-color: var(--success-light);
   color: var(--success);
 }
+
 
 .status-confirmed::before {
   background-color: var(--success);
