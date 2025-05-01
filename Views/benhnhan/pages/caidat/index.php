@@ -17,11 +17,18 @@ $benhnhans = $pBenhNhan->getAllBenhNhanByTK($tentk);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Hồ sơ bệnh nhân</title>
     <style>
+        :root {
+            --custom-purple: rgb(85, 45, 125);
+            --custom-purple-dark: rgb(70, 35, 110);
+            --input-border: #ced4da;
+            --input-focus: var(--custom-purple);
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f2fa;
+            background-color: #fff;
             margin: 0;
             padding-top: 30px;
         }
@@ -103,6 +110,22 @@ $benhnhans = $pBenhNhan->getAllBenhNhanByTK($tentk);
             font-size: 18px;
             color: #c0392b;
         }
+        .btn-primary{
+            background-color: var(--custom-purple);
+            border-color: var(--custom-purple);
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: var(--custom-purple-dark);
+            border-color: var(--custom-purple-dark);
+        }
+        .them{
+            margin-left: 35%;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -134,7 +157,7 @@ $benhnhans = $pBenhNhan->getAllBenhNhanByTK($tentk);
                     <td class="action-buttons">
                         <a href="?action=suahoso&mabenhnhan=<?= $bn['mabenhnhan'] ?>" class="btn-edit">Sửa</a>
 
-                        <form action="xoaBenhNhan.php" method="post" style="display:inline;" onsubmit="return confirm('Bạn chắc chắn muốn xóa bệnh nhân này?');">
+                        <form action="?action=xoahoso&mabenhnhan=" method="post" style="display:inline;" onsubmit="return confirm('Bạn chắc chắn muốn xóa bệnh nhân này?');">
                             <input type="hidden" name="mabenhnhan" value="<?= $bn['mabenhnhan'] ?>">
                             <button type="submit" class="btn-delete">Xóa</button>
                         </form>
@@ -143,9 +166,13 @@ $benhnhans = $pBenhNhan->getAllBenhNhanByTK($tentk);
             <?php endforeach; ?>
         </tbody>
     </table>
+    
 <?php else : ?>
     <p>Không tìm thấy hồ sơ bệnh nhân nào.</p>
 <?php endif; ?>
+<div class="them">
+<a href="?action=taohoso" class="btn btn-primary"> + Tạo hồ sơ bệnh nhân mới</a>
+</div>
 
 </body>
 </html>

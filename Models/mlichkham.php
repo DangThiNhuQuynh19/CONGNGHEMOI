@@ -42,19 +42,7 @@ class mLichKham {
             return false; 
         }
     }
-    public function luulichkham(){
-        $p = new clsKetNoi();
-        $con = $p->moketnoi();
-        $con->set_charset('utf8');
-        if($con){
-            $str = "";
-            $tbl = $con->query($str);
-            $p->dongketnoi($con);
-            return $tbl;
-        }else{
-            return false; 
-        }
-    }
+    
 }
 
 ?>

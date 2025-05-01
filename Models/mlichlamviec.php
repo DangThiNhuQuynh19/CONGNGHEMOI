@@ -9,6 +9,14 @@
             $p->dongketnoi($con);
             return $kq;
         }
+        public function updatelichlamviectrong($malichlamviec){
+            $p = new clsketnoi();
+            $truyvan = "UPDATE lichlamviec SET ghichu ='' where malichlamviec='$malichlamviec'";
+            $con = $p->moketnoi();
+            $kq = mysqli_query($con, $truyvan);
+            $p->dongketnoi($con);
+            return $kq;
+        }
         public function laymalichlamviec($mabacsi,$ngaylam,$macalamviec){
             $p = new clsKetNoi();
             $con = $p->moketnoi();

@@ -92,7 +92,7 @@ if (isset($_POST['datlich'])) {
             $pLich->updatelichlamviecday($malichlamviec);
         }
     
-        echo '<script>alert("Đặt lịch khám thành công! Mã phiếu: ' . $maphieukb . ' <br> Hãy ghi nhớ mã này để nhập xác nhận vào tin nhắn với bác sĩ"); location.href="?action=lichhen";</script>';
+        echo '<script>alert("Đặt lịch khám thành công! Mã phiếu: ' . $maphieukb . ' Hãy ghi nhớ mã này để nhập xác nhận vào tin nhắn với bác sĩ"); location.href="?action=lichhen";</script>';
     } else {
         echo '<div class="text-danger text-center">Đặt lịch khám thất bại. Vui lòng thử lại.</div>';
     }
