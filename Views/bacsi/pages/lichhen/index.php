@@ -40,7 +40,10 @@
                     </form>
                 </div>
             </div>
-            
+            <form method="POST" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
+                <input type="checkbox" name="homnay" id="homnay" onchange="this.form.submit()" <?php if (isset($_POST['homnay'])) echo 'checked'; ?>>
+                <label for="homnay" style="margin-left: 5px;"><b>Hôm nay</b></label>
+            </form>
             <div class="card">
                 <div class="card-body no-padding">
                     <table class="data-table">

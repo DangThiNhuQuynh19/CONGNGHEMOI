@@ -52,7 +52,6 @@ $active_tab = $_GET['tab'] ?? 'medical-records';
                     </div>
                     
                     <div class="patient-actions">
-                        <a href="#" class="btn-primary btn-full"><i class="fas fa-calendar-plus"></i> Đặt lịch hẹn</a>
                         <a href="?action=xetnghiem" class="btn-outline btn-full"><i class="fas fa-flask"></i> Thêm xét nghiệm</a>
                     </div>
                 </div>

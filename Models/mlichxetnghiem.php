@@ -24,7 +24,7 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "select * from lichxetnghiem where mabenhnhan='$mabenhnhan'";
+                $str = "select * from lichxetnghiem where mabenhnhan='$mabenhnhan' ORDER BY malichxetnghiem DESC";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;

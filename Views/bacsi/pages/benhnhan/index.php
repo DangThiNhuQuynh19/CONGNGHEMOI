@@ -64,7 +64,7 @@
                                     echo '<td>' . $i['cccdbenhnhan'] . '</td>';
                                     echo '<td>' . $i['email'] . '</td>';
                                     echo '<td class="actions">';
-                                    echo '<a href="?action=chitietbenhnhan&id=' . $i['mabenhnhan'] . '" class="btn-small">Chi tiết</a>';
+                                    echo '<a class="btn-primary btn-small" style="display: flex;" href="?action=chitietbenhnhan&id=' . $i['mabenhnhan'] . '" class="btn-small">Chi tiết</a>';
                                     echo '</td>';
                                     echo '</tr>';
                                 }
