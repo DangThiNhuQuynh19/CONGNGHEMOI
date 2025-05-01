@@ -42,7 +42,6 @@ class mLichKham {
             return false; 
         }
     }
-<<<<<<< Updated upstream
     public function luulichkham(){
         $p = new clsKetNoi();
         $con = $p->moketnoi();
@@ -56,9 +55,6 @@ class mLichKham {
             return false; 
         }
     }
-=======
-
->>>>>>> Stashed changes
 }
 
 ?>
