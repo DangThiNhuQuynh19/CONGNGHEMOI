@@ -365,9 +365,9 @@ if (isset($_POST['datlich'])) {
   </div>
   <?php else: ?>
     <p class="text-danger">Không có bệnh nhân nào được tìm thấy.</p>
-    <a href="?action=taohoso" class="btn btn-success"> + Tạo hồ sơ bệnh nhân mới</a>
+
   <?php endif; ?>
-    <a href="?action=taohoso" class="btn btn-primary"> + Tạo hồ sơ bệnh nhân mới</a>
+    <a href="?action=taohoso" class="btn btn-success"> + Tạo hồ sơ bệnh nhân mới</a>
 </div>
 </body>
 </html>

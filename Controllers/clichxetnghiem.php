@@ -43,5 +43,18 @@ class cLichXetNghiem{
             }
         }
     }
+    public function getlichxetnghiemtheotentk($tentk){
+        $p = new mLichXetNghiem();
+        $tbl = $p->lichxetnghiemtheotentk($tentk);
+        if(!$tbl){
+            return -1;
+        }else{
+            if($tbl->num_rows > 0){
+                return $tbl;
+            }else{
+                return 0;
+            }
+        }
+    }
 }
 ?>

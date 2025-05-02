@@ -87,6 +87,24 @@
                 return false; 
             }
         }
-        
+        public function lichxetnghiemtheotentk($tentk){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * 
+                FROM lichxetnghiem AS l
+                JOIN benhnhan AS b ON l.mabenhnhan = b.mabenhnhan
+                JOIN loaixetnghiem AS loai ON l.maloaixetnghiem = loai.maloaixetnghiem
+                JOIN chuyenkhoa AS c ON loai.machuyenkhoa = c.machuyenkhoa
+                JOIN khunggioxetnghiem AS k ON k.makhunggioxetnghiem = l.makhunggio
+                WHERE b.tentk = '$tentk' ";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
     }
 ?>

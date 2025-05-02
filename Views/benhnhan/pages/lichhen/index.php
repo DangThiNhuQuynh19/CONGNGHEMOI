@@ -10,10 +10,9 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['user']['tentk'])) {
 
 $tentk = $_SESSION['user']['tentk'];
 $pPhieu = new cPhieuKhamBenh();
-$filter = $_GET['filter'] ?? null; // Lọc theo trạng thái
+$filter = $_GET['filter'] ?? null;
 $currentDate = date('Y-m-d');
 
-// Lấy danh sách phiếu khám theo bộ lọc
 if ($filter === 'đã hủy') {
     $phieus = $pPhieu->getAllPhieuKhamBenhOfTK($tentk, $filter);
 } elseif ($filter === 'đã khám') {
@@ -57,54 +56,131 @@ if (isset($_GET['cancel_id'])) {
     <title>Lịch hẹn khám bệnh</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            padding-top: 130px;
-            background-color: #f9f6ff;
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        padding-top: 100px;
+        background-color: #f2f0f8;
+    }
+
+    h2 {
+        color: #5c2d91;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    form {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    form label {
+        font-weight: 500;
+        font-size: 16px;
+        color: #4b2354;
+    }
+
+    table {
+        width: 92%;
+        margin: auto;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 25px rgba(92, 45, 145, 0.12);
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #512e6c;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 1px;
+        padding: 14px;
+        text-align: center; /* Added this line to center text */
+    }
+
+    td {
+        padding: 14px;
+        font-size: 15px;
+        color: #333;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f7f3fa;
+    }
+
+    tr:hover {
+        background-color: #eae0f8;
+    }
+
+    p {
+        text-align: center;
+        font-size: 18px;
+        color: #c0392b;
+        font-weight: 500;
+    }
+
+    .muted-text {
+        color: #999;
+        font-style: italic;
+    }
+
+    .btn-danger.btn-sm {
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .btn-primary.btn-sm {
+        font-size: 14px;
+        padding: 5px 12px;
+        border-radius: 6px;
+    }
+
+    @media screen and (max-width: 768px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
         }
-        h2 {
-            color: #6c3483;
-            text-align: center;
-            margin-bottom: 20px;
+
+        thead {
+            display: none;
         }
-        form {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 90%;
-            margin: 0 auto;
+
+        tr {
+            margin-bottom: 15px;
             background-color: #fff;
-            border-collapse: collapse;
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(108, 52, 131, 0.2);
+            box-shadow: 0 2px 10px rgba(92, 45, 145, 0.1);
         }
-        th, td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #eee;
-            text-align: center;
+
+        td {
+            text-align: left;
+            padding-left: 40%;
+            position: relative;
         }
-        th {
-            background-color: #3c1561;
-            color: white;
-            text-transform: uppercase;
+
+        td::before {
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            width: 35%;
+            white-space: nowrap;
+            font-weight: bold;
+            color: #555;
         }
-        tr:nth-child(even) {
-            background-color: #f3e9fa;
-        }
-        tr:hover {
-            background-color: #ede0f0;
-        }
-        p {
-            text-align: center;
-            font-size: 18px;
-            color: #c0392b;
-        }
-        .muted-text {
-            color: #999;
-            font-style: italic;
-        }
-    </style>
+
+        td:nth-of-type(1)::before { content: "Mã Lịch Hẹn"; }
+        td:nth-of-type(2)::before { content: "Bệnh Nhân"; }
+        td:nth-of-type(3)::before { content: "Ngày Khám"; }
+        td:nth-of-type(4)::before { content: "Thời Gian"; }
+        td:nth-of-type(5)::before { content: "Khoa"; }
+        td:nth-of-type(6)::before { content: "Bác Sĩ"; }
+        td:nth-of-type(7)::before { content: "Hành động"; }
+    }
+</style>
+
 </head>
 <body>
 
@@ -113,15 +189,15 @@ if (isset($_GET['cancel_id'])) {
 <form method="get">
     <input type="hidden" name="action" value="lichhen">
     <label>
-        <input type="radio" name="filter" value="chưa khám" <?= ($filter === 'upcoming') ? 'checked' : '' ?>>
+    <input type="radio" name="filter" value="chưa khám" <?= ($filter === 'chưa khám') ? 'checked' : '' ?>>
         Chưa khám
     </label>
     <label style="margin-left: 20px;">
-        <input type="radio" name="filter" value="đã khám" <?= ($filter === 'completed') ? 'checked' : '' ?>>
+    <input type="radio" name="filter" value="đã khám" <?= ($filter === 'đã khám') ? 'checked' : '' ?>>
         Đã khám
     </label>
     <label style="margin-left: 20px;">
-        <input type="radio" name="filter" value="đã hủy" <?= ($filter === 'cancelled') ? 'checked' : '' ?>>
+    <input type="radio" name="filter" value="đã hủy" <?= ($filter === 'đã hủy') ? 'checked' : '' ?>>
         Đã hủy
     </label>
     <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 20px;">Lọc</button>
