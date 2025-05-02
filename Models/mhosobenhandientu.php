@@ -6,16 +6,90 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "SELECT * from hosobenhan hs
-                JOIN benhnhan bn ON hs.mabenhnhan = bn.mabenhnhan
-                JOIN bacsi bs ON hs.mabacsi = bs.mabacsi
-                JOIN chuyenkhoa ck ON bs.machuyenkhoa = ck.machuyenkhoa
-                JOIN lichsucapnhathsba ls ON hs.mahoso = ls.mahoso
-                JOIN chitiethoso ct ON hs.mahoso = ct.mahoso
-                JOIN donthuoc dt ON hs.mahoso = dt.mahoso
-                JOIN chitietdonthuoc ctdt ON dt.madonthuoc = ctdt.madonthuoc
-                JOIN thuoc t ON ctdt.mathuoc = t.mathuoc
-                WHERE bn.tentk = '$tentk'";
+                $str = "SELECT * FROM hosobenhan hs 
+                join benhnhan bn on hs.mabenhnhan=bn.mabenhnhan 
+                join bacsi bs on hs.mabacsi = bs.mabacsi 
+                join chuyenkhoa ck on bs.machuyenkhoa = ck.machuyenkhoa 
+                join chitiethoso ct on hs.mahoso = ct.mahoso 
+                join donthuoc dt on ct.madonthuoc = dt.madonthuoc 
+                where bn.tentk= '$tentk'
+                order by hs.mahoso";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+        public function getchitiethosotheotentk($id){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * FROM hosobenhan hs 
+                join benhnhan bn on hs.mabenhnhan=bn.mabenhnhan 
+                join bacsi bs on hs.mabacsi = bs.mabacsi 
+                join chuyenkhoa ck on bs.machuyenkhoa = ck.machuyenkhoa 
+                join chitiethoso ct on hs.mahoso = ct.mahoso 
+                join donthuoc dt on ct.madonthuoc = dt.madonthuoc 
+                join chitietdonthuoc ctdt on dt.madonthuoc = ctdt.madonthuoc
+                join thuoc t on t.mathuoc = ctdt.mathuoc
+                join lichxetnghiem xn on bn.mabenhnhan = xn.mabenhnhan
+                join loaixetnghiem lxn on xn.maloaixetnghiem = lxn.maloaixetnghiem
+                join khunggioxetnghiem kg on xn.makhunggio=kg.makhunggioxetnghiem
+                join ketquaxetnghiem kq on xn.malichxetnghiem = kq.malichxetnghiem
+                where hs.mahoso = '$id'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+        public function getchitiethosotheohoso($id){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * FROM hosobenhan hs 
+                join chitiethoso ct on hs.mahoso = ct.mahoso 
+                where hs.mahoso = '$id'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+        public function getdonthuoctheohoso($id){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * FROM  donthuoc dt 
+                join chitiethoso ct on ct.mahoso = dt.mahoso
+                join hosobenhan hs on dt.mahoso = hs.mahoso
+                join chitietdonthuoc ctdt on dt.madonthuoc = ctdt.madonthuoc
+                join thuoc t on t.mathuoc = ctdt.mathuoc
+                where ct.machitiethoso = '$id'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+        public function getxetnghiemtheohoso($id){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * FROM  lichxetnghiem xn 
+                join chitiethoso ct on ct.mahoso = xn.mahoso
+                join loaixetnghiem lxn on xn.maloaixetnghiem = lxn.maloaixetnghiem
+                join khunggioxetnghiem kg on xn.makhunggio=kg.makhunggioxetnghiem
+                join ketquaxetnghiem kq on xn.malichxetnghiem = kq.malichxetnghiem
+                where ct.machitiethoso = '$id'";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
