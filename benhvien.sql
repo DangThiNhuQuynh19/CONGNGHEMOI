@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 30, 2025 lúc 05:27 PM
+-- Thời gian đã tạo: Th5 03, 2025 lúc 06:59 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -33,7 +33,7 @@ CREATE TABLE `bacsi` (
   `gioithieubs` varchar(5000) NOT NULL,
   `hoten` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `ngaysinh` date NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `emailbs` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `sdt` int(12) NOT NULL,
   `cccd` bigint(200) NOT NULL,
   `ngaybatdau` date NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `bacsi` (
 -- Đang đổ dữ liệu cho bảng `bacsi`
 --
 
-INSERT INTO `bacsi` (`mabacsi`, `motabs`, `gioithieubs`, `hoten`, `ngaysinh`, `email`, `sdt`, `cccd`, `ngaybatdau`, `ngayketthuc`, `imgbs`, `giakham`, `machuyenkhoa`, `capbac`, `trangthai`, `tentk`) VALUES
+INSERT INTO `bacsi` (`mabacsi`, `motabs`, `gioithieubs`, `hoten`, `ngaysinh`, `emailbs`, `sdt`, `cccd`, `ngaybatdau`, `ngayketthuc`, `imgbs`, `giakham`, `machuyenkhoa`, `capbac`, `trangthai`, `tentk`) VALUES
 (1, 'Với hơn 30 năm nghiên cứu và khám chữa bệnh thành công cho nhiều bệnh nhân cơ xương khớp, PGS.TS.BSCC Đặng Hồng Hoa, Trưởng khoa Cơ xương khớp, Bệnh viện Hạnh Phúc được mệnh danh là “Nữ anh hùng áo trắng của ngành Cơ xương khớp”.', 'Sau gần 30 năm tu nghiệp tại ngôi trường danh tiếng Đại học Y Hà Nội và Học viện Quân Y, bác sĩ Đặng Hồng Hoa được phong hàm Phó Giáo Sư vào năm 2016 ở tuổi đời rất trẻ. Bà đã thực hiện nhiều đề tài nghiên cứu khoa học mang tính ứng dụng cao và đóng góp nhiều giá trị cho nền y học Việt Nam như: Đánh giá hiệu quả của Rituximab (MabThera) trong điều trị Viêm khớp dạng thấp: nhân 4 trường hợp; Một số đặc điểm lâm sàng và X-quang của bệnh hư khớp gối; Nghiên cứu hình thái cột sống thắt lưng và khớp háng của người bình thường trên phim X-quang thường quy…\r\nPhó giáo sư Đặng Hồng Hoa cũng là người đặt những viên gạch đầu tiên cho khái niệm “điều trị nhắm đích” với các liệu pháp từ công nghệ sinh học như tế bào gốc, huyết tương giàu tiểu cầu tự thân,… tác động vào hệ thống miễn dịch của cơ thể để cải thiện hiệu quả tình trạng bệnh. Với những nghiên cứu và đóng góp cho ngành nội cơ xương khớp nói riêng và y học Việt Nam nói chung, bà đã vinh dự được phong danh hiệu Thầy thuốc ưu tú năm 2010 và nhận nhiều bằng khen của Thủ tướng chính phủ.', 'ĐẶNG HỒNG HOA', '1997-12-12', 'danghonghoahanhphuchospital@gmail.com', 357388370, 64302345664, '2019-04-08', NULL, 'dang-hong-hoa-avt.png', 150000, 1, 'Phó Giáo Sư, Tiến Sĩ, Bác Sĩ', 'Đang làm việc', 'coxuongkhop.danghonghoa@gmail.com'),
 (2, 'Bác sĩ chuyên khoa I Quách Thị Bích Vân chia sẻ từ lúc nhỏ, chị bị viêm da cơ địa (chàm thể tạng), không có thuốc điều trị dứt điểm. Mỗi lần bệnh tái phát, cả người chị ngứa dữ dội, nhiều đêm trằn trọc không thể chìm vào giấc ngủ.', 'Trong thời gian miệt mài đèn sách dưới mái trường Đại học Y Dược TP.HCM, bác sĩ Quách Thị Bích Vân luôn trăn trở dù học y khoa nhưng chưa thể chữa được bệnh cho chính mình.\r\n\r\nĐiều này đã thôi thúc chị theo đuổi con đường trở thành một bác sĩ Da liễu. Sau khi tốt nghiệp bác sĩ Đa khoa tại Đại học Y Dược TP.HCM, chị liên tiếp theo học các khóa chuyên sâu về lĩnh vực Da liễu – Thẩm mỹ Da. Trong 3 năm từ 2015 đến 2018, chị liên tục tốt nghiệp lớp đào tạo Định hướng chuyên khoa Da liễu và Chuyên khoa I Da liễu tại Đại học Y Dược TP.HCM.\r\n\r\nVới tinh thần ham học hỏi, luôn nỗ lực tìm tòi, đào sâu để nâng cao chuyên môn, tay nghề, bác sĩ Quách Thị Bích Vân còn theo học nhiều khóa đào tạo chuyên môn Da liễu khác như: Thủ thuật cơ bản và tiểu phẫu da, Ứng dụng Laser và ánh sáng trong da liễu, Kỹ thuật cơ bản trong chăm sóc da, Tiêm chất làm đầy trong thẩm mỹ da, Kiến thức và thực hành tiêm Botulinum toxin trong thẩm mỹ da, Chứng chỉ Căng chỉ cơ bản trong thẩm mỹ da.\r\n\r\nSau nhiều năm không ngừng trau dồi, học hỏi, cập nhật các kỹ thuật mới, bác sĩ Bích Vân không chỉ điều trị các bệnh, vấn đề da liễu như: mụn trứng cá, thâm, chàm, mề đay, vảy nến, viêm da dị ứng, dị ứng thuốc, viêm da cơ địa, nấm da, mồ hôi tay…; mà còn thuần thục các kỹ thuật tiên tiến, công nghệ làm đẹp, chăm sóc da từ cơ bản đến chuyên sâu như: laser, tiêm botox, tiêm HA, điều trị sẹo lồi, sẹo rỗ, xóa nếp nhăn, trẻ hóa da, trị nám, tàn nhang, sạm da, triệt lông…', 'QUÁCH THỊ BÍCH VÂN', '1987-02-05', 'dalieu.quachthibichvan@gmail.com', 357388371, 26665432112, '2015-04-08', NULL, 'bichvan.png', 450000, 7, 'Bác Sĩ, Chuyên Khoa I', 'Đang làm việc', 'dalieu.quachthibichvan@gmail.com'),
 (3, 'Bác sĩ có nền tảng vững chắc trong da liễu và luôn tận tâm trong điều trị các vấn đề về da cho người lớn và trẻ em.', 'Sau khi tốt nghiệp bác sĩ đa khoa vào năm 2018, bác sĩ Dung tiếp tục tham gia chương trình đào tạo chuyên khoa I ngành Da liễu tại trường Đại học Y khoa Phạm Ngọc Thạch. Với mong muốn mang lại làn da khỏe – làn da khỏe đẹp cho bệnh nhân, bác sĩ Dung không ngừng nâng cao chuyên môn và áp dụng các kỹ thuật mới trong điều trị các vấn đề về da liễu bệnh học, luôn cập nhật xu hướng, đào tạo liên tục về da liễu thẩm mỹ, bao gồm các chứng chỉ về tiểu phẫu da, sinh thiết da, ứng dụng laser ánh sáng, ứng dụng mesotherapy và các phương pháp điều trị bệnh da – thẩm mỹ không xâm lấn khác. Bác sĩ Dung luôn chú trọng cá nhân hóa điều trị để đảm bảo hiệu quả tối ưu cho từng người bệnh.\r\nKhông chỉ tận tâm với chuyên môn, bác sĩ Thạch Thị Hoàng Dung còn là người đồng hành đáng tin cậy. Với khả năng giao tiếp bằng nhiều ngôn ngữ, giao tiếp được bằng tiếng Campuchia, bác sĩ đã giúp nhiều bệnh nhân Campuchia hiểu rõ hơn về tình trạng bệnh và yên tâm hợp tác trong quá trình điều trị tại Việt Nam.', 'THẠCH THỊ HOÀNG DUNG', '1986-02-05', 'dalieu.thachthihoangdung@gmail.com', 357388372, 36665432113, '2018-04-08', NULL, 'hoangdung.png', 100000, 7, 'Bác Sĩ, Chuyên Khoa I', 'Đang làm việc', 'dalieu.thachthihoangdung@gmail.com'),
@@ -82,7 +82,7 @@ INSERT INTO `bacsi` (`mabacsi`, `motabs`, `gioithieubs`, `hoten`, `ngaysinh`, `e
 (34, 'Gần 20 năm gắn bó với chuyên ngành Ung bướu, bác sĩ Trần Vương Thảo Nghi đã không biết bao nhiêu lần tạo nên những câu chuyện “cổ tích” ngoài đời thực, giúp người bệnh luôn tin rằng Ung thư không phải là dấu chấm hết.', 'Có kinh nghiệm “chinh chiến” trong các tình huống “ngàn cân treo sợi tóc”, đặc biệt với những ca bệnh khó, Bác sĩ Trần Vương Thảo Nghi đã góp phần cải thiện tình trạng bệnh, nâng cao chất lượng cuộc sống cho rất nhiều bệnh nhân. Chính kinh nghiệm và tuổi nghề đã trao cho Bác sĩ Thảo Nghi đôi mắt tinh anh để nhìn rõ tình trạng của người bệnh.\r\nChọn ngành y là một cái nghiệp cho cả cuộc đời, trước khi công tác tại Bệnh viện Đa khoa Tâm Anh, Bác sĩ Trần Vương Thảo Nghi từng làm việc nhiều năm tại các bệnh viện chuyên khoa hàng đầu về Ung bướu trong và ngoài nước. “Khi tôi làm bác sĩ nội trú tại Pháp và được tiếp cận với các kỹ thuật, phương pháp điều trị ung thư ở nước bạn, tôi nhận thấy đó là một thách thức, khó khăn nhưng lại rất thú vị, và đó là điều thôi thúc tôi gắn bó với chuyên ngành ung bướu hơn nữa.”\r\nKhông chỉ đồng hành với người bệnh bằng kinh nghiệm và chuyên môn bài bản, Bác sĩ Thảo Nghi còn thấu hiểu, luôn luôn lắng nghe, chia sẻ với người bệnh như người thân trong gia đình. Chính vì vậy, bác sĩ được nhiều người bệnh yêu mến, quý trọng.\r\nBên cạnh công việc khám chữa bệnh, Bác sĩ Trần Vương Thảo Nghi còn thực hiện nhiều công trình nghiên cứu, báo cáo khoa học về hóa trị – điều trị Ung thư mang tính ứng dụng cao và không ngừng cập nhật những công nghệ điều trị ung thư tiên tiến nhất trên thế giới không chỉ điều trị hiệu quả mà còn góp phần chăm sóc giảm nhẹ cho người bệnh.', 'TRẦN VƯƠNG THẢO NGHI', '1965-04-01', 'ungbuou.tranvuongthaonghi@gmail.com', 987654320, 23456789012, '1985-09-15', NULL, 'thaonghi.png', 300000, 11, 'Bác sĩ', 'Đang làm việc', 'ungbuou.tranvuongthaonghi@gmail.com'),
 (35, 'Bác sĩ chuyên khoa II Ngô Trường Sơn có gần 20 năm kinh nghiệm điều trị ung thư và được đào tạo bài bản chuyên môn ở trong nước cũng như quốc tế. Sau khi tốt nghiệp chuyên ngành đa khoa tại Đại học Y Hà Nội – Ngôi trường đào tạo y khoa danh tiếng hàng đầu cả nước, bác sĩ Sơn tiếp tục hoàn thành xuất', 'Không dừng lại ở đó, với mong muốn học tập và cập nhật những phác đồ hiện đại nhất giúp người bệnh ung thư kiểm soát và điều trị hiệu quả, bác sĩ Sơn đã tham gia nhiều chương trình đào tạo nâng cao tại các quốc gia có nền y học phát triển như: Mỹ, Đan Mạch, Tây Ban Nha, Singapore…\r\nTrong suốt quá trình công tác và học tập, bác sĩ đã áp dụng nhiều kỹ thuật công nghệ cao về xạ trị và hóa chất vào điều trị các bệnh lý ung thư. Cùng với công tác khám chữa bệnh bác sĩ Sơn còn tham gia đào tạo, giảng dạy, chỉ đạo tuyến, viết sách chuyên ngành và nghiên cứu khoa học. Nhờ thành tích xuất sắc trong công tác giảng dạy và điều trị bác sĩ Sơn nhận được nhiều bằng khen của lãnh đạo các cấp. Bác sĩ Sơn cũng luôn được người bệnh yêu quý bởi sự gần gũi và giản dị.\r\nKhông chỉ tham gia tích cực trong công tác điều trị, bác sĩ Sơn còn tham gia báo cáo tại nhiều hội nghị chuyên ngành và được áp dụng điều trị tại các cơ sở khám chữa bệnh lớn trên cả nước.', 'NGÔ TRƯỜNG SƠN', '1975-03-10', 'ungbuou.ngotruongson@gmail.com', 901122334, 56789012345, '1995-08-20', NULL, 'son.png', 200000, 11, 'Bác sĩ, Chuyên khoa II', 'Đang làm việc', 'ungbuou.ngotruongson@gmail.com'),
 (36, 'ThS.BSNT Trần Ngọc Hải là bác sĩ chuyên khoa Y học hạt nhân và Ung Bướu. BS Hải đã có thâm niên công tác gần 20 năm, được đào tạo bài bản về chuyên ngành Y học hạt nhân và Ung bướu tại trong và ngoài nước. ', 'Trong suốt quá trình đào tạo, nghiên cứu, làm việc, bác sĩ Hải đã áp dụng nhiều công nghệ cao về xạ trị và hóa chất vào điều trị đưa lại nhiều lợi ích cho người bệnh. Với những cống hiến cho ngành Y học, bác sĩ Hải nhận được nhiều bằng khen từ lãnh đạo các cấp trong công tác bảo vệ sức khỏe nhân dân.\r\nBên cạnh việc học tập và công tác, bác sĩ Hải còn tham gia nghiên cứu khoa học với chủ đề Nghiên cứu điều trị bệnh lý ung thư đường tiêu hóa bằng hóa xạ trị có sử dụng PET/CT mô phỏng.\r\nVới sự tận tâm và chu đáo, bác sĩ Hải luôn là chỗ dựa vững chắc cho bệnh nhân và người nhà trong suốt quá trình thăm khám, điều trị.', 'TRẦN NGỌC HẢI', '1980-11-28', 'ungbuou.tranngochai@gmail.com', 988776655, 167890123456, '2007-06-01', NULL, 'hai.png\r\n', 370000, 11, 'Thạc Sĩ, Bác Sĩ Nội Trú', 'Đang làm việc', 'ungbuou.tranngochai@gmail.com');
-INSERT INTO `bacsi` (`mabacsi`, `motabs`, `gioithieubs`, `hoten`, `ngaysinh`, `email`, `sdt`, `cccd`, `ngaybatdau`, `ngayketthuc`, `imgbs`, `giakham`, `machuyenkhoa`, `capbac`, `trangthai`, `tentk`) VALUES
+INSERT INTO `bacsi` (`mabacsi`, `motabs`, `gioithieubs`, `hoten`, `ngaysinh`, `emailbs`, `sdt`, `cccd`, `ngaybatdau`, `ngayketthuc`, `imgbs`, `giakham`, `machuyenkhoa`, `capbac`, `trangthai`, `tentk`) VALUES
 (37, 'ThS.BSNT Bùi Thị Nga tốt nghiệp bác sĩ Đa khoa tại Đại học Y Hà Nội và tiếp tục theo học Thạc sĩ chuyên ngành Ung bướu tại đây. Với kinh nghiệm đã được tích lũy trong quá trình đào tạo và công tác tại các bệnh viện uy tín, bác sĩ Nga đã được nhiều người bệnh tin tưởng gửi gắm sức khỏe.', 'Thấu hiểu và đồng cảm những khó khăn của người bệnh khi phải chiến đấu với bệnh ung thư, bác sĩ Nga luôn là điểm tựa tinh thần đồng hành cùng người bệnh đi tìm “tia sáng ở cuối đường hầm”.\r\nBác sĩ Nga chia sẻ “Bệnh nhân ung thư là những người nhạy cảm và dễ tổn thương, với những người mất mát quá nhiều thứ như vậy, chúng tôi không chỉ đơn thuần lên phác đồ điều trị mà còn cần tiếp thêm nghị lực giúp người bệnh an tâm điều trị và có thêm nhiều niềm tin vào cuộc sống”.\r\nHiện tại bác sĩ Nga đang công tác tại Khoa Ung bướu, BVHạnh Phúc. Được sự hỗ trợ của đội ngũ bác sĩ trong khoa, bác sĩ Nga đã tham gia điều trị cho nhiều ca bệnh khó, phức tạp giúp người bệnh giảm triệu chứng và kéo dài tiên lượng sống.', 'BÙI THỊ NGA', '1978-05-15', 'ungbuou.buithinga@gmail.com', 933221144, 278901234567, '2002-10-10', NULL, 'nga.png', 120000, 11, 'Thạc Sĩ, Bác Sĩ Nội Trú', 'Đang làm việc', 'ungbuou.buithinga@gmail.com'),
 (38, 'Thuở nhỏ, ThS.BS.CKI Lê Thị Ngọc Hằng đã có niềm yêu thích đặc biệt với ngành y. Chị nỗ lực thi vào Đại học Y với ước mơ có thể chữa bệnh cho người thân của mình và mọi người xung quanh.', 'Sau khi tốt nghiệp Bác sĩ Đa khoa và Bác sĩ Nội trú của Đại học Y khoa Phạm Ngọc Thạch TP.HCM và Đại học Y Dược TP.HCM, ThS.BS.CKI Lê Thị Ngọc Hằng tiếp tục lấy bằng Bác sĩ Chuyên khoa 1 và Thạc sĩ của Đại học Y Dược. Bên cạnh đó, ThS.BS.CKI Lê Thị Ngọc Hằng còn được cấp chứng chỉ chuyên môn về Tĩnh mạch học, Siêu âm tổng quát thực hành và Ứng dụng sóng cao tần trong điều trị bướu giáp nhân lành tính cũng của đại học này.\r\n\r\nGần 20 năm kinh nghiệm học tập và công tác trong ngành y, ThS.BS.CKI Lê Thị Ngọc Hằng mong muốn đem các kiến thức đã học được để phục vụ công tác khám chữa bệnh cho mọi người. Không chỉ vậy, ThS.BS.CKI Lê Thị Ngọc Hằng còn không ngừng cập nhật các kiến thức mới, các kỹ thuật tiên tiến nhằm đem lại lợi ích tốt nhất khi điều trị cho bệnh nhân.\r\nThS.BS.CKI Lê Thị Ngọc Hằng từng học Bác sĩ nội trú Bệnh viện Nhân dân Gia Định và Bệnh viện Chợ Rẫy, từng là giảng viên bộ môn Lồng ngực – Tim mạch trường Đại học Y Dược TP.HCM và công tác tại Bệnh viện Đại học Y Dược trước khi về làm việc tại khoa Ngoại Lồng ngực – Mạch máu, Bệnh viện Hạnh Phúc.', 'LÊ THỊ NGỌC HẰNG', '1970-09-20', 'longnguc.lethingochang@gmail.com', 901234987, 12345678912, '1995-08-15', NULL, 'hang.png', 150000, 4, 'Thạc Sĩ, Bác Sĩ, Chuyên Khoa I', 'Đang làm việc', 'longnguc.lethingochang@gmail.com'),
 (39, 'ThS.BS.CKI Lê Chí Hiếu tốt nghiệp Bác sĩ Đa khoa, Đại học Y Dược TP.HCM vào năm 2019. Sau đó, bác sĩ tiếp tục theo học khóa Bác sĩ Nội trú của Đại học Y Dược và cùng lúc nhận 3 bằng Thạc sĩ – Chuyên khoa I – Bác sĩ nội trú vào năm 2022.', 'ThS.BS.CKI Lê Chí Hiếu từng làm việc tại các bệnh viện lớn như Bệnh viện Chợ Rẫy, Bệnh viện Đại học Y Dược. Năm 2021, bác sĩ Lê Chí Hiếu tích cực tham gia hoạt động chống dịch COVID-19 tại Bệnh viện Hồi sức COVID Ung bướu 2.\r\nSong song với công tác khám chữa bệnh, ThS.BS.CKI Lê Chí Hiếu dành nhiều thời gian học tập và nghiên cứu khoa học với nhiều bài báo cáo đăng trên các tạp chí y khoa nổi tiếng.', 'LÊ CHÍ HIẾU', '1975-04-12', 'longnguc.lechihieu@gmail.com', 987654123, 987654321098, '2002-07-01', NULL, 'hieu.png', 100000, 4, 'Thạc Sĩ, Bác Sĩ Chuyên Khoa I', 'Đang làm việc', 'longnguc.lechihieu@gmail.com'),
@@ -128,7 +128,7 @@ CREATE TABLE `benhnhan` (
   `tiensubenhtatcuagiadinh` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `tiensubenhtatcuabenhnhan` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `nhommau` varchar(5) DEFAULT NULL,
-  `tentk` varchar(100) NOT NULL
+  `tentk` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -167,10 +167,10 @@ INSERT INTO `benhnhan` (`mabenhnhan`, `hotenbenhnhan`, `ngaysinh`, `gioitinh`, `
 (29, 'Nhã Lan', '1994-03-29', 'Nữ', 'Nhân viên chăm sóc khách hàng', 901235678890, 'Kinh', 'nhalan@example.com', 909012341, 'Hồ Chí Minh', 'Quận Bình Tân', 'Phường Bình Hưng Hòa', '123 Đường Hương Lộ 2', 'Chị gái', 'Có', 'Không', 'AB-', ''),
 (30, 'Tuyết Mai', '1991-04-22', 'Nữ', 'Kế toán trưởng', 12346789012, 'Kinh', 'tuyetmai@example.com', 901234570, 'Hà Nội', 'Ba Đình', 'Phường Kim Mã', '34 Đường Nguyễn Chí Thanh', 'Mẹ', 'Không', 'Có', 'B+', ''),
 (31, 'Phương Vy', '1993-05-07', 'Nữ', 'Nhân viên tư vấn', 123467890134, 'Kinh', 'phuongvy@example.com', 902345682, 'Hồ Chí Minh', 'Quận 4', 'Phường 12', '45 Đường Nguyễn Tất Thành', 'Chị gái', 'Không', 'Không', 'O+', ''),
-(42, 'Lê Thị Bình', '2000-02-22', NULL, NULL, NULL, NULL, 'abc@gmail.com', NULL, NULL, NULL, NULL, NULL, 'bản thân', NULL, NULL, NULL, 'abc@gmail.com'),
+(42, 'Lê Thị Bình', '2000-02-22', 'Nữ', 'giáo viên', 123456789876, 'kinh', 'abc@gmail.com', 987890654, 'Hà Nội', 'thanh xuân', 'Phường Hàng Bạc', '12A Đường Lê Duẩn', 'bản thân', '', '', 'A', 'abc@gmail.com'),
 (43, 'Nguyễn Thanh Hải', '2000-02-22', 'Nam', 'giáo viên', 9768976543, 'kinh', 'hai@gmail.com', 987890654, 'hà nội', 'thanh xuân', 'phường 1', '23', 'bản thân', '', '', 'A', 'hai@gmail.com'),
-(44, 'nguyễn văn ba', '1999-02-22', 'Nam', 'kỹ sư', 123456789012, 'Kinh', 'ba@gmail.com', 901234567, 'Hà Nội', 'Hoàn Kiếm', 'Phường Hàng Bạc', '12A Đường Lê Duẩn', 'bản thân', '', '', 'A', 'ba@gmail.com'),
-(45, 'nguyễn văn tư', '2000-02-22', 'Nam', 'nông dân', 9768976543, 'kinh', 'hai@gmail.com', 987890654, 'hà nội', 'thanh xuân', 'phường 1', '23', 'Con', '', '', 'O', 'hai@gmail.com');
+(44, 'nguyễn văn ba', '1999-02-22', 'Nam', 'kỹ sư', 123456789012, 'Kinh', 'ba@gmail.com', 901234567, 'Hà Nội', 'Hoàn Kiếm', 'Phường Hàng Bạc', '12A Đường Lê Duẩn', 'bản thân', 'ut', 'ut', 'A', 'ba@gmail.com'),
+(45, 'nguyễn văn tư', '2000-02-22', 'Nam', 'nông dân', 9768976543, 'kinh', 'hai@gmail.com', 987890654, 'hà nội', 'thanh xuân', 'phường 1', '23', 'Con', '', '', 'O', 'ba@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -262,24 +262,6 @@ INSERT INTO `chitietdonthuoc` (`id`, `madonthuoc`, `mathuoc`, `lieudung`, `thoig
 (28, 15, 21, '1 viên/lần', 'Tối sau ăn', 30),
 (29, 16, 19, '1 viên/lần', 'Sáng sau ăn', 30),
 (30, 16, 21, '1 viên/lần', 'Tối sau ăn', 30),
-(31, 51, 19, '1 viên/lần', 'Sáng sau ăn', 30),
-(32, 51, 21, '1 viên/lần', 'Tối sau ăn', 30),
-(33, 52, 3, '1 viên/lần', 'Sáng-Trưa-Tối sau ăn', 7),
-(34, 52, 16, '1 viên/lần', 'Khi sốt trên 38.5°C, cách 6h/lần', 5),
-(35, 53, 18, '1 viên/lần', 'Sáng trước ăn 30 phút', 14),
-(36, 53, 16, '1 viên/lần', 'Khi đau, cách 6h/lần', 7),
-(37, 54, 16, '1-2 viên/lần', 'Khi đau, cách 6h/lần', 5),
-(38, 54, 9, '1 viên/lần', 'Sáng-Tối sau ăn', 7),
-(39, 55, 3, '1 viên/lần', 'Sáng-Trưa-Tối sau ăn', 7),
-(40, 55, 8, '1 viên/lần', 'Tối trước khi ngủ', 10),
-(41, 56, 8, '1 viên/lần', 'Sáng sau ăn', 10),
-(42, 56, 10, '1 viên/lần', 'Sáng sau ăn', 5),
-(43, 57, 20, '1 viên/lần', 'Sáng-Tối sau ăn', 30),
-(44, 58, 14, '1 viên/lần', 'Sáng-Tối sau ăn', 7),
-(45, 58, 16, '1 viên/lần', 'Khi sốt trên 38.5°C, cách 6h/lần', 5),
-(46, 59, 16, '1 viên/lần', 'Khi sốt trên 38.5°C, cách 6h/lần', 5),
-(47, 59, 8, '1 viên/lần', 'Sáng sau ăn', 5),
-(48, 59, 9, '1 viên/lần', 'Sáng-Tối sau ăn', 7),
 (49, 8, 11, '1 gói/lần', 'Sáng-Tối sau ăn', 5),
 (50, 9, 2, '1 viên/lần', 'Sáng-Tối sau ăn', 5),
 (51, 1, 22, '1 viên/lần', 'Sáng sau ăn', 30),
@@ -302,6 +284,7 @@ INSERT INTO `chitietdonthuoc` (`id`, `madonthuoc`, `mathuoc`, `lieudung`, `thoig
 CREATE TABLE `chitiethoso` (
   `machitiethoso` int(10) UNSIGNED NOT NULL,
   `mahoso` int(11) UNSIGNED NOT NULL,
+  `mabacsi` int(11) NOT NULL,
   `ngaykham` date NOT NULL,
   `trieuchungbandau` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `chandoan` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
@@ -314,23 +297,23 @@ CREATE TABLE `chitiethoso` (
 -- Đang đổ dữ liệu cho bảng `chitiethoso`
 --
 
-INSERT INTO `chitiethoso` (`machitiethoso`, `mahoso`, `ngaykham`, `trieuchungbandau`, `chandoan`, `huongdieutri`, `madonthuoc`, `ketluan`) VALUES
-(1, 1, '2024-04-17', 'Đau ngực, khó thở khi gắng sức, huyết áp cao 160/95 mmHg', 'Tăng huyết áp độ II, nghi ngờ bệnh mạch vành', 'Điều trị nội khoa, kiểm soát huyết áp, chế độ ăn giảm muối', 1, 'Cần theo dõi huyết áp hàng ngày, tái khám sau 1 tháng'),
-(2, 2, '2024-04-17', 'Đau ngực, khó thở, mệt mỏi', 'Hở van tim hai lá nhẹ, chức năng tim bình thường', 'Theo dõi định kỳ, không cần can thiệp phẫu thuật', 2, 'Tái khám sau 6 tháng, siêu âm tim kiểm tra'),
-(3, 3, '2024-04-17', 'Đau thượng vị, ợ chua, khó tiêu kéo dài 2 tháng', 'Viêm loét dạ dày, trào ngược dạ dày thực quản', 'Điều trị nội khoa, chế độ ăn uống, tránh rượu bia', 3, 'Cần uống thuốc đều đặn, tái khám sau 1 tháng'),
-(4, 4, '2024-04-17', 'Đau hạ sườn phải, vàng da, vàng mắt', 'Viêm gan cấp, men gan tăng cao', 'Nghỉ ngơi, chế độ ăn nhẹ, kiêng rượu bia', 4, 'Cần xét nghiệm men gan lại sau 2 tuần'),
-(5, 5, '2024-04-17', 'Nhìn mờ, mỏi mắt khi làm việc với máy tính', 'Cận thị nhẹ, khô mắt do làm việc với máy tính', 'Sử dụng kính, nhỏ mắt nhân tạo, nghỉ mắt định kỳ', 5, 'Cần đeo kính khi làm việc, tái khám sau 6 tháng'),
-(6, 6, '2024-04-17', 'Nhìn mờ, khó đọc chữ nhỏ', 'Viễn thị, lão thị', 'Đeo kính điều chỉnh', 6, 'Cần đeo kính thường xuyên, tái khám sau 1 năm'),
-(7, 7, '2024-04-17', 'Đau họng, khó nuốt, sốt nhẹ', 'Viêm amidan cấp', 'Điều trị kháng sinh, giảm đau, súc họng', 7, 'Uống thuốc đủ liều, tái khám nếu không đỡ sau 5 ngày'),
-(8, 8, '2024-04-17', 'Nghẹt mũi, chảy mũi, đau đầu vùng trán', 'Viêm xoang mạn tính', 'Điều trị kháng sinh, rửa mũi, xông mũi', 8, 'Cần điều trị dứt điểm, tránh tái phát'),
-(9, 9, '2024-04-17', 'Vết thương hở ở cẳng tay, chảy máu', 'Vết thương hở không nhiễm trùng', 'Làm sạch vết thương, khâu vết thương, băng vô trùng', 9, 'Thay băng sau 2 ngày, cắt chỉ sau 7 ngày'),
-(10, 10, '2024-04-17', 'Vết thương sau phẫu thuật ruột thừa', 'Vết mổ liền tốt, không nhiễm trùng', 'Thay băng vô trùng, tiếp tục điều trị kháng sinh', 10, 'Tiếp tục thay băng mỗi 2 ngày, tái khám sau 1 tuần'),
-(11, 11, '2024-04-17', 'Đau khớp gối, sưng, khó vận động', 'Viêm khớp gối, thoái hóa khớp', 'Điều trị giảm đau, chống viêm, vật lý trị liệu', 11, 'Cần tập vật lý trị liệu đều đặn, giảm cân nếu thừa cân'),
-(12, 12, '2024-04-17', 'Gãy xương cẳng tay, đau, sưng', 'Gãy xương quay 1/3 dưới', 'Bó bột, giảm đau, theo dõi', 12, 'Tái khám sau 2 tuần để kiểm tra bột và X-quang'),
-(13, 13, '2024-04-17', 'Tiểu buốt, tiểu rắt, đau vùng hạ vị', 'Viêm đường tiết niệu', 'Điều trị kháng sinh, uống nhiều nước', 13, 'Uống thuốc đủ liều, xét nghiệm nước tiểu lại sau điều trị'),
-(14, 14, '2024-04-17', 'Đau vùng thắt lưng, tiểu máu', 'Sỏi thận 5mm bên phải', 'Điều trị nội khoa, uống nhiều nước', 14, 'Tái khám sau 1 tháng, siêu âm kiểm tra'),
-(15, 15, '2024-04-17', 'Thai 28 tuần, phát triển bình thường', 'Thai phát triển bình thường, tim thai 140 lần/phút', 'Bổ sung sắt, acid folic, vitamin', 15, 'Tái khám sau 2 tuần'),
-(16, 16, '2024-04-17', 'Khí hư bất thường, ngứa vùng kín', 'Viêm âm đạo do nấm Candida', 'Điều trị kháng nấm, vệ sinh vùng kín', 16, 'Tái khám sau 1 tuần nếu không đỡ');
+INSERT INTO `chitiethoso` (`machitiethoso`, `mahoso`, `mabacsi`, `ngaykham`, `trieuchungbandau`, `chandoan`, `huongdieutri`, `madonthuoc`, `ketluan`) VALUES
+(1, 1, 1, '2024-04-17', 'Đau ngực, khó thở khi gắng sức, huyết áp cao 160/95 mmHg', 'Tăng huyết áp độ II, nghi ngờ bệnh mạch vành', 'Điều trị nội khoa, kiểm soát huyết áp, chế độ ăn giảm muối', 1, 'Cần theo dõi huyết áp hàng ngày, tái khám sau 1 tháng'),
+(2, 2, 1, '2024-04-17', 'Đau ngực, khó thở, mệt mỏi', 'Hở van tim hai lá nhẹ, chức năng tim bình thường', 'Theo dõi định kỳ, không cần can thiệp phẫu thuật', 2, 'Tái khám sau 6 tháng, siêu âm tim kiểm tra'),
+(3, 3, 3, '2024-04-17', 'Đau thượng vị, ợ chua, khó tiêu kéo dài 2 tháng', 'Viêm loét dạ dày, trào ngược dạ dày thực quản', 'Điều trị nội khoa, chế độ ăn uống, tránh rượu bia', 3, 'Cần uống thuốc đều đặn, tái khám sau 1 tháng'),
+(4, 1, 0, '2024-04-17', 'Đau hạ sườn phải, vàng da, vàng mắt', 'Viêm gan cấp, men gan tăng cao', 'Nghỉ ngơi, chế độ ăn nhẹ, kiêng rượu bia', 4, 'Cần xét nghiệm men gan lại sau 2 tuần'),
+(5, 5, 0, '2024-04-17', 'Nhìn mờ, mỏi mắt khi làm việc với máy tính', 'Cận thị nhẹ, khô mắt do làm việc với máy tính', 'Sử dụng kính, nhỏ mắt nhân tạo, nghỉ mắt định kỳ', 5, 'Cần đeo kính khi làm việc, tái khám sau 6 tháng'),
+(6, 6, 0, '2024-04-17', 'Nhìn mờ, khó đọc chữ nhỏ', 'Viễn thị, lão thị', 'Đeo kính điều chỉnh', 6, 'Cần đeo kính thường xuyên, tái khám sau 1 năm'),
+(7, 7, 0, '2024-04-17', 'Đau họng, khó nuốt, sốt nhẹ', 'Viêm amidan cấp', 'Điều trị kháng sinh, giảm đau, súc họng', 7, 'Uống thuốc đủ liều, tái khám nếu không đỡ sau 5 ngày'),
+(8, 8, 0, '2024-04-17', 'Nghẹt mũi, chảy mũi, đau đầu vùng trán', 'Viêm xoang mạn tính', 'Điều trị kháng sinh, rửa mũi, xông mũi', 8, 'Cần điều trị dứt điểm, tránh tái phát'),
+(9, 9, 0, '2024-04-17', 'Vết thương hở ở cẳng tay, chảy máu', 'Vết thương hở không nhiễm trùng', 'Làm sạch vết thương, khâu vết thương, băng vô trùng', 9, 'Thay băng sau 2 ngày, cắt chỉ sau 7 ngày'),
+(10, 10, 0, '2024-04-17', 'Vết thương sau phẫu thuật ruột thừa', 'Vết mổ liền tốt, không nhiễm trùng', 'Thay băng vô trùng, tiếp tục điều trị kháng sinh', 10, 'Tiếp tục thay băng mỗi 2 ngày, tái khám sau 1 tuần'),
+(11, 11, 0, '2024-04-17', 'Đau khớp gối, sưng, khó vận động', 'Viêm khớp gối, thoái hóa khớp', 'Điều trị giảm đau, chống viêm, vật lý trị liệu', 11, 'Cần tập vật lý trị liệu đều đặn, giảm cân nếu thừa cân'),
+(12, 12, 0, '2024-04-17', 'Gãy xương cẳng tay, đau, sưng', 'Gãy xương quay 1/3 dưới', 'Bó bột, giảm đau, theo dõi', 12, 'Tái khám sau 2 tuần để kiểm tra bột và X-quang'),
+(13, 13, 0, '2024-04-17', 'Tiểu buốt, tiểu rắt, đau vùng hạ vị', 'Viêm đường tiết niệu', 'Điều trị kháng sinh, uống nhiều nước', 13, 'Uống thuốc đủ liều, xét nghiệm nước tiểu lại sau điều trị'),
+(14, 14, 0, '2024-04-17', 'Đau vùng thắt lưng, tiểu máu', 'Sỏi thận 5mm bên phải', 'Điều trị nội khoa, uống nhiều nước', 14, 'Tái khám sau 1 tháng, siêu âm kiểm tra'),
+(15, 15, 0, '2024-04-17', 'Thai 28 tuần, phát triển bình thường', 'Thai phát triển bình thường, tim thai 140 lần/phút', 'Bổ sung sắt, acid folic, vitamin', 15, 'Tái khám sau 2 tuần'),
+(16, 16, 0, '2024-04-17', 'Khí hư bất thường, ngứa vùng kín', 'Viêm âm đạo do nấm Candida', 'Điều trị kháng nấm, vệ sinh vùng kín', 16, 'Tái khám sau 1 tuần nếu không đỡ');
 
 -- --------------------------------------------------------
 
@@ -376,65 +359,32 @@ INSERT INTO `chuyenkhoa` (`machuyenkhoa`, `tenchuyenkhoa`, `mota`, `dichvu`, `tr
 
 CREATE TABLE `donthuoc` (
   `madonthuoc` int(11) UNSIGNED NOT NULL,
-  `mahoso` int(11) UNSIGNED NOT NULL,
-  `mabenhnhan` int(11) UNSIGNED NOT NULL,
+  `machitiethoso` int(11) UNSIGNED NOT NULL,
   `ngaytaodonthuoc` date NOT NULL,
-  `ghichu` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
+  `ghichudonthuoc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `donthuoc`
 --
 
-INSERT INTO `donthuoc` (`madonthuoc`, `mahoso`, `mabenhnhan`, `ngaytaodonthuoc`, `ghichu`) VALUES
-(1, 1, 1, '2023-10-15', 'Đơn thuốc điều trị cao huyết áp'),
-(2, 2, 2, '2023-10-16', 'Đơn thuốc điều trị viêm họng'),
-(3, 3, 3, '2023-10-17', 'Đơn thuốc điều trị đau dạ dày'),
-(4, 4, 4, '2023-10-18', 'Đơn thuốc điều trị đau đầu'),
-(5, 5, 5, '2023-10-19', 'Đơn thuốc điều trị viêm xoang'),
-(6, 6, 7, '2023-10-20', 'Đơn thuốc điều trị dị ứng da'),
-(7, 7, 8, '2023-10-21', 'Đơn thuốc điều trị tiểu đường'),
-(8, 8, 9, '2023-10-22', 'Đơn thuốc điều trị viêm phổi'),
-(9, 9, 10, '2023-10-23', 'Đơn thuốc điều trị cảm cúm'),
-(10, 10, 11, '2023-10-24', 'Đơn thuốc điều trị mất ngủ'),
-(11, 11, 13, '2023-10-25', 'Đơn thuốc điều trị hen suyễn'),
-(12, 12, 14, '2023-10-26', 'Đơn thuốc điều trị viêm khớp'),
-(13, 13, 15, '2023-10-27', 'Đơn thuốc điều trị rối loạn tiêu hóa'),
-(14, 14, 16, '2023-10-28', 'Đơn thuốc điều trị thiếu máu'),
-(15, 15, 17, '2023-10-29', 'Đơn thuốc điều trị rối loạn lipid máu'),
-(16, 16, 20, '2023-10-30', 'Đơn thuốc tái khám cao huyết áp'),
-(51, 1, 1, '2023-10-15', 'Đơn thuốc điều trị cao huyết áp'),
-(52, 2, 2, '2023-10-16', 'Đơn thuốc điều trị viêm họng'),
-(53, 3, 3, '2023-10-17', 'Đơn thuốc điều trị đau dạ dày'),
-(54, 4, 4, '2023-10-18', 'Đơn thuốc điều trị đau đầu'),
-(55, 5, 5, '2023-10-19', 'Đơn thuốc điều trị viêm xoang'),
-(56, 6, 7, '2023-10-20', 'Đơn thuốc điều trị dị ứng da'),
-(57, 7, 8, '2023-10-21', 'Đơn thuốc điều trị tiểu đường'),
-(58, 8, 9, '2023-10-22', 'Đơn thuốc điều trị viêm phổi'),
-(59, 9, 10, '2023-10-23', 'Đơn thuốc điều trị cảm cúm'),
-(60, 10, 11, '2023-10-24', 'Đơn thuốc điều trị mất ngủ'),
-(61, 11, 13, '2023-10-25', 'Đơn thuốc điều trị hen suyễn'),
-(62, 12, 14, '2023-10-26', 'Đơn thuốc điều trị viêm khớp'),
-(63, 13, 15, '2023-10-27', 'Đơn thuốc điều trị rối loạn tiêu hóa'),
-(64, 14, 16, '2023-10-28', 'Đơn thuốc điều trị thiếu máu'),
-(65, 15, 17, '2023-10-29', 'Đơn thuốc điều trị rối loạn lipid máu'),
-(66, 16, 20, '2023-10-30', 'Đơn thuốc tái khám cao huyết áp'),
-(101, 1, 1, '2023-10-15', 'Đơn thuốc điều trị cao huyết áp'),
-(102, 2, 2, '2023-10-16', 'Đơn thuốc điều trị viêm họng'),
-(103, 3, 3, '2023-10-17', 'Đơn thuốc điều trị đau dạ dày'),
-(104, 4, 4, '2023-10-18', 'Đơn thuốc điều trị đau đầu'),
-(105, 5, 5, '2023-10-19', 'Đơn thuốc điều trị viêm xoang'),
-(106, 6, 7, '2023-10-20', 'Đơn thuốc điều trị dị ứng da'),
-(107, 7, 8, '2023-10-21', 'Đơn thuốc điều trị tiểu đường'),
-(108, 8, 9, '2023-10-22', 'Đơn thuốc điều trị viêm phổi'),
-(109, 9, 10, '2023-10-23', 'Đơn thuốc điều trị cảm cúm'),
-(110, 10, 11, '2023-10-24', 'Đơn thuốc điều trị mất ngủ'),
-(111, 11, 13, '2023-10-25', 'Đơn thuốc điều trị hen suyễn'),
-(112, 12, 14, '2023-10-26', 'Đơn thuốc điều trị viêm khớp'),
-(113, 13, 15, '2023-10-27', 'Đơn thuốc điều trị rối loạn tiêu hóa'),
-(114, 14, 16, '2023-10-28', 'Đơn thuốc điều trị thiếu máu'),
-(115, 15, 17, '2023-10-29', 'Đơn thuốc điều trị rối loạn lipid máu'),
-(116, 16, 20, '2023-10-30', 'Đơn thuốc tái khám cao huyết áp');
+INSERT INTO `donthuoc` (`madonthuoc`, `machitiethoso`, `ngaytaodonthuoc`, `ghichudonthuoc`) VALUES
+(1, 1, '2023-10-15', 'Đơn thuốc điều trị cao huyết áp'),
+(2, 2, '2023-10-16', 'Đơn thuốc điều trị viêm họng'),
+(3, 3, '2023-10-17', 'Đơn thuốc điều trị đau dạ dày'),
+(4, 4, '2023-10-18', 'Đơn thuốc điều trị đau đầu'),
+(5, 5, '2023-10-19', 'Đơn thuốc điều trị viêm xoang'),
+(6, 6, '2023-10-20', 'Đơn thuốc điều trị dị ứng da'),
+(7, 7, '2023-10-21', 'Đơn thuốc điều trị tiểu đường'),
+(8, 8, '2023-10-22', 'Đơn thuốc điều trị viêm phổi'),
+(9, 9, '2023-10-23', 'Đơn thuốc điều trị cảm cúm'),
+(10, 10, '2023-10-24', 'Đơn thuốc điều trị mất ngủ'),
+(11, 11, '2023-10-25', 'Đơn thuốc điều trị hen suyễn'),
+(12, 12, '2023-10-26', 'Đơn thuốc điều trị viêm khớp'),
+(13, 13, '2023-10-27', 'Đơn thuốc điều trị rối loạn tiêu hóa'),
+(14, 14, '2023-10-28', 'Đơn thuốc điều trị thiếu máu'),
+(15, 15, '2023-10-29', 'Đơn thuốc điều trị rối loạn lipid máu'),
+(16, 16, '2023-10-30', 'Đơn thuốc tái khám cao huyết áp');
 
 -- --------------------------------------------------------
 
@@ -445,34 +395,102 @@ INSERT INTO `donthuoc` (`madonthuoc`, `mahoso`, `mabenhnhan`, `ngaytaodonthuoc`,
 CREATE TABLE `hosobenhan` (
   `mahoso` int(10) UNSIGNED NOT NULL,
   `mabenhnhan` int(11) UNSIGNED NOT NULL,
-  `maloaihoso` int(11) NOT NULL,
   `ghichu` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `ngaytao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `ngaycapnhat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `mabacsi` int(11) NOT NULL
+  `ngaycapnhat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `hosobenhan`
 --
 
-INSERT INTO `hosobenhan` (`mahoso`, `mabenhnhan`, `maloaihoso`, `ghichu`, `ngaytao`, `ngaycapnhat`, `mabacsi`) VALUES
-(1, 1, 3, 'Khám tim tổng quát', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 1),
-(2, 2, 3, 'Siêu âm tim', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 2),
-(3, 3, 3, 'Nội soi dạ dày', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 3),
-(4, 4, 3, 'Khám gan mật', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 4),
-(5, 5, 3, 'Khám mắt định kỳ', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 6),
-(6, 6, 3, 'Đo thị lực', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 7),
-(7, 7, 3, 'Khám tai mũi họng tổng quát', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 8),
-(8, 8, 3, 'Nội soi mũi xoang', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 9),
-(9, 9, 3, 'Khám vết thương', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 10),
-(10, 10, 3, 'Thay băng', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 11),
-(11, 11, 3, 'Khám xương khớp', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 12),
-(12, 12, 3, 'Điều trị gãy xương', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 13),
-(13, 13, 3, 'Khám tiết niệu', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 14),
-(14, 14, 3, 'Siêu âm thận', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 15),
-(15, 15, 4, 'Khám thai định kỳ', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 16),
-(16, 16, 4, 'Khám phụ khoa', '2024-04-16 17:00:00', '2024-04-16 17:00:00', 17);
+INSERT INTO `hosobenhan` (`mahoso`, `mabenhnhan`, `ghichu`, `ngaytao`, `ngaycapnhat`) VALUES
+(1, 44, 'Khám tim tổng quát', '2024-04-16 17:00:00', '2025-05-02 06:18:00'),
+(2, 45, 'Siêu âm tim', '2024-04-16 17:00:00', '2025-05-02 06:33:07'),
+(3, 44, 'Nội soi dạ dày', '2024-04-16 17:00:00', '2025-05-02 07:03:17'),
+(4, 4, 'Khám gan mật', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(5, 5, 'Khám mắt định kỳ', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(6, 6, 'Đo thị lực', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(7, 7, 'Khám tai mũi họng tổng quát', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(8, 8, 'Nội soi mũi xoang', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(9, 9, 'Khám vết thương', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(10, 10, 'Thay băng', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(11, 11, 'Khám xương khớp', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(12, 12, 'Điều trị gãy xương', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(13, 13, 'Khám tiết niệu', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(14, 14, 'Siêu âm thận', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(15, 15, 'Khám thai định kỳ', '2024-04-16 17:00:00', '2024-04-16 17:00:00'),
+(16, 16, 'Khám phụ khoa', '2024-04-16 17:00:00', '2024-04-16 17:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ketquaxetnghiem`
+--
+
+CREATE TABLE `ketquaxetnghiem` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `malichxetnghiem` int(10) UNSIGNED NOT NULL,
+  `tenchisoxetnghiem` varchar(255) NOT NULL,
+  `giatriketqua` varchar(100) NOT NULL,
+  `donvikq` varchar(50) DEFAULT NULL,
+  `khoangthamchieu` varchar(100) DEFAULT NULL,
+  `nhanxet` text DEFAULT NULL,
+  `thoigiantao` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ketquaxetnghiem`
+--
+
+INSERT INTO `ketquaxetnghiem` (`id`, `malichxetnghiem`, `tenchisoxetnghiem`, `giatriketqua`, `donvikq`, `khoangthamchieu`, `nhanxet`, `thoigiantao`) VALUES
+(1, 1, 'Hồng cầu (RBC)', '4.5', 'triệu/µL', '4.2 - 5.9', 'Bình thường', '2025-05-02 09:51:54'),
+(2, 1, 'Bạch cầu (WBC)', '6.8', 'nghìn/µL', '4.0 - 11.0', 'Bình thường', '2025-05-02 09:51:54'),
+(3, 1, 'Tiểu cầu (PLT)', '250', 'nghìn/µL', '150 - 400', 'Bình thường', '2025-05-02 09:51:54'),
+(4, 1, 'Hemoglobin (Hb)', '14', 'g/dL', '13 - 17', 'Bình thường', '2025-05-02 09:51:54'),
+(5, 2, 'Cholesterol toàn phần', '190', 'mg/dL', '< 200', 'Bình thường', '2025-05-02 09:51:54'),
+(6, 2, 'HDL-C', '55', 'mg/dL', '> 40', 'Bình thường', '2025-05-02 09:51:54'),
+(7, 2, 'LDL-C', '110', 'mg/dL', '< 130', 'Hơi cao', '2025-05-02 09:51:54'),
+(8, 2, 'Triglyceride', '160', 'mg/dL', '< 150', 'Hơi cao', '2025-05-02 09:51:54'),
+(9, 3, 'AST (GOT)', '25', 'U/L', '5 - 40', 'Bình thường', '2025-05-02 09:51:54'),
+(10, 3, 'ALT (GPT)', '30', 'U/L', '7 - 56', 'Bình thường', '2025-05-02 09:51:54'),
+(11, 3, 'Bilirubin toàn phần', '1.0', 'mg/dL', '0.1 - 1.2', 'Bình thường', '2025-05-02 09:51:54'),
+(29, 4, 'Cholesterol toàn phần', '210', 'mg/dL', '< 200', 'Cao hơn mức bình thường', '2025-05-02 09:57:54'),
+(30, 4, 'HDL-C', '45', 'mg/dL', '> 40', 'Bình thường', '2025-05-02 09:57:54'),
+(31, 4, 'LDL-C', '140', 'mg/dL', '< 130', 'Cao', '2025-05-02 09:57:54'),
+(32, 4, 'Triglyceride', '170', 'mg/dL', '< 150', 'Cao', '2025-05-02 09:57:54'),
+(33, 5, 'AST (GOT)', '45', 'U/L', '5 - 40', 'Cao', '2025-05-02 09:57:54'),
+(34, 5, 'ALT (GPT)', '50', 'U/L', '7 - 56', 'Bình thường', '2025-05-02 09:57:54'),
+(35, 5, 'Bilirubin toàn phần', '1.5', 'mg/dL', '0.1 - 1.2', 'Cao', '2025-05-02 09:57:54'),
+(36, 7, 'Glucose huyết tương lúc đói', '100', 'mg/dL', '70 - 100', 'Bình thường', '2025-05-02 09:57:54'),
+(37, 7, 'Tế bào viêm', '5', 'cells/field', '0 - 5', 'Bình thường', '2025-05-02 09:57:54'),
+(38, 7, 'Vi sinh vật', 'Không phát hiện', '', '', 'Không phát hiện vi khuẩn', '2025-05-02 09:57:54'),
+(39, 9, 'AST (GOT)', '35', 'U/L', '5 - 40', 'Bình thường', '2025-05-02 09:57:54'),
+(40, 9, 'ALT (GPT)', '40', 'U/L', '7 - 56', 'Bình thường', '2025-05-02 09:57:54'),
+(41, 9, 'Bilirubin toàn phần', '1.1', 'mg/dL', '0.1 - 1.2', 'Bình thường', '2025-05-02 09:57:54'),
+(42, 10, 'Glucose huyết tương lúc đói', '110', 'mg/dL', '70 - 100', 'Cao hơn bình thường', '2025-05-02 09:57:54'),
+(43, 10, 'HbA1c', '6.5', '%', '< 5.7', 'Tiền đái tháo đường', '2025-05-02 09:57:54'),
+(44, 11, 'Glucose huyết tương lúc đói', '95', 'mg/dL', '70 - 100', 'Bình thường', '2025-05-02 09:57:54'),
+(45, 11, 'HbA1c', '5.2', '%', '< 5.7', 'Bình thường', '2025-05-02 09:57:54'),
+(46, 12, 'Tế bào viêm', '3', 'cells/field', '0 - 5', 'Bình thường', '2025-05-02 09:59:29'),
+(47, 12, 'Vi sinh vật', 'Có vi khuẩn Gram âm', '', '', 'Cần theo dõi thêm', '2025-05-02 09:59:29'),
+(48, 13, 'Tế bào viêm', '4', 'cells/field', '0 - 5', 'Bình thường', '2025-05-02 09:59:29'),
+(49, 13, 'Vi sinh vật', 'Không phát hiện', '', '', 'Bình thường', '2025-05-02 09:59:29'),
+(50, 15, 'Hồng cầu (RBC)', '4.7', 'triệu/µL', '4.2 - 5.9', 'Bình thường', '2025-05-02 09:59:29'),
+(51, 15, 'Bạch cầu (WBC)', '7.0', 'nghìn/µL', '4.0 - 11.0', 'Bình thường', '2025-05-02 09:59:29'),
+(52, 15, 'Tiểu cầu (PLT)', '270', 'nghìn/µL', '150 - 400', 'Bình thường', '2025-05-02 09:59:29'),
+(53, 15, 'Hemoglobin (Hb)', '15', 'g/dL', '13 - 17', 'Bình thường', '2025-05-02 09:59:29'),
+(54, 17, 'Kích thước gan', '12', 'cm', '10 - 15', 'Bình thường', '2025-05-02 09:59:29'),
+(55, 17, 'Kích thước thận phải', '9', 'cm', '9 - 12', 'Bình thường', '2025-05-02 09:59:29'),
+(56, 17, 'Kích thước thận trái', '9.5', 'cm', '9 - 12', 'Bình thường', '2025-05-02 09:59:29'),
+(57, 20, 'Glucose huyết tương lúc đói', '105', 'mg/dL', '70 - 100', 'Cao nhẹ', '2025-05-02 09:59:29'),
+(58, 20, 'HbA1c', '5.9', '%', '< 5.7', 'Tiền đái tháo đường', '2025-05-02 09:59:29'),
+(59, 22, 'Tình trạng phổi', 'Không có dấu hiệu tổn thương', '', '', 'Bình thường', '2025-05-02 09:59:29'),
+(60, 22, 'Kích thước tim', 'Bình thường', '', '', 'Bình thường', '2025-05-02 09:59:29'),
+(61, 24, 'Cholesterol toàn phần', '210', 'mg/dL', '< 200', 'Cao', '2025-05-02 09:59:29'),
+(62, 24, 'HDL-C', '38', 'mg/dL', '> 40', 'Thấp', '2025-05-02 09:59:29'),
+(63, 24, 'LDL-C', '140', 'mg/dL', '< 130', 'Cao', '2025-05-02 09:59:29'),
+(64, 24, 'Triglyceride', '160', 'mg/dL', '< 150', 'Cao', '2025-05-02 09:59:29');
 
 -- --------------------------------------------------------
 
@@ -541,22 +559,9 @@ CREATE TABLE `lichlamviec` (
 --
 
 INSERT INTO `lichlamviec` (`malichlamviec`, `mabacsi`, `ngaylam`, `macalamviec`, `ghichu`) VALUES
-(433, 1, '2025-05-01', 21, 'đã đặt');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `lichsucapnhathsba`
---
-
-CREATE TABLE `lichsucapnhathsba` (
-  `macapnhat` int(10) UNSIGNED NOT NULL,
-  `mahoso` int(11) NOT NULL,
-  `mabacsi` int(11) NOT NULL,
-  `loaicapnhat` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `noidung` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `thoigiancapnhat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(433, 1, '2025-05-01', 21, 'đã đặt'),
+(434, 1, '2025-05-02', 22, 'đã đặt'),
+(435, 1, '2025-05-03', 19, '');
 
 -- --------------------------------------------------------
 
@@ -567,11 +572,10 @@ CREATE TABLE `lichsucapnhathsba` (
 CREATE TABLE `lichxetnghiem` (
   `malichxetnghiem` int(10) UNSIGNED NOT NULL,
   `mabenhnhan` int(11) UNSIGNED NOT NULL,
-  `mabacsi` int(11) UNSIGNED NOT NULL,
   `maloaixetnghiem` int(11) UNSIGNED NOT NULL,
   `ngayhen` date NOT NULL,
   `makhunggio` int(11) UNSIGNED NOT NULL,
-  `trangthai` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `trangthailichxetnghiem` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `mahoso` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -579,65 +583,43 @@ CREATE TABLE `lichxetnghiem` (
 -- Đang đổ dữ liệu cho bảng `lichxetnghiem`
 --
 
-INSERT INTO `lichxetnghiem` (`malichxetnghiem`, `mabenhnhan`, `mabacsi`, `maloaixetnghiem`, `ngayhen`, `makhunggio`, `trangthai`, `mahoso`) VALUES
-(1, 1, 1, 1, '2024-04-22', 3, 'Đã đặt lịch', 1),
-(2, 1, 3, 32, '2024-04-22', 4, 'Đã đặt lịch', 1),
-(3, 1, 3, 38, '2024-04-22', 5, 'Đã đặt lịch', 1),
-(4, 2, 3, 32, '2024-04-23', 3, 'Đã đặt lịch', 2),
-(5, 2, 3, 38, '2024-04-23', 4, 'Đã đặt lịch', 2),
-(7, 3, 3, 7, '2024-04-24', 6, 'Đã đặt lịch', 3),
-(9, 4, 3, 7, '2024-04-25', 4, 'Đã đặt lịch', 4),
-(10, 5, 6, 29, '2024-04-26', 5, 'Đã đặt lịch', 5),
-(11, 6, 6, 29, '2024-04-26', 6, 'Đã đặt lịch', 6),
-(12, 7, 8, 14, '2024-04-27', 3, 'Đã đặt lịch', 7),
-(13, 8, 8, 14, '2024-04-27', 4, 'Đã đặt lịch', 8),
-(14, 9, 10, 30, '2024-04-28', 5, 'Đã đặt lịch', 9),
-(15, 1, 1, 1, '2024-04-29', 1, 'Chờ xác nhận', 1),
-(16, 2, 1, 1, '2024-04-29', 2, 'Chờ xác nhận', 2),
-(17, 3, 3, 31, '2024-04-30', 3, 'Chờ xác nhận', 3),
-(18, 4, 16, 35, '2024-04-30', 4, 'Chờ xác nhận', 4),
-(19, 5, 16, 37, '2024-05-02', 5, 'Chờ xác nhận', 5),
-(20, 6, 6, 29, '2024-05-02', 6, 'Chờ xác nhận', 6),
-(21, 7, 8, 14, '2024-05-03', 7, 'Chờ xác nhận', 7),
-(22, 8, 17, 33, '2024-05-03', 8, 'Chờ xác nhận', 8),
-(23, 9, 17, 30, '2024-05-04', 9, 'Chờ xác nhận', 9),
-(24, 1, 1, 9, '2024-05-06', 3, 'Đã hủy', 1),
-(25, 2, 1, 10, '2024-05-06', 4, 'Đã hủy', 2),
-(26, 1, 1, 1, '2024-04-20', 25, 'Đã hoàn thành', 1),
-(27, 1, 1, 38, '2024-04-20', 26, 'Đã hoàn thành', 1),
-(30, 5, 6, 29, '2024-04-18', 5, 'Đã hoàn thành', 5),
-(31, 6, 6, 29, '2024-04-18', 6, 'Đã hoàn thành', 6),
-(32, 7, 8, 14, '2024-04-17', 3, 'Đã hoàn thành', 7),
-(33, 8, 8, 14, '2024-04-17', 4, 'Đã hoàn thành', 8),
-(34, 9, 10, 30, '2024-04-17', 5, 'Đã hoàn thành', 9),
-(35, 1, 1, 1, '2024-04-17', 1, 'Đã hoàn thành', 1),
-(36, 2, 1, 1, '2024-04-17', 2, 'Đã hoàn thành', 2),
-(37, 3, 3, 31, '2024-04-17', 3, 'Đã hoàn thành', 3),
-(38, 4, 16, 35, '2024-04-17', 4, 'Đã hoàn thành', 4),
-(39, 5, 16, 37, '2024-04-17', 5, 'Đã hoàn thành', 5),
-(40, 6, 6, 29, '2024-04-17', 6, 'Đã hoàn thành', 6);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `loaihoso`
---
-
-CREATE TABLE `loaihoso` (
-  `maloai` int(11) NOT NULL,
-  `tenloai` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `loaihoso`
---
-
-INSERT INTO `loaihoso` (`maloai`, `tenloai`) VALUES
-(1, 'BỆNH ÁN IUI'),
-(2, 'BỆNH ÁN IVF'),
-(3, 'BỆNH ÁN NGOẠI KHOA'),
-(4, 'BỆNH ÁN SẢN PHỤ KHOA'),
-(5, 'HỒ SƠ QUẢN LÝ THAI KỲ');
+INSERT INTO `lichxetnghiem` (`malichxetnghiem`, `mabenhnhan`, `maloaixetnghiem`, `ngayhen`, `makhunggio`, `trangthailichxetnghiem`, `mahoso`) VALUES
+(1, 44, 1, '2024-04-22', 3, 'Đã hoàn thành', 1),
+(2, 45, 32, '2024-04-22', 4, 'Đã hoàn thành', 1),
+(3, 1, 38, '2024-04-22', 5, 'Đã hoàn thành', 1),
+(4, 2, 32, '2024-04-23', 3, 'Đã hoàn thành', 2),
+(5, 2, 38, '2024-04-23', 4, 'Đã hoàn thành', 2),
+(7, 3, 7, '2024-04-24', 6, 'Đã hoàn thành', 3),
+(9, 4, 7, '2024-04-25', 4, 'Đã hoàn thành', 4),
+(10, 5, 29, '2024-04-26', 5, 'Đã hoàn thành', 5),
+(11, 6, 29, '2024-04-26', 6, 'Đã hoàn thành', 6),
+(12, 7, 14, '2024-04-27', 3, 'Đã hoàn thành', 7),
+(13, 8, 14, '2024-04-27', 4, 'Đã hoàn thành', 8),
+(14, 9, 30, '2024-04-28', 5, 'Đã hoàn thành', 9),
+(15, 1, 1, '2024-04-29', 1, 'Đã hoàn thành', 1),
+(16, 2, 1, '2024-04-29', 2, 'Đã hoàn thành', 2),
+(17, 3, 31, '2024-04-30', 3, 'Đã hoàn thành', 3),
+(18, 4, 35, '2024-04-30', 4, 'Đã hoàn thành', 4),
+(19, 5, 37, '2024-05-02', 5, 'Đã hoàn thành', 5),
+(20, 6, 29, '2024-05-02', 6, 'Đã hoàn thành', 6),
+(21, 7, 14, '2024-05-03', 7, 'Đã hoàn thành', 7),
+(22, 8, 33, '2024-05-03', 8, 'Đã hoàn thành', 8),
+(23, 9, 30, '2024-05-04', 9, 'Đã hoàn thành', 9),
+(24, 1, 9, '2024-05-06', 3, 'Đã hoàn thành', 1),
+(25, 2, 10, '2024-05-06', 4, 'Đã hủy', 2),
+(26, 1, 1, '2024-04-20', 25, 'Đã hủy', 1),
+(27, 1, 38, '2024-04-20', 26, 'Đã hủy', 1),
+(30, 5, 29, '2024-04-18', 5, 'Đã hủy', 5),
+(31, 6, 29, '2024-04-18', 6, 'Đã hủy', 6),
+(32, 7, 14, '2024-04-17', 3, 'Đã hủy', 7),
+(33, 8, 14, '2024-04-17', 4, 'Chờ xác nhận', 8),
+(34, 9, 30, '2024-04-17', 5, 'Chờ xác nhận', 9),
+(35, 1, 1, '2024-04-17', 1, 'Chờ xác nhận', 1),
+(36, 2, 1, '2024-04-17', 2, 'Đã đặt lịch', 2),
+(37, 3, 31, '2024-04-17', 3, 'Đã đặt lịch', 3),
+(38, 4, 35, '2024-04-17', 4, 'Đã đặt lịch', 4),
+(39, 5, 37, '2024-04-17', 5, 'Đã đặt lịch', 5),
+(40, 6, 29, '2024-04-17', 6, 'Đã đặt lịch', 6);
 
 -- --------------------------------------------------------
 
@@ -797,7 +779,7 @@ CREATE TABLE `phieukhambenh` (
 --
 
 INSERT INTO `phieukhambenh` (`maphieukb`, `ngaykham`, `macalamviec`, `mabacsi`, `mabenhnhan`, `tongtien`, `trangthai`) VALUES
-('0', '2025-04-30', 22, 1, 43, 150000, 'Chưa khám'),
+('0', '2025-04-30', 22, 1, 43, 150000, 'chưa khám'),
 ('12', '2025-04-18', 7, 1, 7, 0, 'đã hủy'),
 ('13', '2025-04-18', 7, 2, 8, 310000, 'đã khám'),
 ('15', '2025-04-18', 8, 1, 10, 90000, 'đã khám'),
@@ -807,9 +789,10 @@ INSERT INTO `phieukhambenh` (`maphieukb`, `ngaykham`, `macalamviec`, `mabacsi`, 
 ('30', '2025-04-18', 13, 1, 25, 0, 'chưa khám'),
 ('32', '2025-04-18', 14, 3, 27, 0, 'đã hủy'),
 ('34', '2025-04-18', 15, 2, 29, 0, 'chưa khám'),
-('56', '2025-04-30', 22, 1, 44, 150000, 'Chưa khám'),
+('56', '2025-04-30', 22, 1, 44, 150000, 'đã khám'),
 ('9', '2025-04-17', 21, 1, 4, 250000, 'đã khám'),
-('PKB1746026745528', '2025-05-01', 21, 1, 44, 150000, 'Chưa khám');
+('PKB1746091263204', '2025-05-01', 21, 1, 44, 150000, 'đã khám'),
+('PKB1746096665810', '2025-05-02', 22, 1, 45, 150000, 'chưa khám');
 
 -- --------------------------------------------------------
 
@@ -1177,7 +1160,8 @@ ALTER TABLE `chitietdonthuoc`
 ALTER TABLE `chitiethoso`
   ADD PRIMARY KEY (`machitiethoso`),
   ADD KEY `fk_chitiethoso_hoso` (`mahoso`),
-  ADD KEY `fk_chitiethoso_donthuoc` (`madonthuoc`);
+  ADD KEY `fk_chitiethoso_donthuoc` (`madonthuoc`),
+  ADD KEY `mabacsi` (`mabacsi`);
 
 --
 -- Chỉ mục cho bảng `chuyenkhoa`
@@ -1190,16 +1174,21 @@ ALTER TABLE `chuyenkhoa`
 --
 ALTER TABLE `donthuoc`
   ADD PRIMARY KEY (`madonthuoc`),
-  ADD KEY `fk_donthuoc_mabenhnhan` (`mabenhnhan`),
-  ADD KEY `fk_donthuoc_hoso` (`mahoso`);
+  ADD KEY `machitiethoso` (`machitiethoso`);
 
 --
 -- Chỉ mục cho bảng `hosobenhan`
 --
 ALTER TABLE `hosobenhan`
   ADD PRIMARY KEY (`mahoso`),
-  ADD KEY `fk_benhan_benhnhan` (`mabenhnhan`),
-  ADD KEY `fk_benhan_loaihoso` (`maloaihoso`);
+  ADD KEY `fk_benhan_benhnhan` (`mabenhnhan`);
+
+--
+-- Chỉ mục cho bảng `ketquaxetnghiem`
+--
+ALTER TABLE `ketquaxetnghiem`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_ketquaxetnghiem_lichxetnghiem` (`malichxetnghiem`);
 
 --
 -- Chỉ mục cho bảng `khunggioxetnghiem`
@@ -1216,27 +1205,14 @@ ALTER TABLE `lichlamviec`
   ADD KEY `fk_lichlamviec_calam` (`macalamviec`);
 
 --
--- Chỉ mục cho bảng `lichsucapnhathsba`
---
-ALTER TABLE `lichsucapnhathsba`
-  ADD PRIMARY KEY (`macapnhat`);
-
---
 -- Chỉ mục cho bảng `lichxetnghiem`
 --
 ALTER TABLE `lichxetnghiem`
   ADD PRIMARY KEY (`malichxetnghiem`),
   ADD KEY `fk_lichxetnghiem_benhnhan` (`mabenhnhan`),
   ADD KEY `fk_lichxetnghiem_khunggio` (`makhunggio`),
-  ADD KEY `fk_lichxetnghiem_bacsi` (`mabacsi`),
   ADD KEY `fk_licxetnghiem_loaixetnghiem` (`maloaixetnghiem`),
   ADD KEY `fk_lichxetnghiem_hosobenhan` (`mahoso`);
-
---
--- Chỉ mục cho bảng `loaihoso`
---
-ALTER TABLE `loaihoso`
-  ADD PRIMARY KEY (`maloai`);
 
 --
 -- Chỉ mục cho bảng `loaixetnghiem`
@@ -1297,7 +1273,7 @@ ALTER TABLE `bacsi`
 -- AUTO_INCREMENT cho bảng `benhnhan`
 --
 ALTER TABLE `benhnhan`
-  MODIFY `mabenhnhan` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `mabenhnhan` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT cho bảng `calamviec`
@@ -1336,6 +1312,12 @@ ALTER TABLE `hosobenhan`
   MODIFY `mahoso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT cho bảng `ketquaxetnghiem`
+--
+ALTER TABLE `ketquaxetnghiem`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
 -- AUTO_INCREMENT cho bảng `khunggioxetnghiem`
 --
 ALTER TABLE `khunggioxetnghiem`
@@ -1345,25 +1327,13 @@ ALTER TABLE `khunggioxetnghiem`
 -- AUTO_INCREMENT cho bảng `lichlamviec`
 --
 ALTER TABLE `lichlamviec`
-  MODIFY `malichlamviec` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=434;
-
---
--- AUTO_INCREMENT cho bảng `lichsucapnhathsba`
---
-ALTER TABLE `lichsucapnhathsba`
-  MODIFY `macapnhat` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `malichlamviec` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=436;
 
 --
 -- AUTO_INCREMENT cho bảng `lichxetnghiem`
 --
 ALTER TABLE `lichxetnghiem`
   MODIFY `malichxetnghiem` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT cho bảng `loaihoso`
---
-ALTER TABLE `loaihoso`
-  MODIFY `maloai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `loaixetnghiem`
@@ -1424,15 +1394,19 @@ ALTER TABLE `chitiethoso`
 -- Các ràng buộc cho bảng `donthuoc`
 --
 ALTER TABLE `donthuoc`
-  ADD CONSTRAINT `fk_donthuoc_hoso` FOREIGN KEY (`mahoso`) REFERENCES `hosobenhan` (`mahoso`),
-  ADD CONSTRAINT `fk_donthuoc_mabenhnhan` FOREIGN KEY (`mabenhnhan`) REFERENCES `benhnhan` (`mabenhnhan`);
+  ADD CONSTRAINT `donthuoc_ibfk_1` FOREIGN KEY (`machitiethoso`) REFERENCES `chitiethoso` (`machitiethoso`);
 
 --
 -- Các ràng buộc cho bảng `hosobenhan`
 --
 ALTER TABLE `hosobenhan`
-  ADD CONSTRAINT `fk_benhan_benhnhan` FOREIGN KEY (`mabenhnhan`) REFERENCES `benhnhan` (`mabenhnhan`),
-  ADD CONSTRAINT `fk_benhan_loaihoso` FOREIGN KEY (`maloaihoso`) REFERENCES `loaihoso` (`maloai`);
+  ADD CONSTRAINT `fk_benhan_benhnhan` FOREIGN KEY (`mabenhnhan`) REFERENCES `benhnhan` (`mabenhnhan`);
+
+--
+-- Các ràng buộc cho bảng `ketquaxetnghiem`
+--
+ALTER TABLE `ketquaxetnghiem`
+  ADD CONSTRAINT `fk_ketquaxetnghiem_lichxetnghiem` FOREIGN KEY (`malichxetnghiem`) REFERENCES `lichxetnghiem` (`malichxetnghiem`);
 
 --
 -- Các ràng buộc cho bảng `lichlamviec`
@@ -1445,7 +1419,6 @@ ALTER TABLE `lichlamviec`
 -- Các ràng buộc cho bảng `lichxetnghiem`
 --
 ALTER TABLE `lichxetnghiem`
-  ADD CONSTRAINT `fk_lichxetnghiem_bacsi` FOREIGN KEY (`mabacsi`) REFERENCES `bacsi` (`mabacsi`),
   ADD CONSTRAINT `fk_lichxetnghiem_benhnhan` FOREIGN KEY (`mabenhnhan`) REFERENCES `benhnhan` (`mabenhnhan`),
   ADD CONSTRAINT `fk_lichxetnghiem_hosobenhan` FOREIGN KEY (`mahoso`) REFERENCES `hosobenhan` (`mahoso`),
   ADD CONSTRAINT `fk_lichxetnghiem_khunggio` FOREIGN KEY (`makhunggio`) REFERENCES `khunggioxetnghiem` (`makhunggioxetnghiem`),

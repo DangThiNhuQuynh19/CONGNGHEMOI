@@ -184,12 +184,13 @@ $tests = $p->getXetNghiemByIDHS($mahoso);
             <thead>
                 <tr>
                     <th>Loại xét nghiệm</th>
-                    <th>Thời gian</th>
+                    <th>Ngày xét nghiệm</th>
                     <th>Khung giờ</th>
                     <th>Trạng thái lịch xét nghiệm</th>
-                    <th>Kết quả</th>
-                    <th>Đơn vị</th>
+                    <th>Tên chỉ số xét nghiệm</th>
                     <th>Giá trị kết quả</th>
+                    <th>Đơn vị</th>
+                    <th>Nhận xét</th>
                 </tr>
             </thead>
             <tbody>
@@ -199,9 +200,10 @@ $tests = $p->getXetNghiemByIDHS($mahoso);
                         <td><?= htmlspecialchars($test['ngayhen']) ?></td>
                         <td><?= htmlspecialchars($test['giobatdau']) ?> - <?= htmlspecialchars($test['gioketthuc']) ?></td>
                         <td><?= htmlspecialchars($test['trangthailichxetnghiem']) ?></td>
-                        <td><?= htmlspecialchars($test['nhanxet']) ?></td>
-                        <td><?= htmlspecialchars($test['donviketqua']) ?></td>
+                        <td><?= htmlspecialchars($test['tenchisoxetnghiem']) ?></td>
                         <td><?= htmlspecialchars($test['giatriketqua']) ?></td>
+                        <td><?= htmlspecialchars($test['donvikq']) ?></td>
+                        <td><?= htmlspecialchars($test['nhanxet']) ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

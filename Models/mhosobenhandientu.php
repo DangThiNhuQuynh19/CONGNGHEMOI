@@ -8,9 +8,9 @@
             if($con){
                 $str = "SELECT * FROM hosobenhan hs 
                 join benhnhan bn on hs.mabenhnhan=bn.mabenhnhan 
-                join bacsi bs on hs.mabacsi = bs.mabacsi 
-                join chuyenkhoa ck on bs.machuyenkhoa = ck.machuyenkhoa 
                 join chitiethoso ct on hs.mahoso = ct.mahoso 
+                join bacsi bs on ct.mabacsi = bs.mabacsi 
+                join chuyenkhoa ck on bs.machuyenkhoa = ck.machuyenkhoa 
                 join donthuoc dt on ct.madonthuoc = dt.madonthuoc 
                 where bn.tentk= '$tentk'
                 order by hs.mahoso";
@@ -26,11 +26,11 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "SELECT * FROM hosobenhan hs 
+                $str = "SELECT * FROM hosobenhan hs
+                  join chitiethoso ct on hs.mahoso = ct.mahoso  
                 join benhnhan bn on hs.mabenhnhan=bn.mabenhnhan 
-                join bacsi bs on hs.mabacsi = bs.mabacsi 
-                join chuyenkhoa ck on bs.machuyenkhoa = ck.machuyenkhoa 
-                join chitiethoso ct on hs.mahoso = ct.mahoso 
+                join bacsi bs on ct.mabacsi = bs.mabacsi 
+                join chuyenkhoa ck on bs.machuyenkhoa = ck.machuyenkhoa  
                 join donthuoc dt on ct.madonthuoc = dt.madonthuoc 
                 join chitietdonthuoc ctdt on dt.madonthuoc = ctdt.madonthuoc
                 join thuoc t on t.mathuoc = ctdt.mathuoc
@@ -67,8 +67,7 @@
             $con->set_charset('utf8');
             if($con){
                 $str = "SELECT * FROM  donthuoc dt 
-                join chitiethoso ct on ct.mahoso = dt.mahoso
-                join hosobenhan hs on dt.mahoso = hs.mahoso
+                join chitiethoso ct on ct.machitiethoso = dt.machitiethoso
                 join chitietdonthuoc ctdt on dt.madonthuoc = ctdt.madonthuoc
                 join thuoc t on t.mathuoc = ctdt.mathuoc
                 where ct.machitiethoso = '$id'";
