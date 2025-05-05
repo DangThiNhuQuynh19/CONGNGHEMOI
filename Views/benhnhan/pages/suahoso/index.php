@@ -35,9 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!preg_match("/^[\p{L}\s]+$/u", $quan)) {
         $errors[] = "Quận/ huyện chỉ được chứa chữ cái và khoảng trắng.";
     }
-    if (!preg_match("/^[\p{L}\s]+$/u", $xa)) {
-        $errors[] = "Xã/ phường chỉ được chứa chữ cái và khoảng trắng.";
+    if (!preg_match("/^[\p{L}\p{N}\s]+$/u", $xa)) {
+        $errors[] = "Xã/phường chỉ được chứa chữ cái, số và khoảng trắng.";
     }
+    if (!preg_match("/^[\p{L}\p{N}\s\/]+$/u", $sonha)) {
+        $errors[] = "Số nhà chỉ được chứa chữ cái, số, khoảng trắng và dấu '/'.";
+    }
+        
     // Ngày sinh phải hợp lệ và nhỏ hơn hiện tại
     if (strtotime($ngaysinh) >= time()) {
         $errors[] = "Ngày sinh phải nhỏ hơn ngày hiện tại.";
