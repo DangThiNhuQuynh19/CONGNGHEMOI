@@ -1,8 +1,6 @@
 <?php
     include_once('Controllers/cbenhnhan.php');
     include_once('Controllers/cbacsi.php');
-    include_once('Controllers/cphieukhambenh.php');
-    $cphieukhambenh = new cPhieuKhamBenh();
     $cbenhnhan = new cBenhNhan();
     $cbacsi = new cBacSi();
     $bacsi= $cbacsi->getBacSiByTenTK($_SESSION['user']['tentk']);
@@ -10,10 +8,6 @@
     if(isset($_POST["btntimkiem"])){
         $benhnhan_list= $cbenhnhan->get_benhnhan_tukhoa($_POST["tukhoa"],$bacsi['mabacsi'] );
     }
-    if(isset($_POST['homnay'])){
-        $benhnhan_list= $cphieukhambenh->get_lichkham_homnay($bacsi['mabacsi']);
-    }
-    
 ?>
 <body>
     <div class="container">
@@ -38,8 +32,8 @@
                 </form>
             </div>
         </div>
-        <form method="POST" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
-            <input value="homnay" type="checkbox" name="homnay" id="homnay" onchange="this.form.submit()" <?php if (isset($_POST['homnay'])) echo 'checked'; ?>>
+        <form method="GET" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
+            <input value="benhnhan" type="checkbox" name="action" id="homnay" onchange="this.form.submit()" <?php if (isset($_GET['action'])) echo 'checked'; ?>>
             <label for="homnay" style="margin-left: 5px;"><b>Chỉ hiển thị bệnh nhân hôm nay</b></label>
         </form>
         <div class="card">

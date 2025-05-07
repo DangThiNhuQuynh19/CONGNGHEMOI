@@ -15,19 +15,5 @@ class cChuyenKhoa{
             }
         }
     }
-
-    public function get_chuyenkhoa_notmabenhnhan($mabenhnhan){
-        $p = new mChuyenKhoa();
-        $tbl = $p->select_chuyenkhoa_notmabenhnhan($mabenhnhan);
-        if(!$tbl){
-            return -1;
-        }else{
-            if($tbl->num_rows > 0){
-                return $tbl;
-            }else{
-                return 0;
-            }
-        }
-    }
 }
 ?>
