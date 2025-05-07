@@ -56,6 +56,7 @@ class cBenhNhan{
         }
     }
 
+
     public function get_benhnhan_mabacsi($mabacsi){
         $p = new mBenhNhan();
         $tbl = $p->select_benhnhan_mabacsi($mabacsi);

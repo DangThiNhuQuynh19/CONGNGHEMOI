@@ -47,6 +47,7 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if ($con) {
+                // Sử dụng dấu backtick để bao quanh tên cột
                 $str = "UPDATE benhnhan 
                         SET hotenbenhnhan='$hotenbenhnhan', ngaysinh='$ngaysinh', gioitinh='$gioitinh', nghenghiep='$nghenghiep', 
                             cccdbenhnhan='$cccdbenhnhan', dantoc='$dantoc', email='$email', sdtbenhnhan='$sdtbenhnhan',
@@ -114,6 +115,7 @@
             $p->dongketnoi($con);
             return $tbl;
         }
+
 
         public function timkiem_benhnhan_tukhoa($tukhoa, $mabacsi){
             $p = new clsKetNoi();

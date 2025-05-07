@@ -23,55 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tiensubenhtatcuagiadinh = $_POST['tiensubenhtatgiadinh'];
     $tiensubenhtatcuabenhnhan = $_POST['tiensubenhbandau'];
     $nhommau = $_POST['nhommau'];
-    $errors = [];
 
-    // Họ tên chỉ chứa chữ và khoảng trắng (có hỗ trợ dấu tiếng Việt)
-    if (!preg_match("/^[\p{L}\s]+$/u", $hotenbenhnhan)) {
-        $errors[] = "Họ tên chỉ được chứa chữ cái và khoảng trắng.";
-    }
-    if (!preg_match("/^[\p{L}\s]+$/u", $tinh)) {
-        $errors[] = "Tỉnh/ thành phố chỉ được chứa chữ cái và khoảng trắng.";
-    }
-    if (!preg_match("/^[\p{L}\s]+$/u", $quan)) {
-        $errors[] = "Quận/ huyện chỉ được chứa chữ cái và khoảng trắng.";
-    }
-    if (!preg_match("/^[\p{L}\p{N}\s]+$/u", $xa)) {
-        $errors[] = "Xã/phường chỉ được chứa chữ cái, số và khoảng trắng.";
-    }
-    if (!preg_match("/^[\p{L}\p{N}\s\/]+$/u", $sonha)) {
-        $errors[] = "Số nhà chỉ được chứa chữ cái, số, khoảng trắng và dấu '/'.";
-    }
-        
-    // Ngày sinh phải hợp lệ và nhỏ hơn hiện tại
-    if (strtotime($ngaysinh) >= time()) {
-        $errors[] = "Ngày sinh phải nhỏ hơn ngày hiện tại.";
-    }
-    
-    // Email (nếu nhập thì kiểm tra định dạng)
-    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Email không đúng định dạng.";
-    }
-    
-    // Số điện thoại (nếu nhập thì bắt đầu bằng 0 và 10 chữ số)
-    if (!empty($sdtbenhnhan) && !preg_match("/^0\d{9}$/", $sdtbenhnhan)) {
-        $errors[] = "Số điện thoại phải bắt đầu bằng 0 và có 10 chữ số.";
-    }
-    
-    // CCCD (nếu nhập thì phải đúng 12 chữ số)
-    if (!empty($cccdbenhnhan) && !preg_match("/^\d{12}$/", $cccdbenhnhan)) {
-        $errors[] = "CCCD phải gồm 12 chữ số.";
-    }
-    
-    // Nếu có lỗi, hiển thị thông báo và dừng
-    if (count($errors) > 0) {
-        $errorMessage = implode("\\n", $errors);
-        echo "<script>
-            alert('Lỗi:\\n$errorMessage');
-            window.history.back();
-        </script>";
-        exit();
-    }
-    
     $kq = $p->updateBenhNhan(
         $mabenhnhan, $hotenbenhnhan, $ngaysinh, $gioitinh, $nghenghiep, $cccdbenhnhan,
         $dantoc, $email, $sdtbenhnhan, $tinh, $quan, $xa, $sonha, $quanhe,
@@ -261,9 +213,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="Bố" <?php echo $benhnhan['quanhe'] == 'Bố' ? 'selected' : ''; ?>>Bố</option>
                         <option value="Mẹ" <?php echo $benhnhan['quanhe'] == 'Mẹ' ? 'selected' : ''; ?>>Mẹ</option>
                         <option value="Anh" <?php echo $benhnhan['quanhe'] == 'Anh' ? 'selected' : ''; ?>>Anh</option>
-                        <option value="Mẹ" <?php echo $benhnhan['quanhe'] == 'Chị' ? 'selected' : ''; ?>>Chị</option>
+                        <option value="Mẹ" <?php echo $benhnhan['quanhe'] == 'Mẹ' ? 'selected' : ''; ?>>Chị</option>
                         <option value="Em" <?php echo $benhnhan['quanhe'] == 'Em' ? 'selected' : ''; ?>>Em</option>
-                        <option value="Chị" <?php echo $benhnhan['quanhe'] == 'Con' ? 'selected' : ''; ?>>Con</option>
+                        <option value="Chị" <?php echo $benhnhan['quanhe'] == 'Chị' ? 'selected' : ''; ?>>Con</option>
                         <option value="bản thân" <?php echo $benhnhan['quanhe'] == 'bản thân' ? 'selected' : ''; ?>>bản thân</option>
                     </select>
                 </div>
