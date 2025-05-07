@@ -1,9 +1,17 @@
 <?php
 $mabenhnhan = $_GET['id'] ?? '';
 include_once('Controllers/cbenhnhan.php');
+include_once('Controllers/chosobenhandientu.php');
+include_once('Controllers/clichxetnghiem.php');
+include_once('Controllers/cdonthuoc.php');
+$clichxetnghiem = new cLichXetNghiem();
+$chsba = new cHoSoBenhAnDienTu();
 $cbenhnhan = new cBenhNhan();
+$cdonthuoc = new cDonThuoc();
 $bn= $cbenhnhan->get_benhnhan_id($mabenhnhan);
-// Get active tab from URL or default to medical-records
+$hsba_list= $chsba->get_hsba_mabenhnhan($mabenhnhan);
+$lichxetnghiem_list=$clichxetnghiem->get_lichxetnghiem_mabenhnhan($mabenhnhan);
+$donthuoc_list= $cdonthuoc->get_donthuoc_mabenhnhan($mabenhnhan);
 $active_tab = $_GET['tab'] ?? 'medical-records';
 ?>    
 <div class="container">
@@ -52,53 +60,54 @@ $active_tab = $_GET['tab'] ?? 'medical-records';
                     </div>
                     
                     <div class="patient-actions">
-                        <a href="?action=xetnghiem" class="btn-outline btn-full"><i class="fas fa-flask"></i> Thêm xét nghiệm</a>
+                        <a href="?action=datlichxetnghiem&id=<?php echo $mabenhnhan;?>" class="btn-outline btn-full"><i class="fas fa-flask"></i> Thêm xét nghiệm</a>
                     </div>
                 </div>
             </div>
         </div>
-        
         <div class="patient-content">
+            <form method="POST" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
+            <a href="?action=taohoso&mabenhnhan=<?php echo $mabenhnhan;?>" class="btn-primary"><i class="fas fa-plus"></i> Thêm hồ sơ</a>
+            </form>
             <div class="tabs">
                 <div class="tab-header">
                     <a href="?action=chitietbenhnhan&id=<?php echo $mabenhnhan; ?>&tab=medical-records" class="tab-link <?php echo $active_tab === 'medical-records' ? 'active' : ''; ?>">Hồ sơ bệnh án</a>
                     <a href="?action=chitietbenhnhan&id=<?php echo $mabenhnhan; ?>&tab=tests" class="tab-link <?php echo $active_tab === 'tests' ? 'active' : ''; ?>">Xét nghiệm</a>
                     <a href="?action=chitietbenhnhan&id=<?php echo $mabenhnhan; ?>&tab=prescriptions" class="tab-link <?php echo $active_tab === 'prescriptions' ? 'active' : ''; ?>">Đơn thuốc</a>
-                    <a href="?action=chitietbenhnhan&id=<?php echo $mabenhnhan ?>&tab=appointments" class="tab-link <?php echo $active_tab === 'appointments' ? 'active' : ''; ?>">Lịch hẹn</a>
                 </div>
-                
                 <div class="tab-content">
                     <?php if ($active_tab === 'medical-records'): ?>
                         <div class="card">
                             <div class="card-header">
                                 <h2>Hồ sơ bệnh án</h2>
-                                <p>Lịch sử bệnh án của bệnh nhân</p>
+                                <p>Lịch sử bệnh án của bệnh nhân</p>  
                             </div>
                             <div class="card-body">
                                 <div class="medical-records">
                                     <?php
-                                    // Normally this would come from a database
-                                    $records = [
-                                        ['type' => 'Khám tổng quát', 'date' => '23/04/2025', 'doctor' => 'Trần Văn C', 'diagnosis' => 'Viêm họng cấp', 'notes' => 'Nghỉ ngơi, uống nhiều nước, dùng thuốc theo đơn'],
-                                        ['type' => 'Tái khám', 'date' => '22/04/2025', 'doctor' => 'Trần Văn C', 'diagnosis' => 'Viêm xoang', 'notes' => 'Tiếp tục điều trị, hẹn tái khám sau 1 tuần'],
-                                        ['type' => 'Khám chuyên khoa', 'date' => '21/04/2025', 'doctor' => 'Lê Thị D', 'diagnosis' => 'Đau lưng mãn tính', 'notes' => 'Chỉ định vật lý trị liệu, kê đơn thuốc giảm đau']
-                                    ];
-                                    
-                                    foreach ($records as $record) {
-                                        echo '<div class="record-item">';
-                                        echo '<div class="record-header">';
-                                        echo '<h3>' . $record['type'] . '</h3>';
-                                        echo '<span class="record-date">' . $record['date'] . '</span>';
+                                    if($hsba_list){
+                                        foreach ($hsba_list as $i) {
+                                            echo '<div class="record-item">';
+                                            echo '<div class="record-header">';
+                                            echo '<h3>' . $i['tenchuyenkhoa'] . '</h3>';
+                                            echo '<span class="record-date">' . $i['ngaytao'] . '</span>';
+                                            echo '</div>';
+                                            echo '<div class="record-details">';
+                                            echo '<p><strong>Bác sĩ:</strong> ' . $i['hoten'] . '</p>';
+                                            echo '<p><strong>Triệu chứng ban đầu:</strong> ' . $i['trieuchungbandau'] . '</p>';
+                                            echo '<p><strong>Chẩn đoán:</strong> ' . $i['chandoan'] . '</p>';
+                                            echo '<p><strong>Ghi chú:</strong> ' . $i['huongdieutri'] . '</p>';
+                                            echo '</div>';
+                                            echo '<div class="record-actions">';
+                                            echo '<a href="?action=chitiethoso&machitiethoso='.$i['machitiethoso'] .'" class="btn-small">Xem chi tiết</a>';
+                                            echo '</div>';
+                                            echo '</div>';
+                                        }
+                                    }else{
                                         echo '</div>';
-                                        echo '<div class="record-details">';
-                                        echo '<p><strong>Bác sĩ:</strong> ' . $record['doctor'] . '</p>';
-                                        echo '<p><strong>Chẩn đoán:</strong> ' . $record['diagnosis'] . '</p>';
-                                        echo '<p><strong>Ghi chú:</strong> ' . $record['notes'] . '</p>';
-                                        echo '</div>';
-                                        echo '<div class="record-actions">';
-                                        echo '<a href="#" class="btn-small">Xem chi tiết</a>';
-                                        echo '</div>';
-                                        echo '</div>';
+                                            echo '<div class="record-details">';
+                                            echo '<p><strong>Chưa có hồ sơ nào gần đây</strong></p>';
+                                            echo '</div>';
                                     }
                                     ?>
                                 </div>
@@ -113,34 +122,50 @@ $active_tab = $_GET['tab'] ?? 'medical-records';
                             <div class="card-body">
                                 <div class="test-records">
                                     <?php
-                                    // Normally this would come from a database
-                                    $tests = [
-                                        ['type' => 'Xét nghiệm máu', 'date' => '18/04/2025', 'department' => 'Huyết học', 'status' => 'Hoàn thành'],
-                                        ['type' => 'X-quang ngực', 'date' => '15/04/2025', 'department' => 'Chẩn đoán hình ảnh', 'status' => 'Đang xử lý'],
-                                        ['type' => 'Siêu âm ổ bụng', 'date' => '12/04/2025', 'department' => 'Chẩn đoán hình ảnh', 'status' => 'Hoàn thành']
-                                    ];
-                                    
-                                    foreach ($tests as $test) {
-                                        $statusClass = $test['status'] === 'Hoàn thành' ? 'status-completed' : 'status-processing';
-                                        
-                                        echo '<div class="test-item">';
-                                        echo '<div class="test-header">';
-                                        echo '<h3>' . $test['type'] . '</h3>';
-                                        echo '<span class="test-date">' . $test['date'] . '</span>';
-                                        echo '</div>';
-                                        echo '<div class="test-details">';
-                                        echo '<p><strong>Chuyên khoa:</strong> ' . $test['department'] . '</p>';
-                                        echo '<p><strong>Trạng thái:</strong> <span class="status-badge ' . $statusClass . '">' . $test['status'] . '</span></p>';
-                                        echo '</div>';
-                                        echo '<div class="test-actions">';
-                                        if ($test['status'] === 'Hoàn thành') {
-                                            echo '<a href="#" class="btn-small">Xem kết quả</a>';
-                                        } else {
-                                            echo '<a href="#" class="btn-small disabled">Chờ kết quả</a>';
+                                    if($lichxetnghiem_list){
+                                        foreach ($lichxetnghiem_list as $i) {
+                                            switch ($i['trangthailichxetnghiem']) {
+                                                case 'Đã hoàn thành':
+                                                    $style = 'status-completed';
+                                                    break;
+                                                case 'Chờ xác nhận':
+                                                    $style = 'status-processing';
+                                                    break;
+                                                case 'Đã đặt lịch':
+                                                    $style = 'status-pending';
+                                                    break;
+                                                case 'Đã hủy':
+                                                    $style = 'status-canceled';
+                                                    break;
+                                            }
+                                            
+                                            echo '<div class="test-item">';
+                                            echo '<div class="test-header">';
+                                            echo '<h3>' . $i['tenloaixetnghiem'] . '</h3>';
+                                            echo '<span class="test-date" style="margin-right: 5px; margin-left: 5px;">' . $i['ngayhen'] . '</span>';
+                                            echo '</div>';
+                                            echo '<div class="test-details">';
+                                            echo '<p><strong>Chuyên khoa:</strong> ' . $i['tenchuyenkhoa'] . '</p>';
+                                            echo '<p><strong>Trạng thái:</strong> <span class="status-badge ' . $style . '">' . $i['trangthailichxetnghiem'] . '</span></p>';
+                                            echo '</div>';
+                                            echo '<div class="test-actions">';
+                                            if ($i['trangthailichxetnghiem'] === 'Đã hoàn thành') {
+                                                echo '<a href="?action=ketquaxetnghiem&id=' . $i['malichxetnghiem'] . '" class="btn-small">Xem kết quả</a>';
+                                            } elseif ($i['trangthailichxetnghiem'] === 'Đã hủy') {
+                                                echo '<a href="#" class="btn-small disabled">Đã xóa</a>';
+                                            }else{
+                                                echo '<a href="#" class="btn-small disabled">Chờ kết quả</a>';
+                                            }
+                                            echo '</div>';
+                                            echo '</div>';
                                         }
+                                    }else{
                                         echo '</div>';
-                                        echo '</div>';
+                                            echo '<div class="record-details">';
+                                            echo '<p><strong>Chưa có lịch xét nghiệm</strong></p>';
+                                            echo '</div>';
                                     }
+                                    
                                     ?>
                                 </div>
                             </div>
@@ -154,84 +179,43 @@ $active_tab = $_GET['tab'] ?? 'medical-records';
                             <div class="card-body">
                                 <div class="prescription-records">
                                     <?php
-                                    // Normally this would come from a database
-                                    $prescriptions = [
-                                        [
-                                            'id' => 'DT001',
-                                            'date' => '23/04/2025',
-                                            'doctor' => 'Trần Văn C',
-                                            'diagnosis' => 'Viêm họng cấp',
-                                            'medications' => [
-                                                ['name' => 'Paracetamol 500mg', 'dosage' => '3 lần/ngày'],
-                                                ['name' => 'Amoxicillin 500mg', 'dosage' => '2 lần/ngày']
-                                            ]
-                                        ],
-                                        [
-                                            'id' => 'DT002',
-                                            'date' => '15/04/2025',
-                                            'doctor' => 'Lê Thị D',
-                                            'diagnosis' => 'Đau lưng mãn tính',
-                                            'medications' => [
-                                                ['name' => 'Diclofenac 50mg', 'dosage' => '2 lần/ngày'],
-                                                ['name' => 'Methocarbamol 500mg', 'dosage' => '3 lần/ngày']
-                                            ]
-                                        ]
-                                    ];
-                                    
-                                    foreach ($prescriptions as $prescription) {
-                                        echo '<div class="prescription-item">';
-                                        echo '<div class="prescription-header">';
-                                        echo '<h3>Đơn thuốc #' . $prescription['id'] . '</h3>';
-                                        echo '<span class="prescription-date">' . $prescription['date'] . '</span>';
-                                        echo '</div>';
-                                        echo '<div class="prescription-details">';
-                                        echo '<p><strong>Bác sĩ:</strong> ' . $prescription['doctor'] . '</p>';
-                                        echo '<p><strong>Chẩn đoán:</strong> ' . $prescription['diagnosis'] . '</p>';
-                                        echo '<div class="medications">';
-                                        foreach ($prescription['medications'] as $medication) {
-                                            echo '<div class="medication">';
-                                            echo '<i class="fas fa-pills"></i>';
-                                            echo '<span>' . $medication['name'] . ' - ' . $medication['dosage'] . '</span>';
+                                    if($donthuoc_list){
+                                        foreach ($donthuoc_list as $i) {
+                                            echo '<div class="prescription-item">';
+                                            echo '<div class="prescription-header">';
+                                            echo '<h3>#' . $i['ghichudonthuoc'] . '</h3>';
+                                            echo '<span class="prescription-date">' . $i['ngaytaodonthuoc'] . '</span>';
+                                            echo '</div>';
+                                            echo '<div class="prescription-details">';
+                                            echo '<p><strong>Bác sĩ:</strong> ' . $i['hoten'] . '</p>';
+                                            echo '<p><strong>Chẩn đoán:</strong> ' . $i['chandoan'] . '</p>';
+                                            echo '<div class="medications">';
+                                            $chitietdonthuoc= $cdonthuoc->get_chitietdonthuoc_madonthuoc($i['madonthuoc']);
+                                            foreach ($chitietdonthuoc as $j) {
+                                                echo '<div class="medication">';
+                                                echo '<i class="fas fa-pills"></i>';
+                                                echo '<span>' . $j['tenthuoc'] . ' - ' . $j['lieudung'].'-'.$j['thoigianuong'].'-'.$j['songayuong'] . '</span>';
+                                                echo '</div>';
+                                            }
+                                            echo '</div>';
+                                            echo '</div>';
+                                            echo '<div class="prescription-actions">';
+                                            echo '<a href="javascript:window.print()" class="btn-small">In đơn thuốc</a>';
+                                            echo '</div>';
                                             echo '</div>';
                                         }
+                                    }else{
                                         echo '</div>';
-                                        echo '</div>';
-                                        echo '<div class="prescription-actions">';
-                                        echo '<a href="#" class="btn-small">In đơn thuốc</a>';
-                                        echo '</div>';
+                                        echo '<div class="record-details">';
+                                        echo '<p><strong>Chưa có đơn thuốc</strong></p>';
                                         echo '</div>';
                                     }
+                                    
                                     ?>
                                 </div>
                             </div>
                         </div>
-                    <?php elseif ($active_tab === 'appointments'): ?>
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>Lịch hẹn</h2>
-                                <p>Lịch hẹn khám bệnh</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="appointment-records">
-                                    <div class="appointment-item">
-                                        <div class="appointment-header">
-                                            <h3>Tái khám</h3>
-                                            <span class="appointment-date">05/05/2025 - 09:30</span>
-                                        </div>
-                                        <div class="appointment-details">
-                                            <p><strong>Bác sĩ:</strong> Trần Văn C</p>
-                                            <p><strong>Phòng:</strong> P205</p>
-                                            <p><strong>Trạng thái:</strong> <span class="status-badge status-confirmed">Đã xác nhận</span></p>
-                                        </div>
-                                        <div class="appointment-actions">
-                                            <a href="#" class="btn-small btn-outline">Hủy lịch hẹn</a>
-                                            <a href="#" class="btn-small">Đổi lịch hẹn</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+                        <?php endif; ?> 
                 </div>
             </div>
         </div>

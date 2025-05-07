@@ -43,6 +43,25 @@ class cLichXetNghiem{
             }
         }
     }
+
+    public function get_lichxetnghiem_mabenhnhan($mabenhnhan){
+        $p = new mLichXetNghiem();
+        $tbl = $p->select_lichxetnghiemchitiet_mabenhnhan($mabenhnhan);
+        $list=array();
+        if(!$tbl){
+            return -1;
+        }else{
+            if($tbl->num_rows > 0){
+                while ($r=$tbl->fetch_assoc()){
+                    $list[]=$r;
+                }
+                return $list;
+            }else{
+                return 0;
+            }
+        }
+    }
+
     public function getlichxetnghiemtheotentk($tentk){
         $p = new mLichXetNghiem();
         $tbl = $p->lichxetnghiemtheotentk($tentk);
@@ -54,6 +73,34 @@ class cLichXetNghiem{
             }else{
                 return 0;
             }
+        }
+    }
+
+    public function get_lichxetnghiem(){
+        $p = new mLichXetNghiem();
+        $tbl = $p->select_LichXetNghiem();
+        $list=array();
+        if(!$tbl){
+            return -1;
+        }else{
+            if($tbl->num_rows > 0){
+               while($r=$tbl->fetch_assoc()){
+                    $list[]=$r;
+               }
+               return $list;
+            }else{
+                return 0;
+            }
+        }
+    }
+
+    public function create_lichxetnghiem($mabenhnhan,$maloaixetnghiem,$ngayhen,$makhunggio,$trangthailichxetnghiem,$mahoso){
+        $p = new mLichXetNghiem();
+        $tbl = $p->insert_lichxetnghiem($mabenhnhan,$maloaixetnghiem,$ngayhen,$makhunggio,$trangthailichxetnghiem,$mahoso);
+        if(!$tbl){
+            return -1;
+        }else{
+            return 0;
         }
     }
 }

@@ -96,5 +96,85 @@
                 return false; 
             }
         }
+
+        public function select_hsba_mabenhnhan($mabenhnhan){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "select * from hosobenhan hs 
+                join benhnhan bn on hs.mabenhnhan=bn.mabenhnhan 
+                join chitiethoso ct on hs.mahoso = ct.mahoso 
+                join bacsi bs on ct.mabacsi = bs.mabacsi 
+                join chuyenkhoa ck on bs.machuyenkhoa = ck.machuyenkhoa 
+                where hs.mabenhnhan= '$mabenhnhan'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+
+        public function select_hsba(){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "select * from hosobenhan";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+
+        public function insert_hosobenhandientu_mabenhnhan($mabenhnhan,$ghichu){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "insert into hosobenhan(mabenhnhan,ghichu,ngaytao,ngaycapnhat) 
+                values('$mabenhnhan','$ghichu',CURDATE(),CURDATE());";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+
+        public function insert_chitiehosobenhan_mabenhnhan($mahoso,$mabacsi,$trieuchungbandau){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "insert into chitiethoso(mahoso,mabacsi,ngaykham,madonthuoc,ketluan, chuandoan,huongdieutri) 
+                values('$mabenhnhan','$ghichu',CURDATE(),CURDATE());";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+
+        public function select_hsba_new($mabenhnhan){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * FROM hosobenhan
+                WHERE mabenhnhan = '$mabenhnhan'
+                ORDER BY mahoso DESC
+                LIMIT 1;";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
     }
 ?>

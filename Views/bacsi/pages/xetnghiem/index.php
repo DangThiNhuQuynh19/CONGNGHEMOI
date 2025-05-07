@@ -2,6 +2,8 @@
     include_once('Controllers/clichxetnghiem.php');
     include_once('Controllers/cbacsi.php');
     include_once('Controllers/cchuyenkhoa.php');
+    include_once('Controllers/cketquaxetnghiem.php');
+    $cketquaxetnghiem = new cKetQuaXetNghiem();
     $cchuyenkhoa = new cChuyenKhoa();
     $chuyenkhoa_list=$cchuyenkhoa->getAllChuyenKhoa();
     $cbacsi = new cBacSi();
@@ -15,11 +17,14 @@
         $machuyenkhoa=$_POST["chuyenkhoa"];
         $lichxetnghiem_list=$clichxetnghiem->get_lichxetnghiem_tukhoa($tukhoa, $machuyenkhoa, $trangthai,$bacsi['mabacsi']);
     }
+    if(isset($_POST['homnay'])){
+        $lichxetnghiem_list=$cketquaxetnghiem->get_ketquaxetnghiem_homnay($bacsi['mabacsi']);
+    }
 ?>
 <div class="container">
     <div class="content-header">
         <h1>Quản lý xét nghiệm</h1>
-        <a href="#" class="btn-primary"><i class="fas fa-plus"></i> Thêm xét nghiệm</a>
+        <a href="?action=datlichxetnghiem" class="btn-primary"><i class="fas fa-plus"></i> Thêm xét nghiệm</a>
     </div>
     
     <div class="card">
@@ -58,7 +63,10 @@
             </form>
         </div>
     </div>
-    
+    <form method="POST" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
+        <input value="homnay" type="checkbox" name="homnay" id="homnay" onchange="this.form.submit()" <?php if (isset($_POST['homnay'])) echo 'checked'; ?>>
+        <label for="homnay" style="margin-left: 5px;"><b>Kết quả hôm nay</b></label>
+    </form>
     <div class="card">
         <div class="card-body no-padding">
             <table class="data-table">
@@ -102,7 +110,16 @@
                                     echo '<td>' . $i['giobatdau'].'-'.$i['gioketthuc'] . '</td>';
                                     echo '<td><span class="status-badge ' .  $style . '">' . $i['trangthailichxetnghiem'] . '</span></td>';
                                     echo '<td class="actions">';
-                                    echo '<a href="?action=ketquaxetnghiem&id=' . $i['malichxetnghiem'] . '" class="btn-small">Chi tiết</a>';
+                                    $kq_list=$cketquaxetnghiem->get_ketquaxetnghiem($i['malichxetnghiem']);
+                                    if ($kq_list){
+                                        echo '<a class="btn-primary" href="?action=ketquaxetnghiem&id=' . $i['malichxetnghiem'] . '" class="btn-small">Kết quả</a>';
+                                    }
+                                    elseif($i['trangthailichxetnghiem']=='Đã hủy'){
+                                        echo '<a class="btn-primary" href="#" class="btn-small">Hủy</a>';
+                                    }
+                                    else{
+                                        echo '<a class="btn-primary" href="#" class="btn-small">chưa có</a>';
+                                    }
                                     echo '</td>';
                                     echo '</tr>';
                                 }
