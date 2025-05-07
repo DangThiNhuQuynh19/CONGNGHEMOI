@@ -1,44 +1,92 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$tentk = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $hoten = $_POST['hotenbenhnhan'];
-    $ngaysinh = $_POST['ngaysinh'];
-    $gioitinh = $_POST['gioitinh'];
-    $nghenghiep = $_POST['nghenghiep'];
-    $cccd = $_POST['cccdbenhnhan'];
-    $dantoc = $_POST['dantoc'];
-    $email = $_POST['email'];
-    $sdt = $_POST['sdtbenhnhan'];
-    $tinh = $_POST['tinh'];
-    $quan = $_POST['quan'];
-    $xa = $_POST['xa'];
-    $sonha = $_POST['sonha'];
-    $quanhe = $_POST['quanhe'];
-    $tiensuGD = $_POST['tiensubenhtatcuagiadinh'];
-    $tiensuBT = $_POST['tiensubenhtatcuabenhnhan'];
-    $nhommau = $_POST['nhommau'];
+    include_once("Controllers/cbenhnhan.php");
+
+    // Lấy dữ liệu POST
+    $hoten = $_POST['hotenbenhnhan'] ?? '';
+    $ngaysinh = $_POST['ngaysinh'] ?? '';
+    $gioitinh = $_POST['gioitinh'] ?? '';
+    $nghenghiep = $_POST['nghenghiep'] ?? '';
+    $cccd = $_POST['cccdbenhnhan'] ?? '';
+    $dantoc = $_POST['dantoc'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $sdt = $_POST['sdtbenhnhan'] ?? '';
+    $tinh = $_POST['tinh'] ?? '';
+    $quan = $_POST['quan'] ?? '';
+    $xa = $_POST['xa'] ?? '';
+    $sonha = $_POST['sonha'] ?? '';
+    $quanhe = $_POST['quanhe'] ?? '';
+    $tiensuGD = $_POST['tiensubenhtatcuagiadinh'] ?? '';
+    $tiensuBT = $_POST['tiensubenhtatcuabenhnhan'] ?? '';
+    $nhommau = $_POST['nhommau'] ?? '';
     $tentk = $_SESSION['user']['tentk'] ?? null;
 
+    // Kiểm tra dữ liệu đầu vào
+    $errors = [];
+
+    if (!preg_match("/^[\p{L}\s]+$/u", $hoten)) {
+        $errors[] = "Họ tên chỉ được chứa chữ cái và khoảng trắng.";
+    }
+    if (!preg_match("/^[\p{L}\s]+$/u", $tinh)) {
+        $errors[] = "Tỉnh/ thành phố chỉ được chứa chữ cái và khoảng trắng.";
+    }
+    if (!preg_match("/^[\p{L}\s]+$/u", $quan)) {
+        $errors[] = "Quận/ huyện chỉ được chứa chữ cái và khoảng trắng.";
+    }
+    if (!preg_match("/^[\p{L}\p{N}\s]+$/u", $xa)) {
+        $errors[] = "Xã/phường chỉ được chứa chữ cái, số và khoảng trắng.";
+    }
+    if (!preg_match("/^[\p{L}\p{N}\s\/]+$/u", $sonha)) {
+        $errors[] = "Số nhà chỉ được chứa chữ cái, số, khoảng trắng và dấu '/'.";
+    }
+    if (strtotime($ngaysinh) >= time()) {
+        $errors[] = "Ngày sinh phải nhỏ hơn ngày hiện tại.";
+    }
+
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Email không đúng định dạng.";
+    }
+
+    if (!empty($sdt) && !preg_match("/^0\d{9}$/", $sdt)) {
+        $errors[] = "Số điện thoại phải bắt đầu bằng 0 và có 10 chữ số.";
+    }
+
+    if (!empty($cccd) && !preg_match("/^\d{12}$/", $cccd)) {
+        $errors[] = "CCCD phải gồm 12 chữ số.";
+    }
+
+    // Nếu có lỗi, thông báo
+    if (count($errors) > 0) {
+        $errorMessage = implode("\\n", $errors);
+        echo "<script>
+            alert('Lỗi nhập liệu:\\n$errorMessage');
+            window.history.back();
+        </script>";
+        exit();
+    }
+
+    // Nếu đã đăng nhập, thực hiện thêm hồ sơ
     if ($tentk) {
-        include_once("Controllers/cbenhnhan.php");
         $p = new cBenhNhan();
         $kq = $p->insertbenhnhan($hoten, $ngaysinh, $gioitinh, $nghenghiep, $cccd,
-                                $dantoc, $email, $sdt, $tinh, $quan, $xa, $sonha, $quanhe,
-                                $tiensuGD, $tiensuBT, $nhommau, $tentk);
+                                 $dantoc, $email, $sdt, $tinh, $quan, $xa, $sonha, $quanhe,
+                                 $tiensuGD, $tiensuBT, $nhommau, $tentk);
         if ($kq) {
-            echo "<script>alert('Tạo hồ sơ thành công');  window.location.href = '?action=caidat';</script>";
+            echo "<script>alert('Tạo hồ sơ thành công'); window.location.href='?action=caidat';</script>";
         } else {
-            echo "<script>alert('Tạo hồ sơ thất bại');</script>";
+            echo "<script>alert('Tạo hồ sơ thất bại'); window.history.back();</script>";
         }
     } else {
-        echo "<script>alert('Bạn chưa đăng nhập.');</script>";
+        echo "<script>alert('Bạn chưa đăng nhập.'); window.location.href='?action=dangnhap';</script>";
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #f4f4f4;
             padding-top: 70px; /* Tăng khoảng cách trên cùng để tránh bị header che */
         }
-
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -66,54 +113,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flex-wrap: wrap;
             gap: 20px;
         }
-
         .col-md-6, .col-md-4, .col-md-12 {
             flex: 1;
             min-width: 240px;
         }
-
         .form-label {
             font-weight: bold;
             margin-bottom: 5px;
         }
-
         .form-control, .form-select, .form-textarea {
-            width: 100%;  /* Đảm bảo các input sẽ chiếm toàn bộ chiều rộng */
-            padding: 12px; /* Tăng kích thước padding cho input */
+            width: 100%;  
+            padding: 12px; 
             margin-bottom: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
-
         .form-control:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: #007bff;
         }
-
         .btn {
             background-color: #3c1561;
             color: #fff;
-            padding: 12px 20px; /* Tăng kích thước padding cho nút */
+            padding: 12px 20px;
             border-radius: 5px;
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .btn:hover {
             background-color: #0056b3;
         }
-
         .form-textarea {
             resize: vertical;
         }
-
         .col-md-6 {
-            flex: 0 0 48%; /* Đảm bảo các cột chia đều không bị hẹp quá */
+            flex: 0 0 48%; 
         }
-
         .col-md-4 {
-            flex: 0 0 31%; /* Điều chỉnh cho các cột nhỏ hơn */
+            flex: 0 0 31%; 
         }
     </style>
 </head>
