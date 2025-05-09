@@ -6,11 +6,14 @@
             $con = $p->moketnoi();
             $con->set_charset('utf8');
             if($con){
-                $str = "select * from lichxetnghiem as l join benhnhan as b on l.mabenhnhan=b.mabenhnhan
+                $str = "select * from lichxetnghiem as l 
+                JOIN hosobenhan AS hs ON l.mahoso = hs.mahoso
+                JOIN chitiethoso AS ct ON ct.mahoso=hs.mahoso
+                join benhnhan as b on l.mabenhnhan=b.mabenhnhan
                 join loaixetnghiem as loai on l.maloaixetnghiem=loai.maloaixetnghiem 
                 join chuyenkhoa as c on loai.machuyenkhoa=c.machuyenkhoa
                 join khunggioxetnghiem as k on k.makhunggioxetnghiem = l.makhunggio
-                where mabacsi='$mabacsi' ORDER BY l.malichxetnghiem DESC ";
+                where ct.mabacsi='$mabacsi' ORDER BY l.malichxetnghiem DESC ";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
@@ -41,12 +44,14 @@
             if ($con) {
                 $sql = "SELECT * 
                         FROM lichxetnghiem AS l
-                        JOIN bacsi AS bs ON l.mabacsi= bs.mabacsi
+                        JOIN hosobenhan AS hs ON l.mahoso = hs.mahoso
+                        JOIN chitiethoso AS ct ON ct.mahoso=hs.mahoso
+                        JOIN bacsi AS bs ON ct.mabacsi= bs.mabacsi
                         JOIN benhnhan AS b ON l.mabenhnhan = b.mabenhnhan
                         JOIN loaixetnghiem AS loai ON l.maloaixetnghiem = loai.maloaixetnghiem
                         JOIN chuyenkhoa AS c ON loai.machuyenkhoa = c.machuyenkhoa
                         JOIN khunggioxetnghiem AS k ON k.makhunggioxetnghiem = l.makhunggio
-                        WHERE l.mabacsi = '$mabacsi'";
+                        WHERE ct.mabacsi = '$mabacsi'";
         
                 if (!empty($tukhoa)) {
                     $sql .= " AND (b.mabenhnhan LIKE '%$tukhoa%' OR b.hotenbenhnhan LIKE '%$tukhoa%')";
@@ -75,11 +80,13 @@
             if($con){
                 $str = "SELECT * 
                 FROM lichxetnghiem AS l
+                JOIN hosobenhan AS hs ON l.mahoso = hs.mahoso
+                JOIN chitiethoso AS ct ON ct.mahoso=hs.mahoso
                 JOIN benhnhan AS b ON l.mabenhnhan = b.mabenhnhan
                 JOIN loaixetnghiem AS loai ON l.maloaixetnghiem = loai.maloaixetnghiem
                 JOIN chuyenkhoa AS c ON loai.machuyenkhoa = c.machuyenkhoa
                 JOIN khunggioxetnghiem AS k ON k.makhunggioxetnghiem = l.makhunggio
-                WHERE l.mabacsi = '$mabacsi' and l.malichxetnghiem='$malichxetnghiem'";
+                WHERE ct.mabacsi = '$mabacsi' and l.malichxetnghiem='$malichxetnghiem'";
                 $tbl = $con->query($str);
                 $p->dongketnoi($con);
                 return $tbl;
@@ -87,6 +94,7 @@
                 return false; 
             }
         }
+
         public function lichxetnghiemtheotentk($tentk){
             $p = new clsKetNoi();
             $con = $p->moketnoi();
@@ -94,6 +102,8 @@
             if($con){
                 $str = "SELECT * 
                 FROM lichxetnghiem AS l
+                JOIN hosobenhan AS hs ON l.mahoso = hs.mahoso
+                JOIN chitiethoso AS ct ON ct.mahoso=hs.mahoso
                 JOIN benhnhan AS b ON l.mabenhnhan = b.mabenhnhan
                 JOIN loaixetnghiem AS loai ON l.maloaixetnghiem = loai.maloaixetnghiem
                 JOIN chuyenkhoa AS c ON loai.machuyenkhoa = c.machuyenkhoa
@@ -104,6 +114,74 @@
                 return $tbl;
             }else{
                 return false; 
+            }
+        }
+
+        public function select_lichxetnghiemchitiet_mabenhnhan($mabenhnhan){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * 
+                FROM lichxetnghiem AS l
+                JOIN hosobenhan AS hs ON l.mahoso = hs.mahoso
+                JOIN benhnhan AS b ON hs.mabenhnhan = b.mabenhnhan
+                JOIN chitiethoso AS ct ON ct.mahoso=hs.mahoso
+                JOIN loaixetnghiem AS loai ON l.maloaixetnghiem = loai.maloaixetnghiem
+                JOIN chuyenkhoa AS c ON loai.machuyenkhoa = c.machuyenkhoa
+                JOIN khunggioxetnghiem AS k ON k.makhunggioxetnghiem = l.makhunggio
+                WHERE b.mabenhnhan='$mabenhnhan'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false; 
+            }
+        }
+
+        public function select_lichxetnghiem() {
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * from lichxetnghiem";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false;
+            }
+        }
+
+        public function insert_lichxetnghiem($mabenhnhan,$maloaixetnghiem,$ngayhen,$makhunggio,$trangthailichxetnghiem,$mahoso){
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "INSERT INTO lichxetnghiem(mabenhnhan,maloaixetnghiem,ngayhen,makhunggio,trangthailichxetnghiem,mahoso) 
+                values('$mabenhnhan','$maloaixetnghiem','$ngayhen','$makhunggio','$trangthailichxetnghiem','$mahoso')";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false;
+            }
+        }
+
+        public function select_lichxetnghiem_mahoso($mahoso) {
+            $p = new clsKetNoi();
+            $con = $p->moketnoi();
+            $con->set_charset('utf8');
+            if($con){
+                $str = "SELECT * from lichxetnghiem l 
+                JOIN  loaixetnghiem loai on loai.maloaixetnghiem = l.maloaixetnghiem
+                JOIN khunggioxetnghiem kg on kg.makhunggioxetnghiem = l.makhunggio
+                WHERE l.mahoso='$mahoso'";
+                $tbl = $con->query($str);
+                $p->dongketnoi($con);
+                return $tbl;
+            }else{
+                return false;
             }
         }
     }
